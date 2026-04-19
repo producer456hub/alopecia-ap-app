@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alopecia Areata & Autoimmunity — A&P Interactive</title>
+<style>
+:root{
+  --bg:#0e0d1b;--bg2:#13112a;--surface:#1e1a35;--surface2:#261f40;
+  --border:#352d55;--primary:#a855f7;--primary-dk:#9333ea;
+  --gold:#f5a623;--red:#ef5350;--green:#4caf50;--teal:#0fd4b8;
+  --blue:#2196f3;--text:#e8e0f5;--muted:#8b7ab5;
+  --r:10px;--r2:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden}
+#sidebar{width:220px;min-width:220px;background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:10}
+.sb-brand{padding:0 16px 20px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sb-brand h2{font-size:14px;color:var(--primary);letter-spacing:.5px;text-transform:uppercase}
+.sb-brand p{font-size:11px;color:var(--muted);margin-top:2px}
+.sb-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;cursor:pointer;
+  border:none;background:none;color:var(--muted);font-size:12.5px;width:100%;text-align:left;
+  transition:all .2s;border-left:3px solid transparent}
+.sb-btn:hover{color:var(--text);background:var(--surface)}
+.sb-btn.active{color:var(--primary);background:var(--surface);border-left-color:var(--primary)}
+.sb-num{width:20px;height:20px;border-radius:50%;background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.sb-btn.active .sb-num{background:var(--primary);color:#000}
+#main{flex:1;overflow-y:auto;scroll-behavior:smooth}
+.chapter{min-height:100vh;padding:60px 50px;display:none;animation:fadeIn .4s ease}
+.chapter.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.ch-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary);margin-bottom:10px}
+.ch-title{font-size:38px;font-weight:800;line-height:1.15;margin-bottom:16px;color:#fff}
+.ch-sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.7;margin-bottom:36px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:28px;margin-bottom:20px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--primary)}
+.card p{font-size:14px;color:var(--muted);line-height:1.65}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:.5px}
+.badge-purple{background:rgba(168,85,247,.18);color:#c084fc}
+.badge-red{background:rgba(239,83,80,.18);color:#ff8a87}
+.badge-green{background:rgba(76,175,80,.18);color:#81c784}
+.badge-blue{background:rgba(33,150,243,.18);color:#64b5f6}
+.badge-gold{background:rgba(245,166,35,.18);color:#ffcc02}
+.badge-teal{background:rgba(15,212,184,.18);color:#0fd4b8}
+.highlight{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(168,85,247,.04));
+  border:1px solid rgba(168,85,247,.3);border-radius:var(--r);padding:20px 24px;margin:20px 0}
+.highlight h4{color:var(--primary);font-size:14px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
+.highlight p{font-size:14px;line-height:1.7}
+.concept-list{display:flex;flex-direction:column;gap:12px}
+.concept-item{display:flex;gap:16px;align-items:flex-start;padding:16px;
+  background:var(--surface2);border-radius:var(--r);border-left:4px solid var(--primary)}
+.concept-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center;margin-top:2px}
+.concept-body h4{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.concept-body p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.stat-row{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+.stat{background:var(--surface2);border-radius:var(--r);padding:14px 20px;text-align:center;min-width:120px}
+.stat .sv{font-size:26px;font-weight:800;color:var(--primary)}
+.stat .sl{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:24px 0}
+.flow-node{background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);
+  padding:12px 16px;text-align:center;min-width:110px;cursor:pointer;transition:all .25s;position:relative}
+.flow-node:hover,.flow-node.active{border-color:var(--primary);background:var(--surface)}
+.flow-node.active{box-shadow:0 0 0 3px rgba(168,85,247,.25)}
+.flow-node .fn-label{font-size:11px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.6px}
+.flow-node .fn-name{font-size:13px;font-weight:700;color:var(--text)}
+.flow-node.stimulus .fn-name{color:var(--gold)}
+.flow-node.receptor .fn-name{color:#c084fc}
+.flow-node.control .fn-name{color:#64b5f6}
+.flow-node.effector .fn-name{color:#81c784}
+.flow-node.response .fn-name{color:#ff8a87}
+.flow-arrow{font-size:22px;color:var(--muted);padding:0 4px;flex-shrink:0}
+.node-info{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;margin-top:16px;min-height:80px;transition:all .3s}
+.node-info h4{color:var(--primary);font-size:15px;font-weight:700;margin-bottom:8px}
+.node-info p{font-size:13.5px;color:var(--muted);line-height:1.65}
+.node-info .ni-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:6px}
+.pos-loop{position:relative;margin:30px auto;max-width:540px}
+.pos-loop-items{display:flex;flex-direction:column;gap:0}
+.pl-item{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--surface2);border-radius:var(--r);margin-bottom:0;border-left:4px solid var(--primary)}
+.pl-arrow{text-align:center;color:var(--primary);font-size:18px;padding:4px 0}
+.pl-icon{font-size:20px;flex-shrink:0}
+.pl-body h5{font-size:13px;font-weight:700;color:#c084fc}
+.pl-body p{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5}
+.loop-indicator{text-align:center;padding:10px;background:rgba(168,85,247,.1);border-radius:var(--r);
+  border:1px dashed rgba(168,85,247,.4);color:#c084fc;font-size:13px;font-weight:600;margin-top:8px}
+/* SIM */
+.sim-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;margin-top:24px}
+@media(max-width:900px){.sim-layout{grid-template-columns:1fr}}
+.sim-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;overflow-x:auto}
+.sim-controls{display:flex;flex-direction:column;gap:12px}
+.drug-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.drug-card:hover{border-color:var(--primary)}
+.drug-card.on{border-color:var(--primary);background:var(--surface2)}
+.drug-card.on::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--primary)}
+.drug-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.drug-name{font-size:13px;font-weight:700;color:var(--text)}
+.drug-brand{font-size:11px;color:var(--muted);margin-bottom:6px}
+.drug-mech{font-size:12px;color:var(--muted);line-height:1.5}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--border);
+  position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;
+  background:#fff;top:3px;left:3px;transition:.3s}
+.toggle.on{background:var(--primary)}
+.toggle.on::after{transform:translateX(16px)}
+.gauges{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.gauge-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.gauge-label span:first-child{color:var(--muted)}
+.gauge-label span:last-child{font-weight:700;color:var(--text)}
+.gauge-bar{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.gauge-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.g-immune .gauge-fill{background:linear-gradient(90deg,#ffcc02,#f5a623)}
+.g-jak .gauge-fill{background:linear-gradient(90deg,#ff8a87,#ef5350)}
+.g-tcell .gauge-fill{background:linear-gradient(90deg,#ce93d8,#9c27b0)}
+.g-regrow .gauge-fill{background:linear-gradient(90deg,#81c784,#4caf50)}
+.drug-detail{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;margin-top:12px;font-size:12.5px;line-height:1.65}
+.dd-row{display:flex;gap:8px;margin-bottom:6px}
+.dd-label{color:var(--primary);font-weight:700;min-width:80px;flex-shrink:0}
+.dd-val{color:var(--muted)}
+/* ELI5 */
+.eli5-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--r2);
+  padding:28px 32px;margin-bottom:20px;position:relative;overflow:hidden;cursor:pointer;transition:all .25s}
+.eli5-card:hover{border-color:var(--primary);transform:translateY(-2px)}
+.eli5-card .ec-emoji{font-size:48px;margin-bottom:14px;display:block}
+.eli5-card h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:4px}
+.eli5-card .ec-concept{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+.eli5-card p{font-size:15.5px;line-height:1.75;color:var(--muted)}
+.eli5-card p strong{color:var(--text)}
+.eli5-card .ec-science{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:13.5px;color:var(--muted);line-height:1.7}
+.eli5-card.open .ec-science{display:block}
+.eli5-card .ec-toggle{position:absolute;top:20px;right:20px;font-size:12px;color:var(--primary);
+  font-weight:700;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:20px;padding:4px 12px}
+.eli5-story{background:linear-gradient(135deg,#1e1a35,#261f40);border:2px solid var(--gold);border-radius:var(--r2);padding:32px;margin:28px 0}
+.eli5-story h3{color:var(--gold);font-size:20px;margin-bottom:16px}
+.eli5-story p{font-size:15.5px;line-height:1.9;color:var(--text);margin-bottom:14px}
+.eli5-story p:last-child{margin-bottom:0}
+.story-highlight{color:var(--primary);font-weight:700}
+.story-bad{color:#ff8a87;font-weight:700}
+.story-good{color:#81c784;font-weight:700}
+.eli5-analogy-bar{display:flex;align-items:center;gap:16px;background:var(--surface2);border-radius:var(--r);padding:16px 20px;margin:8px 0}
+.eli5-analogy-bar .aa-left{font-size:30px;flex-shrink:0}
+.eli5-analogy-bar .aa-title{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:3px}
+.eli5-analogy-bar .aa-text{font-size:13.5px;color:var(--muted);line-height:1.55}
+/* QUIZ */
+#quiz-gate{text-align:center;padding:60px 40px}
+.quiz-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.quiz-choice{background:var(--surface);border:2px solid var(--border);border-radius:var(--r2);
+  padding:32px 28px;width:280px;cursor:pointer;transition:all .25s;text-align:left}
+.quiz-choice:hover{border-color:var(--primary);transform:translateY(-3px)}
+.quiz-choice h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:10px}
+.quiz-choice p{font-size:13px;color:var(--muted);line-height:1.6}
+.quiz-choice .qc-icon{font-size:36px;margin-bottom:14px}
+.quiz-screen{padding:60px 50px;max-width:780px;margin:0 auto;display:none}
+.quiz-screen.active{display:block}
+.quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.qp-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.qp-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .5s}
+.qp-text{font-size:13px;color:var(--muted);white-space:nowrap}
+.q-num{font-size:12px;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.q-text{font-size:21px;font-weight:700;color:#fff;margin-bottom:28px;line-height:1.4}
+.q-options{display:flex;flex-direction:column;gap:10px}
+.q-opt{padding:16px 20px;background:var(--surface);border:2px solid var(--border);
+  border-radius:var(--r);cursor:pointer;font-size:14.5px;transition:all .2s;text-align:left;color:var(--text)}
+.q-opt:hover:not(.answered){border-color:var(--primary);background:var(--surface2)}
+.q-opt.correct{border-color:var(--green);background:rgba(76,175,80,.15);color:#fff}
+.q-opt.wrong{border-color:var(--red);background:rgba(239,83,80,.12);color:#fff}
+.q-opt.answered{cursor:default}
+.q-feedback{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 20px;margin-top:18px;font-size:14px;line-height:1.65;display:none}
+.q-feedback.show{display:block}
+.q-feedback .fb-label{font-weight:700;margin-bottom:6px}
+.q-feedback.correct .fb-label{color:var(--green)}
+.q-feedback.wrong .fb-label{color:var(--red)}
+.btn-next{margin-top:20px;padding:13px 30px;background:var(--primary);color:#fff;
+  border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;display:none;transition:background .2s}
+.btn-next:hover{background:var(--primary-dk)}
+.btn-next.show{display:inline-block}
+.results-screen{padding:60px 50px;text-align:center;display:none}
+.results-screen.active{display:block}
+.score-ring{width:160px;height:160px;border-radius:50%;border:8px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 28px;position:relative;overflow:hidden}
+.score-ring::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--pct,0%),transparent 0);opacity:.25}
+.score-num{font-size:48px;font-weight:800;color:var(--primary);line-height:1}
+.score-denom{font-size:16px;color:var(--muted)}
+.result-msg{font-size:18px;color:var(--text);margin-bottom:28px;line-height:1.6}
+.result-btn{padding:13px 28px;border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;margin:6px;transition:all .2s}
+.result-btn.primary{background:var(--primary);color:#fff}
+.result-btn.secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.result-btn:hover{opacity:.85}
+.missed-list{text-align:left;max-width:600px;margin:24px auto 0}
+.missed-list h4{font-size:14px;color:var(--muted);margin-bottom:12px}
+.missed-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;font-size:13px;line-height:1.55}
+.missed-item .mi-q{color:var(--text);margin-bottom:4px}
+.missed-item .mi-a{color:var(--green)}
+.ch-nav{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap}
+.btn-ch{padding:12px 24px;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dk)}
+.btn-secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{background:var(--surface2)}
+.immune-diagram{display:flex;flex-direction:column;gap:0;margin:24px 0;max-width:580px}
+.imm-cell{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--surface2);border-radius:var(--r);border-left:4px solid var(--primary)}
+.imm-arrow{text-align:center;padding:6px;font-size:20px;color:var(--primary)}
+.imm-icon{font-size:24px;flex-shrink:0}
+.imm-body h5{font-size:13px;font-weight:700;color:#c084fc;margin-bottom:3px}
+.imm-body p{font-size:12.5px;color:var(--muted);line-height:1.5}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+@media(max-width:700px){#sidebar{width:180px;min-width:180px}.chapter{padding:40px 24px}.ch-title{font-size:28px}}
+@media(max-width:540px){body{flex-direction:column}#sidebar{width:100%;min-width:unset;height:auto;flex-direction:row;overflow-x:auto;padding:10px 0;border-right:none;border-bottom:1px solid var(--border);position:sticky;top:0}.sb-brand{display:none}.sb-btn{padding:8px 12px;white-space:nowrap}}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="sb-brand">
+    <h2>AA Interactive</h2>
+    <p>Autoimmune Alopecia</p>
+  </div>
+  <button class="sb-btn active" onclick="goTo(0)"><span class="sb-num">★</span>Introduction</button>
+  <button class="sb-btn" onclick="goToELI5()"><span class="sb-num">🧸</span>ELI5 Mode</button>
+  <button class="sb-btn" onclick="goTo(1)"><span class="sb-num">1</span>Immune Privilege</button>
+  <button class="sb-btn" onclick="goTo(2)"><span class="sb-num">2</span>Set Point</button>
+  <button class="sb-btn" onclick="goTo(3)"><span class="sb-num">3</span>Stimulus</button>
+  <button class="sb-btn" onclick="goTo(4)"><span class="sb-num">4</span>Receptor</button>
+  <button class="sb-btn" onclick="goTo(5)"><span class="sb-num">5</span>Control Center</button>
+  <button class="sb-btn" onclick="goTo(6)"><span class="sb-num">6</span>Effector</button>
+  <button class="sb-btn" onclick="goTo(7)"><span class="sb-num">7</span>Negative Feedback</button>
+  <button class="sb-btn" onclick="goTo(8)"><span class="sb-num">8</span>Positive Feedback</button>
+  <button class="sb-btn" onclick="goTo(9)"><span class="sb-num">💊</span>Drug Simulator</button>
+  <button class="sb-btn" onclick="goTo(10)"><span class="sb-num">📝</span>Take a Quiz</button>
+</nav>
+
+<div id="main">
+
+<!-- CH 0: INTRO -->
+<div class="chapter active" id="ch0">
+  <span class="ch-tag">Welcome</span>
+  <h1 class="ch-title">When Your Immune System<br/>Attacks Your Own Hair</h1>
+  <p class="ch-sub">Alopecia areata is a fascinating autoimmune disorder — your body's defense system, which is supposed to protect you, turns against your hair follicles. Understanding it means understanding some of the most important concepts in A&P: homeostasis, feedback loops, and what happens when they go wrong.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">Focus</div>
+      <h3>Alopecia Areata Only</h3>
+      <p>This module is entirely dedicated to the autoimmune type of hair loss — a fundamentally different mechanism from hormonal hair loss. No DHT, no androgen receptors. This is the immune system.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">What You'll Learn</div>
+      <h3>Core A&P Concepts</h3>
+      <p>Set point · Normal range · Stimulus · Receptor · Control center · Effector · Negative feedback · Positive feedback — all through the lens of autoimmunity.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">Interactive</div>
+      <h3>JAK Inhibitor Simulator + Quizzes</h3>
+      <p>Try all four FDA-approved and off-label JAK inhibitors. See exactly where each one breaks the autoimmune positive feedback loop. Two quizzes at the end.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>Key Facts About Alopecia Areata</h4>
+    <p>
+      Affects <strong>~2% of the global population</strong> — no gender preference, can occur at any age.<br/>
+      Presents as <strong>patchy, well-defined round areas</strong> of sudden hair loss on the scalp or body.<br/>
+      Can progress to <strong>alopecia totalis</strong> (entire scalp) or <strong>alopecia universalis</strong> (entire body).<br/>
+      Unlike androgenetic alopecia, <strong>the follicle is not destroyed</strong> — it is forced into telogen. Regrowth is possible.<br/>
+      First FDA-approved systemic treatment (baricitinib) arrived only in <strong>June 2022</strong>.
+    </p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goToELI5()">🧸 Explain It Like I'm Five</button>
+    <button class="btn-ch btn-primary" onclick="goTo(1)">Start Full Lessons →</button>
+  </div>
+</div>
+
+<!-- ELI5 -->
+<div class="chapter" id="ch-eli5">
+  <span class="ch-tag">ELI5 Mode 🧸</span>
+  <h1 class="ch-title">Explain It Like I'm Five</h1>
+  <p class="ch-sub">All the big words, broken down into simple stories. <strong>Tap any card</strong> to reveal the real science underneath.</p>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">🏰</span>
+    <div class="ec-concept">Immune Privilege — The Set Point</div>
+    <h3>Your Hair Has a Secret Forcefield</h3>
+    <p>Imagine your hair follicles are like little castles. Normally they have a magic <strong>invisibility cloak</strong> that makes the immune system (your body's army) not notice them. The army walks right past and leaves the castles alone. <strong>That's the set point</strong> — cloaked and safe, hair growing normally.</p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> Hair follicles are immune-privileged sites — they actively suppress local immune surveillance. Mechanisms include: low MHC class I molecule expression on follicle cells (making them "invisible" to cytotoxic T cells), local secretion of immunosuppressive molecules (TGF-β, α-MSH, ACTH), and exclusion of activated immune cells from the follicle bulb. This privilege is necessary because rapidly dividing matrix cells expressing melanin antigens would otherwise be targeted by the immune system.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">💥</span>
+    <div class="ec-concept">Stimulus — The Cloak Breaks</div>
+    <h3>Something Breaks the Forcefield</h3>
+    <p>One day — maybe because of a virus, a big stressful event, or sometimes for no clear reason at all — the invisibility cloak <strong>breaks</strong>. Suddenly the hair castle is visible. The army sees it. And the army thinks: <em>"Wait — what IS that thing? It doesn't look like it belongs here. ATTACK!"</em></p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> The stimulus in alopecia areata is immune privilege collapse. The follicle begins upregulating NKG2D ligands (MICA, MICB, ULBP3) on its surface — stress molecules that signal "I'm damaged or foreign." MHC class I expression also increases, presenting follicle-specific antigens. Triggers include viral infections, physical stress, psychological stress, and genetic predisposition (HLA-DR alleles, ULBP3 gene variants) — but in many cases no clear trigger is identified.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">👀</span>
+    <div class="ec-concept">Receptor — The Army's Eyes</div>
+    <h3>Special Scouts Who Spot the Problem</h3>
+    <p>Your immune army has special soldiers called <strong>CD8+ T cells</strong>. They carry tiny binoculars called <strong>NKG2D receptors</strong>. When the forcefield broke, the hair castle started glowing with special "LOOK AT ME" signals. The NKG2D binoculars see those signals and tell the soldier: <em>"Found one. Move in."</em></p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> CD8+ cytotoxic T cells bearing NKG2D receptors are the primary effector cells in alopecia areata. NKG2D is an activating receptor that binds stress ligands (MICA, MICB, ULBP3) — molecules upregulated on follicle cells under stress. T cell receptors (TCR) also recognize follicle-specific antigens (particularly melanocyte antigens like Melan-A/MART-1) presented on MHC class I. IL-15 receptor on CD8+ T cells and NK cells is a second critical receptor that sustains their activation and cytotoxicity.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">📡</span>
+    <div class="ec-concept">Control Center — The Signal Amplifier</div>
+    <h3>The Radio Tower That Makes Everything Louder</h3>
+    <p>When the soldier spots the castle, they send a signal called <strong>IFN-γ</strong> (a chemical message). That signal goes to a special radio tower inside the immune cells called the <strong>JAK-STAT system</strong>. The tower receives the signal and broadcasts it EVERYWHERE, making more soldiers wake up and join the attack. <strong>That's the control center</strong> — it takes the signal and turns up the volume.</p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> The JAK-STAT pathway is the intracellular control center. IFN-γ binds its receptor → activates JAK1 and JAK2 → phosphorylate STAT1 → STAT1 enters nucleus → transcribes pro-inflammatory genes (including MHC class I, NKG2D ligands, and more IFN-γ). IL-15 signals through JAK1/JAK3 → STAT5 → CD8+ T cell and NK cell survival and proliferation. This pathway is why JAK inhibitors are effective treatments — they silence the control center.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">⚔️</span>
+    <div class="ec-concept">Effector — The Soldiers Doing the Damage</div>
+    <h3>The Army Actually Attacks</h3>
+    <p>The <strong>effector</strong> is the one who actually does the job — the soldiers who storm the castle. In alopecia areata, that's the <strong>CD8+ T cells and NK cells</strong>. They march into the hair follicle and attack the cells at the bottom that make the hair grow. The hair factory goes into emergency shutdown — the hair falls out. <strong>But importantly, the castle walls aren't destroyed.</strong> Just the workers inside went home.</p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> CD8+ NKG2D+ cytotoxic T cells infiltrate the peribulbar region of the hair follicle (described as a "swarm of bees" pattern on pathology). They release perforin and granzyme B, inducing apoptosis in hair matrix keratinocytes. The follicle is forced into premature catagen/telogen. Crucially, the follicle's stem cells in the bulge region are spared — this is why regrowth is possible when the immune attack is suppressed. NK cells amplify the attack by producing additional IFN-γ.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">↩️</span>
+    <div class="ec-concept">Negative Feedback — When the Army Usually Backs Down</div>
+    <h3>The General Who Says "Okay, Stand Down"</h3>
+    <p>Normally, your immune system has a negative feedback system — a general who tells the soldiers "mission accomplished, go home." Special cells called <strong>regulatory T cells (Tregs)</strong> release calming signals that tell the army to stop fighting. In healthy people, this keeps the immune system from going too far. In alopecia areata, this braking system <strong>isn't working well enough</strong> in the scalp — so the attack keeps going.</p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> CD4+ CD25+ FOXP3+ regulatory T cells (Tregs) are the primary negative feedback in immune responses. They secrete IL-10 and TGF-β, which suppress effector T cell activity. In alopecia areata, Treg numbers and function in the perifollicular area are reduced. The follicle's own immunosuppressive molecules (TGF-β, α-MSH) are overwhelmed. Once immune privilege collapses, the local immunosuppressive environment cannot reassert itself without intervention — the brakes fail.</div>
+  </div>
+
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">🔊</span>
+    <div class="ec-concept">Positive Feedback — The Loop That Won't Stop</div>
+    <h3>The Microphone in Front of the Speaker</h3>
+    <p>Here's the really scary part. When the soldiers attack the hair castle and damage it, the damage makes the castle send out <strong>even more "LOOK AT ME" signals</strong>. That recruits even more soldiers. Who attack more. Which causes more damage. Which sends more signals. Which recruits even more soldiers... <strong>It just keeps getting louder and louder, like a microphone next to a speaker.</strong> This is why patches of alopecia areata can spread if untreated.</p>
+    <div class="ec-science"><strong style="color:var(--primary)">The science:</strong> The positive feedback loop: IFN-γ from T cells → JAK1/2 → STAT1 → upregulates MHC class I and NKG2D ligands on follicle cells → more T cell recognition → more IFN-γ. Damaged follicle cells release DAMPs (damage-associated molecular patterns) → activate innate immune cells → more IFN-γ and IL-15. IL-15 → JAK1/3 → STAT5 → CD8+ T cell and NK cell survival and proliferation → more IFN-γ. This self-amplifying cycle explains why early localized AA can spread to alopecia totalis or universalis.</div>
+  </div>
+
+  <div class="eli5-story">
+    <h3>🧸 The Whole Story — Plain English</h3>
+    <p>Your hair follicles are <span class="story-highlight">invisible to your immune system</span> — they wear a special invisibility cloak. That's the set point. Everything's fine, hair grows normally.</p>
+    <p>Then something — stress, a virus, bad luck — <span class="story-bad">rips the cloak off</span>. The follicle suddenly has big flashing signs on it saying "SOMETHING'S WRONG HERE." The immune system's special soldiers (CD8+ T cells) see those signs and move in.</p>
+    <p>Inside those soldiers there's a <span class="story-highlight">signal amplifier called JAK-STAT</span>. It takes the "attack" signal and blasts it out to recruit more soldiers. Those soldiers release a chemical called IFN-γ, which makes the follicle flash even more warning signs, which recruits even more soldiers... <span class="story-bad">a spiral that feeds itself.</span></p>
+    <p>The soldiers storm the hair factory and tell all the workers to go home. <span class="story-bad">Hair falls out in patches.</span> The factory building is still there — just empty. That's why <span class="story-good">the hair CAN come back</span> if someone stops the attack in time.</p>
+    <p>And that's exactly what JAK inhibitors do — <span class="story-good">they jam the radio tower (JAK-STAT) so the amplified attack signal can't spread</span>. The soldiers stand down. The factory reopens. Hair grows back.</p>
+  </div>
+
+  <h3 style="color:var(--primary);margin-bottom:14px">🔁 Quick Cheat Sheet</h3>
+  <div class="eli5-analogy-bar"><div class="aa-left">🏰</div><div><div class="aa-title">Set Point</div><div class="aa-text">Hair follicle wearing its invisibility cloak — immune system ignores it, hair grows normally</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">💥</div><div><div class="aa-title">Stimulus</div><div class="aa-text">The cloak breaks — follicle starts flashing "LOOK AT ME" signals (NKG2D ligands, MHC class I)</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">👀</div><div><div class="aa-title">Receptor</div><div class="aa-text">NKG2D binoculars on CD8+ T cells that spot those flashing signals</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">📡</div><div><div class="aa-title">Control Center</div><div class="aa-text">The JAK-STAT radio tower — amplifies the attack signal and broadcasts it everywhere</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">⚔️</div><div><div class="aa-title">Effector</div><div class="aa-text">CD8+ T cells and NK cells — the soldiers who actually storm the follicle and shut it down</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">↩️</div><div><div class="aa-title">Negative Feedback</div><div class="aa-text">The general (Tregs) saying "stand down" — but in AA this braking system fails locally</div></div></div>
+  <div class="eli5-analogy-bar"><div class="aa-left">🔊</div><div><div class="aa-title">Positive Feedback</div><div class="aa-text">Microphone + speaker screeching — attack causes damage, damage recruits more attackers, repeat</div></div></div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(0)">← Back to Intro</button>
+    <button class="btn-ch btn-primary" onclick="goTo(1)">Start Full Lessons →</button>
+  </div>
+</div>
+
+<!-- CH 1: IMMUNE PRIVILEGE -->
+<div class="chapter" id="ch1">
+  <span class="ch-tag">Chapter 1</span>
+  <h1 class="ch-title">Immune Privilege: The Body's "No-Go Zone"</h1>
+  <p class="ch-sub">Before we can understand what goes wrong in alopecia areata, we need to understand something remarkable: hair follicles are normally <strong>hidden from the immune system</strong>. This isn't an accident — it's an active, carefully maintained biological state.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item">
+      <div class="concept-icon">🛡️</div>
+      <div class="concept-body">
+        <h4>What Is Immune Privilege?</h4>
+        <p>Certain body sites — the eye, brain, testes, and hair follicles — actively suppress immune responses within their boundaries. This is called immune privilege. It's not that these sites have no immune activity; they actively produce molecules that discourage it.</p>
+      </div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-icon">❓</div>
+      <div class="concept-body">
+        <h4>Why Do Hair Follicles Need This?</h4>
+        <p>Hair matrix cells divide rapidly and express melanin-producing enzymes. Melanocyte antigens (like Melan-A/MART-1) can look "foreign" to the immune system — similar to how tumor antigens look. Without immune privilege, the immune system would attack every actively growing follicle.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">Mechanism 1</div>
+      <h3>Low MHC Class I Expression</h3>
+      <p>MHC class I molecules present intracellular proteins to CD8+ T cells for inspection. Hair follicle bulb cells keep MHC class I expression very low — making themselves nearly invisible to cytotoxic T cells. No display = no target.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">Mechanism 2</div>
+      <h3>Local Immunosuppressive Signals</h3>
+      <p>Follicle cells actively secrete: <strong>TGF-β</strong> (suppresses T cell activation), <strong>α-MSH</strong> (melanocyte-stimulating hormone — anti-inflammatory), and <strong>ACTH</strong>. These create a chemical "do not attack" zone around the bulb.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-green">Mechanism 3</div>
+      <h3>Physical Immune Cell Exclusion</h3>
+      <p>The peribulbar region normally contains very few activated immune cells. A combination of basement membrane integrity and local chemokine suppression keeps effector T cells from accumulating near the follicle matrix.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>The Key Takeaway</h4>
+    <p>Immune privilege is not a passive state — it requires constant active maintenance. Think of it as a force field that needs power to stay on. When something disrupts the power supply (the stimulus), the force field drops instantly, and the immune system — which was always nearby — can suddenly see and attack the follicle.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(0)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(2)">Next: Set Point →</button>
+  </div>
+</div>
+
+<!-- CH 2: SET POINT -->
+<div class="chapter" id="ch2">
+  <span class="ch-tag">Chapter 2</span>
+  <h1 class="ch-title">Set Point &amp; Normal Range</h1>
+  <p class="ch-sub">In alopecia areata, the homeostatic variable being regulated isn't a simple number like blood glucose. It's a <strong>biological state</strong>: the immune privilege of the hair follicle.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--primary)">
+      <div class="concept-icon">🎯</div>
+      <div class="concept-body">
+        <h4>Set Point</h4>
+        <p>The set point is: <em>follicle immune privilege maintained</em>. In this state — low MHC class I, low NKG2D ligands, local TGF-β and α-MSH active — the hair cycle proceeds normally. Anagen runs for years, catagen and telogen follow in order. The immune system does not interfere.</p>
+      </div>
+    </div>
+    <div class="concept-item" style="border-left-color:var(--primary)">
+      <div class="concept-icon">📊</div>
+      <div class="concept-body">
+        <h4>Normal Range</h4>
+        <p>Small, transient fluctuations in immune activity near follicles are normal and handled by local regulatory mechanisms. The normal range is: occasional passing immune cell surveillance, quickly dampened by the follicle's immunosuppressive environment. No T cell accumulation, no sustained IFN-γ signal.</p>
+      </div>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="sv">~2%</div><div class="sl">of people affected by AA</div></div>
+    <div class="stat"><div class="sv">~50%</div><div class="sl">show spontaneous regrowth</div></div>
+    <div class="stat"><div class="sv">100%</div><div class="sl">of AA cases: follicle structurally intact</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Activated T cells in normal peribulbar region</div></div>
+  </div>
+  <div class="highlight">
+    <h4>Why This Set Point Matters for Treatment</h4>
+    <p>Because the set point is a <em>state</em> (immune privilege) rather than a number, returning to the set point means restoring the follicle's ability to hide from the immune system. JAK inhibitors do not restore immune privilege directly — they suppress the immune attack to give the follicle a chance to re-establish it. This is why AA <strong>often returns after stopping JAK inhibitors</strong> (~50% relapse within 6–8 months). The set point hasn't truly been reset; the attack has just been paused.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(1)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(3)">Next: Stimulus →</button>
+  </div>
+</div>
+
+<!-- CH 3: STIMULUS -->
+<div class="chapter" id="ch3">
+  <span class="ch-tag">Chapter 3</span>
+  <h1 class="ch-title">The Stimulus</h1>
+  <p class="ch-sub">Something disrupts the follicle's immune privilege. This disruption is the <strong>stimulus</strong> that triggers the entire cascade. In alopecia areata, the stimulus is the follicle becoming visible — and vulnerable.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--gold)">
+      <div class="concept-icon">⚡</div>
+      <div class="concept-body">
+        <h4>Stimulus (definition)</h4>
+        <p>Any change detected by a receptor that initiates a feedback response. In AA, the stimulus is immune privilege collapse — the follicle begins expressing molecules that flag it as a target for immune attack.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">Signal 1</div>
+      <h3>NKG2D Ligand Upregulation</h3>
+      <p>Under stress, follicle cells upregulate <strong>MICA, MICB, and ULBP3</strong> on their surface. These are "I'm in distress" flags that activate NKG2D receptors on CD8+ T cells and NK cells — telling them to attack.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">Signal 2</div>
+      <h3>MHC Class I Upregulation</h3>
+      <p>Follicle cells begin displaying their internal proteins on MHC class I molecules. This exposes follicle-specific antigens (especially melanocyte antigens like Melan-A) to CD8+ T cell receptors — creating direct targets for cytotoxic killing.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">Known Triggers</div>
+      <h3>What Breaks Immune Privilege?</h3>
+      <p>Identified triggers include: <strong>viral infections</strong> (especially EBV, CMV), <strong>severe psychological stress</strong>, physical trauma, thyroid disease, and other autoimmune conditions. Genetic factors (HLA-DR alleles, ULBP3/MICA polymorphisms) increase susceptibility. In many cases, <strong>no trigger is ever identified</strong>.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>The Stimulus Is a Loss of Identity</h4>
+    <p>In most feedback loops, the stimulus is a change in a measurable quantity (too much glucose, too much heat). In AA, the stimulus is more subtle: the follicle <em>stops suppressing its own visibility</em>. It's less like a fire alarm going off and more like a camouflaged soldier accidentally removing their camouflage. The immune system was already nearby — now it can see the target.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(2)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(4)">Next: Receptor →</button>
+  </div>
+</div>
+
+<!-- CH 4: RECEPTOR -->
+<div class="chapter" id="ch4">
+  <span class="ch-tag">Chapter 4</span>
+  <h1 class="ch-title">The Receptor</h1>
+  <p class="ch-sub">Multiple receptor systems detect the follicle's distress signals. In alopecia areata, the receptors are on <strong>immune cells</strong> — not on the follicle itself.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#c084fc">
+      <div class="concept-icon">👂</div>
+      <div class="concept-body">
+        <h4>Receptor (definition)</h4>
+        <p>A structure that detects a specific stimulus and generates a signal. In AA, receptors are on the immune cells that will carry out the attack — they detect the follicle's distress molecules and generate activation signals.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">Primary Receptor</div>
+      <h3>NKG2D Receptor</h3>
+      <p>Expressed on CD8+ cytotoxic T cells and NK cells. Detects MICA, MICB, and ULBP3 stress ligands displayed on follicle cells. NKG2D activation is a <strong>co-stimulatory signal</strong> that strongly amplifies T cell and NK cell cytotoxicity — like a second key in the ignition that makes the attack much more powerful.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">Secondary Receptor</div>
+      <h3>T Cell Receptor (TCR)</h3>
+      <p>The TCR on CD8+ T cells recognizes specific peptide antigens presented on MHC class I. In AA, TCRs have been identified that recognize <strong>melanocyte antigens</strong> — Melan-A/MART-1 and TRP-1. These autoreactive T cell clones are the specific "soldiers" that home in on follicles.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">Amplification Receptor</div>
+      <h3>IL-15 Receptor (IL-15Rβγ)</h3>
+      <p>IL-15 is secreted by perifollicular cells and keratinocytes. It binds the IL-15 receptor on CD8+ T cells and NK cells, driving their <strong>survival, proliferation, and cytotoxicity</strong>. This is the receptor that sustains the attack over time — even after the initial NKG2D signal fades.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>Three Locks — Three Keys</h4>
+    <p>The immune attack on the follicle requires multiple receptor-ligand pairs to fully activate: NKG2D + stress ligands (the "danger signal"), TCR + MHC class I peptide (the "this specific thing is a target" signal), and IL-15R + IL-15 (the "keep going" survival signal). This is why JAK inhibitors that block IL-15 signaling (like ritlecitinib, which targets JAK3 — the kinase downstream of IL-15R) are particularly effective in AA.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(3)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(5)">Next: Control Center →</button>
+  </div>
+</div>
+
+<!-- CH 5: CONTROL CENTER -->
+<div class="chapter" id="ch5">
+  <span class="ch-tag">Chapter 5</span>
+  <h1 class="ch-title">The Control Center</h1>
+  <p class="ch-sub">Once the receptors detect the follicle's distress signals, intracellular machinery takes over. The <strong>JAK-STAT signaling pathway</strong> is the control center — it processes the receptor signal and decides what genes to turn on.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#64b5f6">
+      <div class="concept-icon">🧠</div>
+      <div class="concept-body">
+        <h4>Control Center (definition)</h4>
+        <p>The integrating center that receives receptor input, compares it to the set point, and directs the effector. In AA, the JAK-STAT pathway inside immune cells is the control center — it translates cytokine signals into gene expression changes that amplify the immune attack.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">JAK1 / JAK2 pathway</div>
+      <h3>IFN-γ → STAT1</h3>
+      <p>IFN-γ binds its receptor → recruits JAK1 and JAK2 → they phosphorylate STAT1 → STAT1 dimerizes and enters the nucleus → activates interferon-stimulated genes: <strong>MHC class I (makes follicle more visible), NKG2D ligands (more "attack me" flags), and inflammatory chemokines (recruits more T cells).</strong></p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">JAK1 / JAK3 pathway</div>
+      <h3>IL-15 → STAT5</h3>
+      <p>IL-15 binds IL-15Rβγ → recruits JAK1 and JAK3 → phosphorylate STAT5 → STAT5 in nucleus → activates genes for <strong>CD8+ T cell and NK cell survival, proliferation, and cytotoxicity</strong>. This is the pathway that keeps the attack going long-term.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">The Critical Point</div>
+      <h3>Why JAK-STAT Is the Target</h3>
+      <p>Both critical pathways (IFN-γ and IL-15) converge on JAK kinases. Block the JAKs → both STAT1 and STAT5 go unphosphorylated → the attack genes don't get turned on → the positive feedback loop breaks. This is the entire rationale for JAK inhibitor therapy in AA.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>JAK-STAT: A 4-Step Signal</h4>
+    <p><strong>1.</strong> Cytokine (IFN-γ or IL-15) binds receptor on cell surface<br/>
+    <strong>2.</strong> JAK kinases (attached to the receptor) phosphorylate each other and STAT proteins<br/>
+    <strong>3.</strong> Phosphorylated STATs dimerize and move into the nucleus<br/>
+    <strong>4.</strong> STATs bind DNA and activate target genes → inflammatory response amplified<br/><br/>
+    JAK inhibitors block step 2 — preventing all downstream steps from occurring.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(4)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(6)">Next: Effector →</button>
+  </div>
+</div>
+
+<!-- CH 6: EFFECTOR -->
+<div class="chapter" id="ch6">
+  <span class="ch-tag">Chapter 6</span>
+  <h1 class="ch-title">The Effector</h1>
+  <p class="ch-sub">The effector carries out the response. In alopecia areata, the effectors are the <strong>immune cells themselves</strong> — they physically attack the hair follicle and shut it down.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#81c784">
+      <div class="concept-icon">💪</div>
+      <div class="concept-body">
+        <h4>Effector (definition)</h4>
+        <p>The organ or tissue that executes the response commanded by the control center. In AA, the effectors are CD8+ cytotoxic T cells and NK cells — they carry out the physical attack on hair matrix cells.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">Primary Effector</div>
+      <h3>CD8+ Cytotoxic T Cells</h3>
+      <p>The main attackers. They infiltrate the peribulbar space (surrounding the hair bulb) in large numbers — pathologists describe this as a <strong>"swarm of bees"</strong> pattern around the follicle on biopsy. They kill matrix cells by releasing <strong>perforin</strong> (punches holes in cell membranes) and <strong>granzyme B</strong> (triggers apoptosis/cell death).</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">Secondary Effector</div>
+      <h3>NK Cells (Natural Killer Cells)</h3>
+      <p>NK cells amplify the attack by releasing large amounts of IFN-γ — feeding directly back into the JAK-STAT positive feedback loop. They also directly kill follicle cells via NKG2D-triggered cytotoxicity. NK cell activity is specifically targeted by ritlecitinib (JAK3/ITK inhibitor).</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">The Crucial Distinction</div>
+      <h3>Follicle Is Forced Into Telogen — Not Destroyed</h3>
+      <p>Unlike late-stage androgenetic alopecia (where follicles are replaced by fibrous tracts), in AA the <strong>follicle bulge stem cells are spared</strong>. The follicle goes into an extended kenogen (empty telogen) state. The factory is closed — but the building is intact. This is why regrowth is possible.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>Why Does Hair Grow Back in Patches?</h4>
+    <p>Not all follicles are attacked simultaneously — the immune response starts locally and spreads. Follicles at different stages of immune attack produce different sized hairs (or none). At the patch margin, you often see <strong>"exclamation mark hairs"</strong> — short hairs that are thinner at the base than the tip, indicating the attack started mid-cycle and the follicle began miniaturizing before shutting down completely. These are a diagnostic hallmark of AA.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(5)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(7)">Next: Negative Feedback →</button>
+  </div>
+</div>
+
+<!-- CH 7: NEGATIVE FEEDBACK -->
+<div class="chapter" id="ch7">
+  <span class="ch-tag">Chapter 7</span>
+  <h1 class="ch-title">The Negative Feedback Loop</h1>
+  <p class="ch-sub">In a healthy immune response, <strong>negative feedback mechanisms</strong> limit the attack and return the system to homeostasis. In alopecia areata, these mechanisms exist — they just fail to dominate at the follicle level.</p>
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--green)">
+      <div class="concept-icon">↩️</div>
+      <div class="concept-body">
+        <h4>Negative Feedback (definition)</h4>
+        <p>A response that opposes and reduces the original stimulus, returning the system toward the set point. In immune responses, negative feedback prevents the immune system from attacking indefinitely or targeting the wrong tissues.</p>
+      </div>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:16px;font-size:14px">👇 Click any node to learn its role</p>
+  <div class="flow" id="neg-flow">
+    <div class="flow-node stimulus" data-node="priv" onclick="showNodeInfo('priv')"><div class="fn-label">Set Point</div><div class="fn-name">Immune Privilege</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node stimulus" data-node="trigger" onclick="showNodeInfo('trigger')"><div class="fn-label">Stimulus</div><div class="fn-name">Privilege Collapse</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node receptor" data-node="ngkd" onclick="showNodeInfo('ngkd')"><div class="fn-label">Receptor</div><div class="fn-name">NKG2D / TCR</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node control" data-node="jakstat" onclick="showNodeInfo('jakstat')"><div class="fn-label">Control Center</div><div class="fn-name">JAK-STAT</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node effector" data-node="tcel" onclick="showNodeInfo('tcel')"><div class="fn-label">Effector</div><div class="fn-name">CD8+ T Cells / NK</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node response" data-node="attack" onclick="showNodeInfo('attack')"><div class="fn-label">Response</div><div class="fn-name">Follicle Attack</div></div>
+  </div>
+  <div class="node-info" id="node-info">
+    <div class="ni-tag">Click a node above to explore it</div>
+    <p>The normal immune response has negative feedback built in — regulatory T cells, IL-10, and TGF-β all work to shut down immune activity after a threat is cleared. In alopecia areata, these brakes are overwhelmed by the positive feedback loop that amplifies the attack.</p>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h3>The Negative Feedback That Normally Works</h3>
+    <p style="margin-bottom:12px"><strong>Regulatory T cells (Tregs)</strong> — CD4+CD25+FOXP3+ cells that suppress effector T cell activity via IL-10 and TGF-β. Treg numbers are reduced in the perifollicular area in AA.</p>
+    <p style="margin-bottom:12px"><strong>IL-10</strong> — an anti-inflammatory cytokine that normally signals "stand down." Reduced in AA lesions.</p>
+    <p><strong>The follicle's own TGF-β and α-MSH</strong> — once immune privilege is lost, these signals are overpowered by the IFN-γ amplification loop. The negative feedback exists but loses to the positive feedback in a 1v1.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(6)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(8)">Next: Positive Feedback →</button>
+  </div>
+</div>
+
+<!-- CH 8: POSITIVE FEEDBACK -->
+<div class="chapter" id="ch8">
+  <span class="ch-tag">Chapter 8</span>
+  <h1 class="ch-title">The Positive Feedback Loop</h1>
+  <p class="ch-sub">Alopecia areata is driven by a <strong>self-amplifying positive feedback loop</strong>. Once started, each step of the immune attack produces signals that make the next round of attack stronger — until JAK inhibitors or spontaneous remission interrupt it.</p>
+  <div class="pos-loop">
+    <div class="pos-loop-items">
+      <div class="pl-item">
+        <div class="pl-icon">💥</div>
+        <div class="pl-body"><h5>Immune privilege collapses</h5><p>Follicle upregulates NKG2D ligands (MICA/MICB/ULBP3) and MHC class I. Trigger: stress, infection, genetic vulnerability.</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">🦠</div>
+        <div class="pl-body"><h5>CD8+ T cells and NK cells recognize the follicle</h5><p>NKG2D receptor binds ULBP3/MICA. TCR binds MHC class I + melanocyte antigen. Attack begins. IFN-γ released.</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">📡</div>
+        <div class="pl-body"><h5>IFN-γ → JAK1/2 → STAT1 → MORE MHC class I and MORE NKG2D ligands</h5><p>The follicle becomes even more visible. More T cells recruited. IFN-γ amplifies its own signal — the defining positive feedback step.</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">🔥</div>
+        <div class="pl-body"><h5>IL-15 → JAK1/3 → STAT5 → T cell and NK cell survival and proliferation</h5><p>Local IL-15 keeps the attack force alive and growing. More effector cells = more IFN-γ = more amplification.</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">💀</div>
+        <div class="pl-body"><h5>Matrix cells killed → follicle forced into telogen/kenogen</h5><p>DAMPs released from dying cells attract more innate immune cells. The patch of hair loss appears. If unchecked, spreads to adjacent follicles.</p></div>
+      </div>
+    </div>
+    <div class="loop-indicator">🔄 More IFN-γ → More MHC class I → More T cell recruitment → More IFN-γ — the loop feeds itself</div>
+  </div>
+  <div class="highlight">
+    <h4>Why Does AA Spread?</h4>
+    <p>Activated autoreactive T cells don't stay put — they circulate through the lymphatic system and bloodstream. Once primed against follicle antigens, they can recognize and attack follicles elsewhere on the scalp and body. This explains the progression from a small patch → alopecia totalis (full scalp) → alopecia universalis (full body). The positive feedback generates a systemic pool of follicle-targeting T cells.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(7)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(9)">Next: Drug Simulator →</button>
+  </div>
+</div>
+
+<!-- CH 9: DRUG SIMULATOR -->
+<div class="chapter" id="ch9">
+  <span class="ch-tag">Interactive</span>
+  <h1 class="ch-title">JAK Inhibitor Simulator</h1>
+  <p class="ch-sub">All approved treatments for alopecia areata target the JAK-STAT pathway — the control center of the autoimmune loop. Toggle each drug to see where it intervenes and how the loop responds.</p>
+  <div class="sim-layout">
+    <div class="sim-diagram">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Active drugs light up their intervention point in the loop. Watch immune activity and regrowth potential respond.</p>
+      <div class="immune-diagram" id="aa-loop">
+        <div class="imm-cell sim-node" id="sn-trigger"><div class="imm-icon">💥</div><div class="imm-body"><h5>Immune Privilege Collapse</h5><p>NKG2D ligands + MHC class I upregulated on follicle</p></div></div>
+        <div class="imm-arrow">↓</div>
+        <div class="imm-cell sim-node" id="sn-tcell"><div class="imm-icon">🦠</div><div class="imm-body"><h5>T Cell + NK Cell Activation</h5><p>NKG2D, TCR, and IL-15R detect follicle distress signals</p></div></div>
+        <div class="imm-arrow">↓</div>
+        <div class="imm-cell sim-node" id="sn-jak" style="border-left-color:var(--gold)"><div class="imm-icon">⚙️</div><div class="imm-body"><h5>JAK-STAT Signaling ⚔ Drug Target</h5><p>IFN-γ → JAK1/2 → STAT1 &nbsp;|&nbsp; IL-15 → JAK1/3 → STAT5</p></div></div>
+        <div class="imm-arrow">↓</div>
+        <div class="imm-cell sim-node" id="sn-ifng"><div class="imm-icon">🔊</div><div class="imm-body"><h5>IFN-γ Amplification</h5><p>More MHC class I, more NKG2D ligands → more T cells recruited → loop continues</p></div></div>
+        <div class="imm-arrow">↓</div>
+        <div class="imm-cell sim-node" id="sn-outcome" style="border-left-color:#ff8a87"><div class="imm-icon">💀</div><div class="imm-body"><h5>Follicle Forced Into Telogen</h5><p>Matrix cells killed by perforin/granzyme B → hair loss patch appears</p></div></div>
+      </div>
+      <div class="gauges" style="margin-top:24px">
+        <div class="gauge-item">
+          <div class="gauge-label"><span>Immune Activity</span><span id="g-immune-val">100%</span></div>
+          <div class="gauge-bar g-immune"><div class="gauge-fill" id="g-immune" style="width:100%"></div></div>
+        </div>
+        <div class="gauge-item">
+          <div class="gauge-label"><span>JAK-STAT Signal Strength</span><span id="g-jak-val">100%</span></div>
+          <div class="gauge-bar g-jak"><div class="gauge-fill" id="g-jak" style="width:100%"></div></div>
+        </div>
+        <div class="gauge-item">
+          <div class="gauge-label"><span>T Cell Activity</span><span id="g-tcell-val">100%</span></div>
+          <div class="gauge-bar g-tcell"><div class="gauge-fill" id="g-tcell" style="width:100%"></div></div>
+        </div>
+        <div class="gauge-item">
+          <div class="gauge-label"><span>Hair Regrowth Potential</span><span id="g-regrow-val">10%</span></div>
+          <div class="gauge-bar g-regrow"><div class="gauge-fill" id="g-regrow" style="width:10%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sim-controls" id="sim-drug-list"></div>
+  </div>
+  <div class="drug-detail" id="sim-drug-detail" style="margin-top:0">
+    <p style="color:var(--muted);font-size:13px">Click a drug card to see full details. Toggle the switch to activate it in the loop.</p>
+  </div>
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(8)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(10)">Take a Quiz →</button>
+  </div>
+</div>
+
+<!-- CH 10: QUIZ GATE -->
+<div class="chapter" id="ch10">
+  <span class="ch-tag">Assessment</span>
+  <h1 class="ch-title">Test Your Knowledge</h1>
+  <p class="ch-sub">Two quizzes — pick what you want to test.</p>
+  <div class="quiz-cards">
+    <div class="quiz-choice" onclick="startQuiz(1)">
+      <div class="qc-icon">🔄</div>
+      <h3>Quiz 1: Homeostasis Concepts</h3>
+      <p>Focused on set point, normal range, stimulus, receptor, control center, effector, and negative vs. positive feedback — all through the lens of alopecia areata.</p>
+      <p style="margin-top:14px;font-size:12px;color:var(--primary);font-weight:700">10 questions · ~5 min</p>
+    </div>
+    <div class="quiz-choice" onclick="startQuiz(2)">
+      <div class="qc-icon">🧬</div>
+      <h3>Quiz 2: AA Deep Dive</h3>
+      <p>Comprehensive questions on immune privilege, JAK-STAT pathway, specific cells and molecules, drug mechanisms, and clinical details of alopecia areata.</p>
+      <p style="margin-top:14px;font-size:12px;color:var(--primary);font-weight:700">10 questions · ~6 min</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ SCREENS -->
+<div class="quiz-screen" id="quiz1-screen">
+  <div class="quiz-progress"><div class="qp-bar"><div class="qp-fill" id="q1-prog"></div></div><div class="qp-text" id="q1-prog-text">1 / 10</div></div>
+  <div id="q1-content"></div>
+  <div class="q-feedback" id="q1-feedback"></div>
+  <button class="btn-next" id="q1-next" onclick="nextQuestion(1)">Next Question →</button>
+</div>
+<div class="quiz-screen" id="quiz2-screen">
+  <div class="quiz-progress"><div class="qp-bar"><div class="qp-fill" id="q2-prog"></div></div><div class="qp-text" id="q2-prog-text">1 / 10</div></div>
+  <div id="q2-content"></div>
+  <div class="q-feedback" id="q2-feedback"></div>
+  <button class="btn-next" id="q2-next" onclick="nextQuestion(2)">Next Question →</button>
+</div>
+
+<!-- RESULTS -->
+<div class="results-screen" id="quiz1-results">
+  <h2 style="font-size:28px;margin-bottom:8px">Quiz 1 Results</h2>
+  <p style="color:var(--muted);margin-bottom:28px">Homeostasis Concepts — AA Context</p>
+  <div class="score-ring" id="q1-ring"><div class="score-num" id="q1-score">0</div><div class="score-denom">/ 10</div></div>
+  <p class="result-msg" id="q1-msg"></p>
+  <div class="missed-list" id="q1-missed"></div>
+  <div style="margin-top:28px">
+    <button class="result-btn primary" onclick="startQuiz(1)">Retake Quiz 1</button>
+    <button class="result-btn secondary" onclick="startQuiz(2)">Take Quiz 2</button>
+    <button class="result-btn secondary" onclick="goTo(0)">Review Content</button>
+  </div>
+</div>
+<div class="results-screen" id="quiz2-results">
+  <h2 style="font-size:28px;margin-bottom:8px">Quiz 2 Results</h2>
+  <p style="color:var(--muted);margin-bottom:28px">AA Deep Dive</p>
+  <div class="score-ring" id="q2-ring"><div class="score-num" id="q2-score">0</div><div class="score-denom">/ 10</div></div>
+  <p class="result-msg" id="q2-msg"></p>
+  <div class="missed-list" id="q2-missed"></div>
+  <div style="margin-top:28px">
+    <button class="result-btn primary" onclick="startQuiz(2)">Retake Quiz 2</button>
+    <button class="result-btn secondary" onclick="startQuiz(1)">Take Quiz 1</button>
+    <button class="result-btn secondary" onclick="goTo(0)">Review Content</button>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// NAV
+function goTo(n){
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el=>{
+    el.classList.remove('active');
+    if(el.classList.contains('quiz-screen')||el.classList.contains('results-screen')) el.style.display='';
+  });
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  const idx = n===0?0:n+2;
+  const btns=document.querySelectorAll('.sb-btn');
+  if(btns[idx]) btns[idx].classList.add('active');
+  const ch=document.getElementById('ch'+n);
+  if(ch) ch.classList.add('active');
+  document.getElementById('main').scrollTo({top:0,behavior:'smooth'});
+  if(n===9) renderDrugs();
+}
+function goToELI5(){
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el=>{
+    el.classList.remove('active');
+    if(el.classList.contains('quiz-screen')||el.classList.contains('results-screen')) el.style.display='';
+  });
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sb-btn')[1].classList.add('active');
+  document.getElementById('ch-eli5').classList.add('active');
+  document.getElementById('main').scrollTo({top:0,behavior:'smooth'});
+}
+function toggleELI5(card){
+  const open=card.classList.contains('open');
+  card.classList.toggle('open',!open);
+  const t=card.querySelector('.ec-toggle');
+  if(t) t.textContent=open?'Show science ↓':'Hide science ↑';
+}
+
+// NODE INFO
+const nodeData={
+  priv:{tag:'Set Point',title:'Immune Privilege (Normal State)',text:'Hair follicle bulb cells maintain very low MHC class I expression, secrete TGF-β and α-MSH, and physically exclude activated immune cells. This is the set point — the state the system tries to maintain. Hair grows normally when this state is preserved.'},
+  trigger:{tag:'Stimulus',title:'Immune Privilege Collapse',text:'Under stress, infection, or unknown triggers, follicle cells upregulate NKG2D ligands (MICA, MICB, ULBP3) and increase MHC class I expression. Follicle-specific antigens are now displayed to passing CD8+ T cells. The set point has been disrupted.'},
+  ngkd:{tag:'Receptor',title:'NKG2D Receptor / T Cell Receptor / IL-15R',text:'NKG2D on CD8+ T cells and NK cells detects MICA/MICB/ULBP3 stress ligands. TCR recognizes follicle antigens (especially melanocyte antigen Melan-A) on MHC class I. IL-15 receptor drives T cell and NK cell survival and amplification. These are the sensors of the AA feedback loop.'},
+  jakstat:{tag:'Control Center',title:'JAK-STAT Signaling Pathway',text:'IFN-γ → JAK1/JAK2 → STAT1 phosphorylation → pro-inflammatory gene transcription. IL-15 → JAK1/JAK3 → STAT5 → T cell/NK cell proliferation. This pathway is the intracellular amplifier that turns a weak signal into a strong immune response. All four approved AA drugs target JAK kinases.'},
+  tcel:{tag:'Effector',title:'CD8+ Cytotoxic T Cells and NK Cells',text:'CD8+ T cells kill hair matrix keratinocytes using perforin (punches holes in membranes) and granzyme B (triggers apoptosis). NK cells release more IFN-γ, amplifying the loop. The "swarm of bees" peribulbar infiltration on biopsy is a hallmark of active alopecia areata.'},
+  attack:{tag:'Response / Outcome',title:'Follicle Forced Into Telogen (Kenogen)',text:'Matrix cells undergo apoptosis → follicle transitions to catagen then telogen. Unlike AGA, the follicle\'s bulge stem cells are preserved — the follicle is empty, not destroyed. Visible hair loss appears as a patch. The dead cells release DAMPs that attract more innate immune cells, feeding back into the positive feedback loop.'}
+};
+function showNodeInfo(id){
+  const d=nodeData[id]; if(!d) return;
+  document.querySelectorAll('.flow-node').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`[data-node="${id}"]`)?.classList.add('active');
+  const p=document.getElementById('node-info');
+  p.innerHTML=`<div class="ni-tag">${d.tag}</div><h4>${d.title}</h4><p>${d.text}</p>`;
+}
+
+// DRUGS
+const DRUGS=[
+  {id:'baricitinib',name:'Baricitinib',brand:'Olumiant',target:'jak12',color:'#a855f7',
+   mechanism:'Selective JAK1 + JAK2 inhibitor — blocks IFN-γ → STAT1 and IL-6 → STAT3 signaling',
+   fda:'FDA-approved June 2022 — FIRST systemic AA treatment ever approved. 2 mg/day.',
+   efficacy:'38.8% achieve ≥80% scalp coverage at 36 weeks (BRAVE-AA1 & AA2 trials)',
+   time:'4–8 weeks for initial response; 6–9 months for full effect',
+   sideEffects:'Upper respiratory infections (~15%), VTE risk (black box), elevated lipids, serious infection risk, teratogenic',
+   immuneMult:0.35,jakMult:0.32,tcellMult:0.40},
+  {id:'ritlecitinib',name:'Ritlecitinib',brand:'Litfulo',target:'jak3',color:'#8b5cf6',
+   mechanism:'Selective JAK3 + TEC kinase (ITK, BTK) inhibitor — targets IL-15-driven CD8+ T cell and NK cell signaling specifically',
+   fda:'FDA-approved June 2023 — first approved for adolescents ≥12 years. 50 mg/day.',
+   efficacy:'23% SALT ≤20 at week 24; 31% at week 48 (ALLEGRO trial)',
+   time:'4–8 weeks initial; 6–12 months full effect',
+   sideEffects:'Headache, diarrhea, acne; more lymphocyte-selective → potentially fewer hematologic effects; same class black box warnings',
+   immuneMult:0.45,jakMult:0.40,tcellMult:0.35},
+  {id:'deuruxolitinib',name:'Deuruxolitinib',brand:'Leqselvi',target:'jak12',color:'#7c3aed',
+   mechanism:'Deuterium-modified JAK1/JAK2 inhibitor — deuterium substitution slows metabolism → more stable blood levels than baricitinib',
+   fda:'FDA-approved August 2024 — most recently approved AA treatment. 8 mg twice daily.',
+   efficacy:'~30–35% achieve SALT ≤20 at week 24 (THRIVE-AA1 & AA2)',
+   time:'4–8 weeks initial response',
+   sideEffects:'Similar to baricitinib; more consistent drug levels may reduce peak-related side effects; same class black box',
+   immuneMult:0.38,jakMult:0.35,tcellMult:0.42},
+  {id:'tofacitinib',name:'Tofacitinib',brand:'Xeljanz (off-label)',target:'jak13',color:'#6d28d9',
+   mechanism:'Pan JAK1/3 inhibitor (weak JAK2) — first JAK inhibitor studied in AA (Yale 2014); broader JAK blockade profile',
+   fda:'NOT FDA-approved for AA — off-label use only. Approved for RA, PsA, UC.',
+   efficacy:'~32% complete or near-complete response in off-label case series; ~77% in severe AA in early small trials',
+   time:'4–8 weeks initial response; disease returns ~50% within 8 months of stopping',
+   sideEffects:'Same class black box warnings; infection risk; preceded approved drugs and established proof-of-concept for JAK inhibition in AA',
+   immuneMult:0.40,jakMult:0.38,tcellMult:0.38}
+];
+
+let activeDrugs=new Set();
+
+function renderDrugs(){
+  const list=document.getElementById('sim-drug-list');
+  list.innerHTML='';
+  DRUGS.forEach(d=>{
+    const c=document.createElement('div');
+    c.className='drug-card'; c.id='dcard-'+d.id;
+    c.innerHTML=`<div class="drug-header"><div><div class="drug-name" style="color:${d.color}">${d.name}</div><div class="drug-brand">${d.brand}</div></div><div class="toggle" id="tog-${d.id}" onclick="event.stopPropagation();toggleDrug('${d.id}')"></div></div><div class="drug-mech">${d.mechanism}</div>`;
+    c.onclick=(e)=>{if(!e.target.classList.contains('toggle')) showDrugDetail(d);};
+    list.appendChild(c);
+  });
+}
+
+function toggleDrug(id){
+  activeDrugs.has(id)?activeDrugs.delete(id):activeDrugs.add(id);
+  document.getElementById('dcard-'+id)?.classList.toggle('on',activeDrugs.has(id));
+  document.getElementById('tog-'+id)?.classList.toggle('on',activeDrugs.has(id));
+  updateGauges(); highlightNodes();
+}
+
+function highlightNodes(){
+  document.querySelectorAll('.sim-node').forEach(n=>{n.style.borderColor='';n.style.background='';});
+  activeDrugs.forEach(id=>{
+    const d=DRUGS.find(x=>x.id===id); if(!d) return;
+    const el=document.getElementById('sn-jak');
+    if(el){el.style.borderColor=d.color;el.style.background=`${d.color}18`;}
+  });
+}
+
+function updateGauges(){
+  let iM=1,jM=1,tM=1;
+  activeDrugs.forEach(id=>{
+    const d=DRUGS.find(x=>x.id===id); if(!d) return;
+    iM=Math.min(iM,d.immuneMult); jM=Math.min(jM,d.jakMult); tM=Math.min(tM,d.tcellMult);
+  });
+  const ip=Math.round(iM*100), jp=Math.round(jM*100), tp=Math.round(tM*100);
+  const rp=Math.min(90,Math.round(10+(1-iM)*85));
+  setG('g-immune',ip); setG('g-jak',jp); setG('g-tcell',tp); setG('g-regrow',rp);
+}
+
+function setG(id,pct){
+  const el=document.getElementById(id), vl=document.getElementById(id+'-val');
+  if(el) el.style.width=pct+'%'; if(vl) vl.textContent=pct+'%';
+}
+
+function showDrugDetail(d){
+  const det=document.getElementById('sim-drug-detail');
+  det.innerHTML=`<div class="dd-row"><span class="dd-label">Drug</span><span class="dd-val" style="color:${d.color};font-weight:700">${d.name} (${d.brand})</span></div><div class="dd-row"><span class="dd-label">Mechanism</span><span class="dd-val">${d.mechanism}</span></div><div class="dd-row"><span class="dd-label">FDA Status</span><span class="dd-val">${d.fda}</span></div><div class="dd-row"><span class="dd-label">Efficacy</span><span class="dd-val">${d.efficacy}</span></div><div class="dd-row"><span class="dd-label">Time to effect</span><span class="dd-val">${d.time}</span></div><div class="dd-row"><span class="dd-label">Side effects</span><span class="dd-val">${d.sideEffects}</span></div>`;
+}
+
+// QUIZ DATA
+const Q1=[
+  {q:'In alopecia areata, what is the "set point" for the hair follicle\'s relationship with the immune system?',opts:['High T cell activity surrounding every follicle at all times','The follicle maintaining immune privilege — being effectively invisible to the immune system','Maximum IFN-γ production to protect follicles from infection','Complete absence of all immune cells from the entire body'],ans:1,exp:'The set point is immune privilege — the state in which the follicle actively suppresses local immune surveillance through low MHC class I expression, local TGF-β and α-MSH, and physical exclusion of activated immune cells. Hair grows normally when this state is maintained.'},
+  {q:'Which of the following best describes the STIMULUS in alopecia areata?',opts:['DHT binding to androgen receptors on dermal papilla cells','The hair follicle losing its immune privilege and upregulating NKG2D ligands and MHC class I','The hypothalamus signaling a reduction in hair growth','5-alpha reductase converting testosterone to DHT in the follicle'],ans:1,exp:'The stimulus in AA is immune privilege collapse — the follicle begins expressing NKG2D ligands (MICA, MICB, ULBP3) and upregulating MHC class I molecules. This makes the follicle visible and targetable by CD8+ T cells and NK cells.'},
+  {q:'What acts as the primary RECEPTOR in the alopecia areata feedback loop?',opts:['The androgen receptor (AR) on dermal papilla cells','5-alpha reductase type II enzyme','NKG2D receptor on CD8+ T cells and NK cells, detecting stress ligands on follicle cells','JAK1 kinase inside T cells'],ans:2,exp:'NKG2D is an activating receptor on CD8+ T cells and NK cells that detects stress ligands (MICA, MICB, ULBP3) upregulated on follicle cells. The T cell receptor (TCR) and IL-15 receptor are also important receptors in AA. Together they detect the stimulus and initiate the attack.'},
+  {q:'The CONTROL CENTER in the alopecia areata autoimmune loop is best described as:',opts:['The hypothalamic-pituitary-gonadal (HPG) axis controlling androgen production','The hair follicle dermal papilla deciding how long anagen lasts','The JAK-STAT signaling pathway inside T cells and NK cells, which amplifies the immune signal','The androgen receptor complex in the follicle nucleus'],ans:2,exp:'The JAK-STAT pathway is the intracellular control center. IFN-γ → JAK1/JAK2 → STAT1 → pro-inflammatory gene transcription. IL-15 → JAK1/JAK3 → STAT5 → T cell and NK cell survival. This pathway processes the receptor signal and directs the effector response.'},
+  {q:'The EFFECTOR in alopecia areata is:',opts:['DHT molecules circulating in the blood','5-alpha reductase converting testosterone to DHT','CD8+ cytotoxic T cells and NK cells that kill hair matrix cells','The androgen receptor on dermal papilla cells'],ans:2,exp:'CD8+ NKG2D+ cytotoxic T cells and NK cells are the effectors — they physically execute the attack by releasing perforin and granzyme B, killing hair matrix keratinocytes and forcing the follicle into telogen. They are the "workers" who carry out the immune response.'},
+  {q:'How does IFN-γ create a POSITIVE feedback loop in alopecia areata?',opts:['It directly destroys hair follicles and creates scar tissue permanently','It upregulates MHC class I and NKG2D ligands on follicle cells → more T cells recognize the follicle → more IFN-γ is produced','It is a negative feedback signal that ends the immune attack after the threat is cleared','It stimulates the Wnt pathway to promote new hair growth after attack'],ans:1,exp:'IFN-γ signals through JAK1/JAK2 → STAT1, which upregulates MHC class I and NKG2D ligands on follicle cells — making the follicle even more visible to T cells. More visible follicle = more T cell recruitment = more IFN-γ. This is the defining positive feedback step in AA.'},
+  {q:'Regulatory T cells (Tregs) releasing IL-10 and TGF-β to limit the immune attack is an example of:',opts:['A positive feedback loop that amplifies inflammation','A negative feedback mechanism trying to restore the immune privilege set point','The effector executing the control center\'s instructions','The stimulus that initiates the autoimmune cascade'],ans:1,exp:'Tregs are the immune system\'s negative feedback mechanism — they release anti-inflammatory cytokines (IL-10, TGF-β) to suppress effector T cell activity and return immune responses toward baseline. In AA, Treg numbers and function in the perifollicular area are reduced, meaning this negative feedback is overwhelmed by the positive feedback loop.'},
+  {q:'JAK inhibitors treat alopecia areata by:',opts:['Blocking 5-alpha reductase to reduce DHT levels in follicles','Physically removing autoreactive T cells from the immune system','Blocking JAK kinases to prevent STAT phosphorylation, interrupting the IFN-γ and IL-15 amplification loops','Directly rebuilding the follicle\'s immune privilege barrier'],ans:2,exp:'JAK inhibitors block JAK1, JAK2, or JAK3 — the kinases that phosphorylate STAT proteins downstream of IFN-γ and IL-15 receptors. Without STAT activation, the genes driving T cell proliferation and MHC class I upregulation are not transcribed. The positive feedback loop is broken at the control center.'},
+  {q:'Unlike androgenetic alopecia, why is spontaneous regrowth possible in alopecia areata?',opts:['The HPG axis corrects androgen levels over time without medication','The follicle bulge stem cells are spared — the follicle is forced into telogen but its structure is preserved, allowing anagen to resume','The immune system naturally produces antibodies that reverse the hair loss','JAK inhibitors permanently cure the condition after one course of treatment'],ans:1,exp:'In AA, CD8+ T cells target hair matrix cells in the bulb but spare the bulge stem cells — the follicle\'s regenerative reservoir. The follicle goes into extended kenogen (empty telogen) but remains structurally intact. When the immune attack subsides — spontaneously or with treatment — the stem cells can re-activate and anagen resumes.'},
+  {q:'IL-15 sustains the alopecia areata attack by signaling through which pathway?',opts:['5-alpha reductase → DHT → androgen receptor','IFN-γ → JAK1/2 → STAT1','IL-15 → JAK1/JAK3 → STAT5 → CD8+ T cell and NK cell survival and proliferation','TGF-β → SMAD2/3 → pro-apoptotic gene expression in follicle cells'],ans:2,exp:'IL-15 binds the IL-15Rβγ receptor and signals through JAK1 and JAK3, activating STAT5. STAT5 drives gene expression for T cell and NK cell survival, proliferation, and cytotoxicity. This is the pathway that keeps the effector force alive and active long-term — and why ritlecitinib (JAK3 inhibitor) specifically targets it.'}
+];
+
+const Q2=[
+  {q:'What normally protects hair follicles from immune attack?',opts:['A thick physical keratin barrier that physically blocks immune cells','Immune privilege: low MHC class I, local TGF-β and α-MSH secretion, and physical exclusion of activated immune cells from the peribulbar region','High DHT levels that suppress T cell function in the scalp','Constant JAK-STAT signaling that keeps immune cells active but contained'],ans:1,exp:'Immune privilege is an active, maintained state. The follicle keeps MHC class I expression very low (making it invisible to CD8+ T cells), secretes immunosuppressive molecules (TGF-β, α-MSH, ACTH), and physically limits activated immune cell accumulation in the peribulbar zone. All three mechanisms together create the "no-go zone."'},
+  {q:'Which cells are the primary effectors (attackers) in alopecia areata?',opts:['CD4+ helper T cells producing IL-4 and IL-13','Neutrophils releasing reactive oxygen species','CD8+ NKG2D+ cytotoxic T cells','Regulatory T cells releasing IL-10'],ans:2,exp:'CD8+ NKG2D+ cytotoxic T cells are the primary effectors. They express both the NKG2D receptor (recognizes MICA/MICB/ULBP3 stress ligands) and the T cell receptor (recognizes follicle antigens on MHC class I). They infiltrate the peribulbar space and kill matrix cells with perforin and granzyme B.'},
+  {q:'IFN-γ plays a central role in alopecia areata by:',opts:['Promoting hair follicle growth through Wnt pathway activation','Acting as the master amplifier — upregulating MHC class I and NKG2D ligands on follicles, making them more visible to T cells, creating the positive feedback loop','Suppressing CD8+ T cell activity to protect the follicle from autoimmune attack','Converting testosterone to DHT in scalp follicle cells'],ans:1,exp:'IFN-γ signals through JAK1/JAK2 → STAT1, transcribing genes that upregulate MHC class I and NKG2D ligands on follicle cells. This makes the follicle a stronger T cell target, recruiting more T cells who produce more IFN-γ. This self-amplifying cycle is the core positive feedback loop of alopecia areata.'},
+  {q:'Baricitinib (Olumiant) was historically significant for alopecia areata because:',opts:['It was the first drug to block 5-alpha reductase in hair follicles','It was the first FDA-approved systemic treatment for alopecia areata (June 2022), ending decades with no approved options','It was the first drug to permanently cure alopecia areata in clinical trials','It was the first topical JAK inhibitor approved for scalp use'],ans:1,exp:'Baricitinib (Olumiant, Eli Lilly) received FDA approval in June 2022 as the first-ever FDA-approved systemic treatment for severe alopecia areata. Before this, there were no approved systemic options — patients relied on off-label corticosteroids, tofacitinib, or intralesional injections. It is a selective JAK1/JAK2 inhibitor.'},
+  {q:'Ritlecitinib (Litfulo) differs from baricitinib primarily in that:',opts:['Ritlecitinib blocks 5-alpha reductase; baricitinib blocks JAK kinases','Ritlecitinib selectively inhibits JAK3 and TEC kinases (ITK, BTK), targeting the IL-15-driven lymphocyte signaling pathway more specifically, while baricitinib inhibits JAK1/JAK2','Ritlecitinib is a topical formulation applied to the scalp; baricitinib is oral','Ritlecitinib targets the androgen receptor; baricitinib targets STAT proteins directly'],ans:1,exp:'Ritlecitinib targets JAK3 (which is exclusively paired with γc cytokine receptors — IL-2, IL-7, IL-15, IL-21) and TEC kinases (ITK, BTK). This makes it more lymphocyte-selective than baricitinib, potentially reducing off-target effects. JAK3 inhibition specifically disrupts the IL-15 pathway that drives CD8+ T cell and NK cell survival in AA.'},
+  {q:'"Alopecia universalis" is defined as:',opts:['Patchy, localized hair loss on the scalp only','Complete loss of all scalp hair (same as alopecia totalis)','Complete loss of all body hair — scalp, eyebrows, eyelashes, and all body sites','Diffuse thinning due to hormonal imbalance'],ans:2,exp:'Alopecia universalis (AU) is the most severe form — complete loss of all hair on the entire body, including scalp, eyebrows, eyelashes, beard, body hair, and even nasal hair. Alopecia totalis (AT) refers specifically to complete scalp hair loss. Both are driven by the same IFN-γ positive feedback loop spreading to all follicles.'},
+  {q:'Why does alopecia areata tend to relapse after stopping JAK inhibitors?',opts:['JAK inhibitors permanently deplete autoreactive T cells from the immune system','JAK inhibitors suppress the immune attack but do not eliminate the autoreactive T cell clones or restore the follicle\'s immune privilege — when the drug is removed, the attack can resume','JAK inhibitors cause the hair follicle to become more sensitive to immune attack over time','JAK inhibitors are converted to DHT in the scalp, which causes a new type of hair loss'],ans:1,exp:'JAK inhibitors quiet the JAK-STAT signal, reducing IFN-γ and IL-15 amplification. But the autoreactive CD8+ T cell clones specific to follicle antigens remain in the immune repertoire. When the drug is stopped, these cells can re-activate and restart the positive feedback loop. The set point (immune privilege) has been paused, not reset. ~50% of patients relapse within 6–8 months of stopping.'},
+  {q:'The NKG2D ligands MICA, MICB, and ULBP3 are significant in AA because:',opts:['They directly kill hair matrix cells by inducing apoptosis','They are the antigens presented on MHC class I that T cell receptors recognize','They are upregulated on follicle cells under stress and activate NKG2D receptors on CD8+ T cells and NK cells, triggering cytotoxic activity','They are produced by JAK kinases and drive STAT phosphorylation'],ans:2,exp:'NKG2D ligands (MICA, MICB, ULBP3) are stress-inducible molecules displayed on the surface of follicle cells when immune privilege collapses. They are recognized by NKG2D receptors on CD8+ T cells and NK cells — acting as a "danger signal" that activates these effector cells and amplifies the immune attack. Genetic variants in ULBP3 and MICA are known AA risk factors.'},
+  {q:'Deuruxolitinib (Leqselvi) was developed as a deuterium-modified JAK inhibitor. The clinical rationale for deuterium modification is:',opts:['Deuterium makes the drug specifically target JAK3 instead of JAK1/2','Deuterium substitution at specific positions slows CYP3A4-mediated metabolism, creating more stable and consistent blood levels than the parent compound','Deuterium modification eliminates all black box warning side effects','Deuterium allows the drug to be formulated as a topical rather than oral medication'],ans:1,exp:'Deuruxolitinib is the deuterium-modified version of ruxolitinib. Deuterium (heavy hydrogen) substituted at sites of CYP3A4 metabolism slows the metabolic breakdown of the drug, resulting in a longer half-life and more consistent plasma levels. This reduces the peak-to-trough fluctuation that can cause side effects at peaks and reduced efficacy at troughs.'},
+  {q:'The "swarm of bees" peribulbar infiltration seen on scalp biopsy in active alopecia areata consists primarily of:',opts:['Neutrophils and eosinophils attacking sebaceous glands','CD8+ NKG2D+ cytotoxic T cells surrounding the hair follicle bulb','Regulatory T cells attempting to protect the follicle from damage','Plasma cells producing IgE antibodies against hair keratins'],ans:1,exp:'Scalp biopsy in active alopecia areata characteristically shows a dense peribulbar lymphocytic infiltrate — predominantly CD8+ NKG2D+ cytotoxic T cells — surrounding the hair bulb in a pattern pathologists describe as a "swarm of bees." This is the effector army closing in on the follicle. The bulge region (stem cells) is typically spared, explaining why regrowth is possible.'}
+];
+
+// QUIZ ENGINE
+let quizState={1:{current:0,score:0,answers:[],started:false},2:{current:0,score:0,answers:[],started:false}};
+function startQuiz(num){
+  quizState[num]={current:0,score:0,answers:[],started:true};
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el=>{el.classList.remove('active');el.style.display='none';});
+  const s=document.getElementById('quiz'+num+'-screen');
+  s.style.display='block'; s.classList.add('active');
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  renderQuestion(num);
+}
+function renderQuestion(num){
+  const st=quizState[num], qs=num===1?Q1:Q2, q=qs[st.current];
+  if(!q){showResults(num);return;}
+  document.getElementById('q'+num+'-prog').style.width=((st.current/qs.length)*100)+'%';
+  document.getElementById('q'+num+'-prog-text').textContent=(st.current+1)+' / '+qs.length;
+  document.getElementById('q'+num+'-feedback').className='q-feedback';
+  document.getElementById('q'+num+'-feedback').style.display='none';
+  document.getElementById('q'+num+'-next').className='btn-next';
+  const opts=q.opts.map((o,i)=>`<button class="q-opt" onclick="answerQ(${num},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+  document.getElementById('q'+num+'-content').innerHTML=`<div class="q-num">Question ${st.current+1}</div><div class="q-text">${q.q}</div><div class="q-options">${opts}</div>`;
+}
+function answerQ(num,chosen){
+  const st=quizState[num], qs=num===1?Q1:Q2, q=qs[st.current];
+  document.querySelectorAll(`#q${num}-content .q-opt`).forEach((b,i)=>{b.classList.add('answered');if(i===q.ans)b.classList.add('correct');else if(i===chosen&&chosen!==q.ans)b.classList.add('wrong');});
+  const ok=chosen===q.ans; if(ok) st.score++;
+  st.answers.push({q:q.q,chosen,correct:ok,ans:q.ans,ansText:q.opts[q.ans],exp:q.exp});
+  const fb=document.getElementById('q'+num+'-feedback');
+  fb.className='q-feedback show '+(ok?'correct':'wrong');
+  fb.style.display='block';
+  fb.innerHTML=`<div class="fb-label">${ok?'✓ Correct!':'✗ Incorrect'}</div><p>${q.exp}</p>`;
+  const nb=document.getElementById('q'+num+'-next'); nb.className='btn-next show';
+  nb.textContent=st.current===qs.length-1?'See Results →':'Next Question →';
+}
+function nextQuestion(num){
+  quizState[num].current++;
+  const qs=num===1?Q1:Q2;
+  if(quizState[num].current>=qs.length) showResults(num); else renderQuestion(num);
+}
+function showResults(num){
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el=>{el.classList.remove('active');el.style.display='none';});
+  const r=document.getElementById('quiz'+num+'-results'); r.style.display='block'; r.classList.add('active');
+  const st=quizState[num], total=num===1?Q1.length:Q2.length, pct=st.score/total;
+  document.getElementById('q'+num+'-score').textContent=st.score;
+  document.getElementById('q'+num+'-ring').style.setProperty('--pct',Math.round(pct*100)+'%');
+  const msgs=[[.9,'🏆 Outstanding! You have a thorough grasp of the AA autoimmune feedback loop.'],[.7,'👍 Great work! A few concepts to review, but strong overall understanding.'],[.5,'📚 Good effort! Review the chapters on the topics you missed and try again.'],[0,'📖 Keep studying! Go back through the chapters carefully — you\'ll get it.']];
+  document.getElementById('q'+num+'-msg').textContent=`You scored ${st.score} out of ${total}. ${msgs.find(m=>pct>=m[0])[1]}`;
+  const missed=st.answers.filter(a=>!a.correct);
+  document.getElementById('q'+num+'-missed').innerHTML=missed.length?'<h4>Review these:</h4>'+missed.map(a=>`<div class="missed-item"><div class="mi-q">${a.q}</div><div class="mi-a">✓ ${a.ansText}</div></div>`).join(''):'<div class="missed-item" style="border-color:var(--green)">🎯 Perfect score!</div>';
+}
+
+goTo(0);
+</script>
+</body>
+</html>
