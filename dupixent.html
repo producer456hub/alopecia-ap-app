@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dupixent & Alopecia Areata — Your Personal Guide</title>
+<style>
+:root{
+  --bg:#0b0d18;--bg2:#10121f;--surface:#181b2e;--surface2:#1f2238;
+  --border:#2d3058;--gold:#f5a623;--gold-dk:#d48a10;--teal:#0fd4b8;
+  --red:#ef5350;--green:#22c55e;--pink:#ec4899;--purple:#a855f7;
+  --blue:#3b82f6;--text:#e8eaf5;--muted:#7b80a8;--r:10px;--r2:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh}
+
+/* TOP NAV */
+.topnav{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topnav .tn-brand{display:flex;align-items:center;gap:10px}
+.topnav .tn-brand span{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px}
+.topnav .tn-back{font-size:13px;color:var(--muted);cursor:pointer;border:1px solid var(--border);
+  padding:7px 14px;border-radius:var(--r);background:var(--surface);transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:6px}
+.topnav .tn-back:hover{color:var(--text);border-color:var(--muted)}
+.topnav .tn-links{display:flex;gap:8px}
+.tn-link{font-size:12px;color:var(--muted);cursor:pointer;padding:6px 12px;border-radius:20px;transition:all .2s}
+.tn-link:hover,.tn-link.active{color:var(--gold);background:rgba(245,166,35,.1)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0b0d18 0%,#141828 50%,#0b0d18 100%);
+  padding:70px 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;
+  border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,.12),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;
+  border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.08),transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.12);
+  border:1px solid rgba(245,166,35,.3);border-radius:20px;padding:6px 14px;
+  font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.6px;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:42px;font-weight:800;line-height:1.15;color:#fff;max-width:680px;margin-bottom:16px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:17px;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:28px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;color:var(--muted)}
+.pill strong{color:var(--text)}
+
+/* SECTION */
+.section{padding:60px;border-bottom:1px solid var(--border)}
+.section-inner{max-width:960px;margin:0 auto}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.sec-title{font-size:30px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.25}
+.sec-sub{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:700px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:26px 28px;margin-bottom:16px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.card p{font-size:14px;color:var(--muted);line-height:1.65}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:8px;letter-spacing:.5px}
+.badge-gold{background:rgba(245,166,35,.15);color:var(--gold)}
+.badge-red{background:rgba(239,83,80,.15);color:#ff8a87}
+.badge-green{background:rgba(34,197,94,.15);color:#4ade80}
+.badge-pink{background:rgba(236,72,153,.15);color:#f472b6}
+.badge-purple{background:rgba(168,85,247,.15);color:#c084fc}
+.badge-blue{background:rgba(59,130,246,.15);color:#93c5fd}
+.highlight{background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(245,166,35,.03));
+  border:1px solid rgba(245,166,35,.25);border-radius:var(--r);padding:20px 24px;margin:20px 0}
+.highlight h4{color:var(--gold);font-size:14px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.highlight p,.highlight li{font-size:14px;line-height:1.7;color:var(--muted)}
+.highlight ul{margin-left:16px;margin-top:6px}
+.highlight li{margin-bottom:4px}
+.info-box{border-radius:var(--r);padding:18px 22px;margin:16px 0}
+.info-box.warn{background:rgba(239,83,80,.08);border:1px solid rgba(239,83,80,.3)}
+.info-box.good{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3)}
+.info-box.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3)}
+.info-box h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.info-box.warn h4{color:#ff8a87}
+.info-box.good h4{color:#4ade80}
+.info-box.note h4{color:#93c5fd}
+.info-box p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.stat-row{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0}
+.stat{background:var(--surface2);border-radius:var(--r);padding:16px 22px;text-align:center;min-width:120px;flex:1}
+.stat .sv{font-size:28px;font-weight:800;color:var(--gold)}
+.stat .sl{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;line-height:1.4}
+
+/* MECHANISM FLOW */
+.mech-flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:24px 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px}
+.mech-node{background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);
+  padding:10px 14px;text-align:center;min-width:90px;font-size:12px}
+.mech-node .mn-label{font-size:10px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.mech-node .mn-name{font-size:12.5px;font-weight:700}
+.mech-node.pink .mn-name{color:var(--pink)}
+.mech-node.red .mn-name{color:var(--red)}
+.mech-node.green .mn-name{color:var(--green)}
+.mech-node.gold .mn-name{color:var(--gold)}
+.mech-arrow{padding:0 6px;color:var(--muted);font-size:18px;flex-shrink:0}
+.mech-block{background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:var(--r);
+  padding:8px 12px;text-align:center;font-size:11px;font-weight:700;color:var(--gold);position:relative}
+.mech-block::before{content:'🚫';font-size:16px;display:block;margin-bottom:2px}
+
+/* ============ SEESAW INTERACTIVE ============ */
+.sim-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:30px;margin:24px 0}
+.sim-controls-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px}
+.sim-title{font-size:16px;font-weight:700;color:#fff}
+
+/* Profile selector */
+.profile-selector{display:flex;flex-direction:column;gap:8px}
+.profile-selector label{font-size:12px;color:var(--muted);font-weight:600}
+.profile-track{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.profile-opt{padding:8px 14px;font-size:12px;cursor:pointer;background:var(--surface2);color:var(--muted);transition:all .2s;border:none;font-weight:600}
+.profile-opt.active.atopic{background:var(--pink);color:#fff}
+.profile-opt.active.mixed{background:var(--purple);color:#fff}
+.profile-opt.active.th1{background:var(--red);color:#fff}
+
+/* Dupixent toggle */
+.dupixent-toggle{display:flex;flex-direction:column;align-items:center;gap:8px}
+.dupixent-toggle label{font-size:12px;color:var(--muted);font-weight:600;text-align:center}
+.big-toggle{width:72px;height:36px;border-radius:18px;background:var(--border);
+  position:relative;cursor:pointer;transition:.4s;border:2px solid var(--border)}
+.big-toggle::after{content:'';position:absolute;width:26px;height:26px;border-radius:50%;
+  background:#fff;top:3px;left:3px;transition:.4s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.big-toggle.on{background:var(--gold);border-color:var(--gold)}
+.big-toggle.on::after{transform:translateX(36px)}
+.toggle-label{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.5px}
+.big-toggle.on + .toggle-label{color:var(--gold)}
+
+/* SEESAW */
+.seesaw-area{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:24px}
+.seesaw-visual{flex:1;min-width:280px;display:flex;flex-direction:column;align-items:center}
+.seesaw-beams{display:flex;align-items:flex-end;justify-content:center;height:200px;position:relative;width:100%}
+.seesaw-beam{width:80%;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--pink),var(--purple),var(--red));
+  position:absolute;bottom:60px;transform-origin:center;transition:transform 1s ease}
+.seesaw-pivot{width:20px;height:60px;background:var(--border);position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-radius:4px}
+.seesaw-pivot-base{width:80px;height:12px;background:var(--border);position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-radius:6px}
+.seesaw-side{position:absolute;bottom:80px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all 1s ease}
+.seesaw-side.left{left:8%;transform-origin:bottom center}
+.seesaw-side.right{right:8%;transform-origin:bottom center}
+.seesaw-ball{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;border:3px solid;transition:all 1s ease}
+.seesaw-ball.th2{background:rgba(236,72,153,.2);border-color:var(--pink);color:var(--pink)}
+.seesaw-ball.th1{background:rgba(239,83,80,.2);border-color:var(--red);color:var(--red)}
+.seesaw-ball-label{font-size:11px;font-weight:700;text-align:center;line-height:1.4;transition:all 1s ease}
+.seesaw-caption{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+
+/* Outcome panel */
+.outcome-panel{flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px}
+.outcome-card{background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);padding:16px;transition:all .5s}
+.outcome-card.active-good{border-color:var(--green);background:rgba(34,197,94,.07)}
+.outcome-card.active-bad{border-color:var(--red);background:rgba(239,83,80,.07)}
+.outcome-card.active-mixed{border-color:var(--purple);background:rgba(168,85,247,.07)}
+.outcome-card h5{font-size:13px;font-weight:700;margin-bottom:6px}
+.outcome-card.active-good h5{color:var(--green)}
+.outcome-card.active-bad h5{color:var(--red)}
+.outcome-card.active-mixed h5{color:var(--purple)}
+.outcome-card p{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* GAUGES */
+.sim-gauges{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.g-item .g-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.g-item .g-label span:first-child{color:var(--muted)}
+.g-item .g-label span:last-child{font-weight:700;font-size:12px}
+.g-bar{height:7px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-bottom:4px}
+.g-fill{height:100%;border-radius:4px;transition:width 1.2s ease}
+.gf-th2{background:linear-gradient(90deg,#f472b6,#ec4899)}
+.gf-th1{background:linear-gradient(90deg,#ff8a87,#ef5350)}
+.gf-ifng{background:linear-gradient(90deg,#ffcc02,#f5a623)}
+.gf-hair{background:linear-gradient(90deg,#4ade80,#22c55e)}
+
+/* EXPLAIN AREA */
+.sim-explain{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-top:20px;font-size:13.5px;line-height:1.7;color:var(--muted);min-height:80px;transition:all .4s}
+.sim-explain .exp-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px}
+
+/* RESEARCH TABLE */
+.research-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13.5px}
+.research-table th{background:var(--surface2);color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.8px;padding:12px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.research-table td{padding:12px 14px;border-bottom:1px solid rgba(45,48,88,.5);vertical-align:top;color:var(--muted);line-height:1.55}
+.research-table tr:last-child td{border-bottom:none}
+.research-table td:first-child{color:var(--text);font-weight:600}
+.research-table .good-cell{color:var(--green)}
+.research-table .bad-cell{color:#ff8a87}
+.research-table .mixed-cell{color:var(--purple)}
+
+/* WATCH FOR */
+.watch-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:640px){.watch-grid{grid-template-columns:1fr}}
+.watch-card{border-radius:var(--r);padding:20px;border:1px solid}
+.watch-card.warn{background:rgba(239,83,80,.06);border-color:rgba(239,83,80,.3)}
+.watch-card.good{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.3)}
+.watch-card h4{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.watch-card.warn h4{color:#ff8a87}
+.watch-card.good h4{color:#4ade80}
+.watch-card ul{list-style:none}
+.watch-card ul li{font-size:13.5px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.55;display:flex;align-items:flex-start;gap:8px}
+.watch-card ul li:last-child{border-bottom:none}
+.watch-card ul li::before{flex-shrink:0;margin-top:2px}
+.watch-card.warn ul li::before{content:'⚠️';font-size:12px}
+.watch-card.good ul li::before{content:'✓';color:var(--green);font-weight:700;font-size:13px}
+
+/* DERM QUESTIONS */
+.q-list{display:flex;flex-direction:column;gap:10px}
+.derm-q{background:var(--surface2);border-left:4px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:14px;color:var(--text);line-height:1.55;cursor:pointer;transition:all .2s}
+.derm-q:hover{background:var(--surface);border-left-color:var(--gold)}
+.derm-q .dq-tag{font-size:10px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+
+/* FINDINGS */
+.finding-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:24px 28px;margin-bottom:16px;position:relative;overflow:hidden}
+.finding-card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:var(--gold)}
+.finding-card h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;margin-left:12px}
+.finding-card .fc-source{font-size:11px;color:var(--muted);margin-bottom:12px;margin-left:12px}
+.finding-card .fc-body{font-size:14px;color:var(--muted);line-height:1.7;margin-left:12px}
+.finding-card .fc-result{display:inline-block;margin-top:12px;margin-left:12px;padding:6px 14px;border-radius:var(--r);font-size:13px;font-weight:700}
+.finding-card .fc-result.good{background:rgba(34,197,94,.15);color:#4ade80}
+.finding-card .fc-result.warn{background:rgba(239,83,80,.15);color:#ff8a87}
+.finding-card .fc-result.mixed{background:rgba(168,85,247,.15);color:#c084fc}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin:20px 0}
+.tl-item{display:flex;gap:16px;padding-bottom:24px;position:relative}
+.tl-item::before{content:'';position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--border)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:2px;z-index:1}
+.tl-dot.warn{background:rgba(239,83,80,.2);border:2px solid var(--red)}
+.tl-dot.info{background:rgba(59,130,246,.2);border:2px solid var(--blue)}
+.tl-dot.good{background:rgba(34,197,94,.2);border:2px solid var(--green)}
+.tl-body h5{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.tl-body p{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* COMBO SECTION */
+.combo-diagram{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:24px 0}
+.combo-box{background:var(--surface2);border-radius:var(--r2);padding:20px;flex:1;min-width:200px;text-align:center;border:2px solid var(--border)}
+.combo-box .cb-icon{font-size:36px;margin-bottom:10px}
+.combo-box h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.combo-box p{font-size:12.5px;color:var(--muted);line-height:1.55}
+.combo-box.gold{border-color:rgba(245,166,35,.4)}
+.combo-box.gold h4{color:var(--gold)}
+.combo-box.purple{border-color:rgba(168,85,247,.4)}
+.combo-box.purple h4{color:var(--purple)}
+.combo-box.green{border-color:rgba(34,197,94,.4)}
+.combo-box.green h4{color:var(--green)}
+.combo-plus{font-size:28px;color:var(--muted);flex-shrink:0}
+.combo-equals{font-size:28px;color:var(--green);flex-shrink:0}
+
+/* DISCLAIMER */
+.disclaimer{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;margin-top:24px;font-size:12.5px;color:var(--muted);line-height:1.65}
+.disclaimer strong{color:var(--text)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:28px 60px;text-align:center;font-size:12px;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:700px){
+  .hero{padding:40px 24px}.section{padding:40px 24px}
+  .hero h1{font-size:28px}.sim-gauges{grid-template-columns:1fr}
+  .seesaw-area{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="tn-brand">
+    <span>💊 Dupixent & AA — Personal Guide</span>
+  </div>
+  <div class="tn-links">
+    <a class="tn-back" href="aa.html">← Back to AA Module</a>
+    <a class="tn-back" href="index.html" style="margin-left:4px">🏠 Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🧬 Personalized for You</div>
+  <h1>You're Taking <span>Dupixent</span>.<br/>Here's What's Happening<br/>in Your Immune System.</h1>
+  <p>Dupixent (dupilumab) is one of the most powerful anti-inflammatory biologics available — but its relationship with alopecia areata is complex. It can help hair grow back. It can also trigger or worsen hair loss. Here's exactly why, and what to watch for.</p>
+  <div class="hero-pills">
+    <div class="pill"><strong>Drug:</strong> Dupilumab (Dupixent)</div>
+    <div class="pill"><strong>Target:</strong> IL-4 receptor alpha (IL-4Rα)</div>
+    <div class="pill"><strong>Type:</strong> Human IgG4 monoclonal antibody</div>
+    <div class="pill"><strong>Made by:</strong> Regeneron &amp; Sanofi</div>
+    <div class="pill"><strong>FDA AA approved:</strong> No — used off-label for AA</div>
+  </div>
+</div>
+
+<!-- SECTION 1: WHAT DUPIXENT DOES -->
+<section class="section" id="mechanism">
+  <div class="section-inner">
+    <span class="sec-tag">Section 1</span>
+    <h2 class="sec-title">What Dupixent Actually Does</h2>
+    <p class="sec-sub">Dupixent is a biological missile aimed at one specific target: the <strong>IL-4 receptor alpha (IL-4Rα)</strong>. By blocking this single receptor subunit, it shuts down two entire immune signaling pathways at once.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="badge badge-gold">The Target</div>
+        <h3 style="color:var(--gold)">IL-4Rα — One Receptor, Two Pathways</h3>
+        <p>IL-4Rα is shared by two different receptor complexes. Dupixent blocks it upstream — before the signal splits — shutting down both IL-4 and IL-13 signaling simultaneously. Think of it as blocking the main pipe before it branches into two.</p>
+      </div>
+      <div class="card">
+        <div class="badge badge-pink">What It Stops</div>
+        <h3 style="color:var(--pink)">Th2 "Allergy" Inflammation</h3>
+        <p>IL-4 and IL-13 are the two main "allergy team" cytokines. They drive eczema flares, IgE production, eosinophil recruitment, and mucus overproduction. Dupixent silences both. Your Th2 immune axis is significantly dampened.</p>
+      </div>
+      <div class="card">
+        <div class="badge badge-blue">What It Doesn't Stop</div>
+        <h3 style="color:var(--blue)">Th1 Inflammation (IFN-γ)</h3>
+        <p>Dupixent does NOT block IFN-γ, JAK1/JAK2, STAT1, or any of the Th1 pathways. This is critical — because IFN-γ/JAK-STAT1 is the exact pathway that drives alopecia areata.</p>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">The full signaling chain Dupixent blocks:</p>
+    <div class="mech-flow">
+      <div class="mech-node pink"><div class="mn-label">Cytokines</div><div class="mn-name">IL-4 + IL-13</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-block">Dupixent blocks<br/>IL-4Rα here</div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node" style="opacity:.4"><div class="mn-label">Blocked</div><div class="mn-name">JAK1/JAK3<br/>JAK1/TYK2</div></div>
+      <div class="mech-arrow" style="opacity:.4">→</div>
+      <div class="mech-node" style="opacity:.4"><div class="mn-label">Blocked</div><div class="mn-name">STAT6</div></div>
+      <div class="mech-arrow" style="opacity:.4">→</div>
+      <div class="mech-node" style="opacity:.4"><div class="mn-label">Blocked</div><div class="mn-name">GATA-3<br/>IgE / Eotaxin</div></div>
+    </div>
+
+    <div class="highlight">
+      <h4>What STAT6 blocking means for your body</h4>
+      <p>When Dupixent prevents STAT6 from activating, it turns off a cascade of downstream effects all at once:</p>
+      <ul>
+        <li><strong>↓ GATA-3</strong> — the master Th2 transcription factor. Less Th2 differentiation overall.</li>
+        <li><strong>↓ IgE production</strong> — B cells no longer class-switch to IgE. Allergy antibody levels drop over months.</li>
+        <li><strong>↓ Eotaxins (CCL24, CCL26)</strong> — eosinophil recruiters shut off. Blood eosinophils transiently rise (they're not being pulled into tissues) before falling.</li>
+        <li><strong>↓ Filaggrin suppression</strong> — your skin barrier starts to recover. This is why Dupixent helps eczema.</li>
+        <li><strong>↓ IL-13-driven mucus</strong> — airway improvement in asthma.</li>
+      </ul>
+    </div>
+
+    <div class="card-grid" style="margin-top:8px">
+      <div class="card">
+        <div class="badge badge-gold">Pharmacokinetics</div>
+        <h3 style="color:var(--gold)">How It Moves Through Your Body</h3>
+        <p><strong>Route:</strong> Subcutaneous injection<br/>
+        <strong>Half-life:</strong> ~18–26 days<br/>
+        <strong>Steady state:</strong> Reached around 16 weeks of Q2W dosing<br/>
+        <strong>Washout:</strong> Non-detectable ~9–13 weeks after last dose<br/>
+        <strong>Metabolism:</strong> Broken down like normal antibodies (not liver CYP450) — no drug-drug interactions via metabolism</p>
+      </div>
+      <div class="card">
+        <div class="badge badge-blue">FDA Approvals</div>
+        <h3 style="color:var(--blue)">What It's Approved For</h3>
+        <p>Atopic dermatitis (2017) · Asthma (2018) · CRSwNP (2019) · Eosinophilic esophagitis (2022) · Prurigo nodularis (2022) · COPD (2024) · Chronic spontaneous urticaria (2025) · Bullous pemphigoid (2025)<br/><br/>
+        <strong style="color:#ff8a87">NOT approved for alopecia areata</strong> — off-label use only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: THE SEESAW (INTERACTIVE) -->
+<section class="section" id="seesaw">
+  <div class="section-inner">
+    <span class="sec-tag">Section 2 — Interactive</span>
+    <h2 class="sec-title">The Immune Seesaw</h2>
+    <p class="sec-sub">Your immune system has two major "teams" that actively suppress each other. Dupixent tips this balance — and the direction it tips for your AA depends on your individual immune profile. Use the controls below to explore.</p>
+
+    <div class="sim-wrapper">
+      <div class="sim-controls-top">
+        <div class="dupixent-toggle">
+          <label>Dupixent Status</label>
+          <div class="big-toggle" id="dupix-toggle" onclick="toggleDupixent()"></div>
+          <span class="toggle-label" id="dupix-label">OFF</span>
+        </div>
+        <div class="profile-selector">
+          <label>Your AA Profile (select what fits you best)</label>
+          <div class="profile-track">
+            <button class="profile-opt atopic active" onclick="setProfile('atopic',this)">Atopic AA<br/><span style="font-size:10px;font-weight:400">High IgE, has AD</span></button>
+            <button class="profile-opt mixed" onclick="setProfile('mixed',this)">Mixed<br/><span style="font-size:10px;font-weight:400">Some atopy</span></button>
+            <button class="profile-opt th1" onclick="setProfile('th1',this)">Classic Th1 AA<br/><span style="font-size:10px;font-weight:400">Low IgE, no AD</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="seesaw-area">
+        <!-- Seesaw visual -->
+        <div class="seesaw-visual">
+          <div class="seesaw-beams" style="width:100%;position:relative;height:180px">
+            <div class="seesaw-beam" id="seesaw-beam" style="width:85%;left:7.5%;position:absolute;bottom:48px;height:10px;border-radius:5px;transform:rotate(0deg);transition:transform 1s ease"></div>
+            <!-- Left side: Th2 -->
+            <div id="ss-left" style="position:absolute;left:8%;bottom:58px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:bottom 1s ease">
+              <div class="seesaw-ball th2" id="ss-th2-ball" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:3px solid var(--pink);background:rgba(236,72,153,.2);color:var(--pink)">Th2</div>
+              <div style="font-size:11px;color:var(--pink);font-weight:700;text-align:center;line-height:1.4">IL-4 / IL-13<br/>Allergy Team</div>
+            </div>
+            <!-- Right side: Th1 -->
+            <div id="ss-right" style="position:absolute;right:8%;bottom:58px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:bottom 1s ease">
+              <div class="seesaw-ball th1" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:3px solid var(--red);background:rgba(239,83,80,.2);color:var(--red)" id="ss-th1-ball">Th1</div>
+              <div style="font-size:11px;color:var(--red);font-weight:700;text-align:center;line-height:1.4">IFN-γ / IL-15<br/>AA Attack Team</div>
+            </div>
+            <!-- Pivot -->
+            <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:50px;background:var(--border);border-radius:4px"></div>
+            <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:70px;height:10px;background:var(--border);border-radius:5px"></div>
+          </div>
+          <div id="seesaw-caption" class="seesaw-caption" style="margin-top:12px;font-size:13px;color:var(--muted)">Th2 high (AD patient) — partially checking Th1 attack</div>
+        </div>
+
+        <!-- Outcome panel -->
+        <div class="outcome-panel">
+          <div class="sim-gauges">
+            <div class="g-item">
+              <div class="g-label"><span>Th2 (IL-4/IL-13)</span><span id="gv-th2" style="color:var(--pink)">85%</span></div>
+              <div class="g-bar"><div class="g-fill gf-th2" id="gf-th2" style="width:85%"></div></div>
+            </div>
+            <div class="g-item">
+              <div class="g-label"><span>Th1 (IFN-γ)</span><span id="gv-th1" style="color:var(--red)">55%</span></div>
+              <div class="g-bar"><div class="g-fill gf-th1" id="gf-th1" style="width:55%"></div></div>
+            </div>
+            <div class="g-item">
+              <div class="g-label"><span>AA Loop Activity</span><span id="gv-ifng" style="color:var(--gold)">50%</span></div>
+              <div class="g-bar"><div class="g-fill gf-ifng" id="gf-ifng" style="width:50%"></div></div>
+            </div>
+            <div class="g-item">
+              <div class="g-label"><span>Hair Regrowth Potential</span><span id="gv-hair" style="color:var(--green)">35%</span></div>
+              <div class="g-bar"><div class="g-fill gf-hair" id="gf-hair" style="width:35%"></div></div>
+            </div>
+          </div>
+          <div class="sim-explain" id="sim-explain">
+            <div class="exp-title">Current State</div>
+            <span id="exp-text">Your atopic dermatitis creates a strong Th2 (IL-4/IL-13) environment. This partially suppresses your Th1 immune axis — the one driving your AA. Toggle Dupixent ON to see what happens.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcome cards -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px" id="outcome-cards">
+        <div class="outcome-card" id="oc-improve" style="flex:1;min-width:200px">
+          <h5>✓ Hair Improvement Pathway</h5>
+          <p>Th2 cytokines were directly inhibiting follicle growth via STAT6. Removing them allows Wnt/β-catenin signaling to recover. High-IgE atopic patients most likely to see this.</p>
+        </div>
+        <div class="outcome-card" id="oc-worsen" style="flex:1;min-width:200px">
+          <h5>⚠ AA Worsening Pathway</h5>
+          <p>Dupixent removes the Th2 brake on Th1. IFN-γ rebounds. The AA autoimmune loop accelerates. More common in non-atopic, low-IgE, male patients.</p>
+        </div>
+        <div class="outcome-card" id="oc-direct" style="flex:1;min-width:200px">
+          <h5>💡 Direct Follicle Effect</h5>
+          <p>IL-4 and IL-13 receptors sit on your dermal papilla cells. Blocking them removes a direct growth inhibitor from your hair follicles — separate from the immune battle above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: DIRECT FOLLICLE EFFECTS -->
+<section class="section" id="follicle">
+  <div class="section-inner">
+    <span class="sec-tag">Section 3</span>
+    <h2 class="sec-title">Dupixent's Direct Effect on Your Hair Follicles</h2>
+    <p class="sec-sub">Here's something most people don't know: <strong>IL-4 and IL-13 don't just cause inflammation — they directly tell your hair follicles to stop growing.</strong> Dupixent blocks this signal at the follicle itself.</p>
+
+    <div class="card">
+      <div class="badge badge-pink">New Research (2020–2024)</div>
+      <h3 style="color:var(--pink)">IL-4Rα Is Expressed on Dermal Papilla Cells</h3>
+      <p>The same receptor subunit Dupixent targets (IL-4Rα) is expressed on <strong>dermal papilla cells, outer root sheath cells, and hair matrix keratinocytes</strong>. This means IL-4 and IL-13 have direct access to the engine room of your hair follicle — not just the surrounding immune environment.</p>
+    </div>
+
+    <div class="mech-flow" style="flex-wrap:wrap;gap:8px">
+      <div class="mech-node pink"><div class="mn-label">Cytokine</div><div class="mn-name">IL-4 / IL-13</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node gold"><div class="mn-label">On DP Cell</div><div class="mn-name">IL-4Rα receptor</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node red"><div class="mn-label">Activates</div><div class="mn-name">STAT6</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node red"><div class="mn-label">Suppresses</div><div class="mn-name">Wnt/β-catenin<br/>↑ DKK-1</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node red"><div class="mn-label">Result</div><div class="mn-name">Premature catagen<br/>↓ anagen</div></div>
+    </div>
+
+    <div style="text-align:center;font-size:20px;color:var(--green);margin:8px 0;font-weight:800">With Dupixent ↓</div>
+
+    <div class="mech-flow" style="flex-wrap:wrap;gap:8px">
+      <div class="mech-block">Dupixent blocks<br/>IL-4Rα on DP cell</div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node green"><div class="mn-label">No STAT6</div><div class="mn-name">STAT6 stays off</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node green"><div class="mn-label">Released</div><div class="mn-name">Wnt/β-catenin<br/>recovers</div></div>
+      <div class="mech-arrow">→</div>
+      <div class="mech-node green"><div class="mn-label">Result</div><div class="mn-name">Anagen extends<br/>Hair grows</div></div>
+    </div>
+
+    <div class="highlight" style="margin-top:20px">
+      <h4>The Hair Organ Culture Evidence</h4>
+      <p>In laboratory studies exposing human hair follicles to IL-4 or IL-13, researchers observed: premature entry into catagen (regression phase), suppression of hair shaft elongation, downregulation of Wnt target genes, and upregulation of apoptosis markers in matrix cells. Dupixent removes these direct inhibitory signals — a pro-growth effect <strong>independent of its immune modulation</strong>. This may explain why even patients without classic AA can see hair density improvement on Dupixent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: THE PARADOX EXPLAINED -->
+<section class="section" id="paradox">
+  <div class="section-inner">
+    <span class="sec-tag">Section 4</span>
+    <h2 class="sec-title">Why the Same Drug Can Do Opposite Things</h2>
+    <p class="sec-sub">Dupixent can trigger new hair loss <em>or</em> restore it — in the same disease, in different patients. This isn't a flaw in the research. It's a window into how your individual immune makeup determines your outcome.</p>
+
+    <div class="card-grid">
+      <div class="card" style="border-color:rgba(34,197,94,.3)">
+        <div class="badge badge-green">Profile: Helps AA</div>
+        <h3 style="color:var(--green)">High-IgE / Atopic AA Patient</h3>
+        <p>Your AA developed alongside or after atopic dermatitis. Your scalp biopsy would show elevated Th2 markers (IL-4, IL-13, TARC) in addition to the usual Th1 signals. In this profile, IL-4/IL-13 are <strong>directly contributing</strong> to your AA. Dupixent removes them → AA improves.</p>
+        <div class="info-box good" style="margin-top:12px">
+          <h4>Key predictor: IgE ≥ 200 IU/mL</h4>
+          <p>The Phase 2a trial found 53.8% of patients with IgE ≥200 achieved ≥30% hair improvement on dupilumab. Baseline IgE predicted response with 83% accuracy.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(239,83,80,.3)">
+        <div class="badge badge-red">Profile: Worsens AA</div>
+        <h3 style="color:var(--red)">Low-IgE / Non-Atopic AA Patient</h3>
+        <p>Your AA has no significant Th2 component. But IL-4 (even at normal levels) was providing a mild brake on Th1 activity. When Dupixent removes that brake, Th1 rebounds. IFN-γ surges. The AA loop accelerates. Hair loss spreads or appears for the first time.</p>
+        <div class="info-box warn" style="margin-top:12px">
+          <h4>Pattern from published cases</h4>
+          <p>Worsening cases are disproportionately male, lower IgE, no prior atopic history, and AA appearing 3–12 months after starting Dupixent.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div class="badge badge-purple">The Seesaw Mechanism</div>
+      <h3 style="color:var(--purple)">Th1 and Th2 Mutually Suppress Each Other</h3>
+      <p style="margin-bottom:12px">This isn't random — it's built into the biology of T cell differentiation:</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px;background:var(--surface2);border-radius:var(--r);padding:14px">
+          <div style="font-size:12px;font-weight:700;color:var(--pink);margin-bottom:6px">IL-4 suppresses Th1 by:</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6">Activating STAT6 → upregulating GATA-3 (Th2 master) → suppressing T-bet (Th1 master) → less IFN-γ production. When Dupixent removes IL-4, T-bet is released from suppression.</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:var(--surface2);border-radius:var(--r);padding:14px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:6px">IFN-γ suppresses Th2 by:</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6">Activating STAT1 → upregulating T-bet → suppressing GATA-3 → less IL-4/IL-13. A pre-existing Th1-heavy AA state means the Th2 suppression of Th1 is already weak. Removing it entirely tips the balance hard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: RESEARCH FINDINGS -->
+<section class="section" id="research">
+  <div class="section-inner">
+    <span class="sec-tag">Section 5 — What the Research Shows</span>
+    <h2 class="sec-title">The Science Behind This Page</h2>
+    <p class="sec-sub">These are real published studies. This section is here so you can read the actual evidence and bring it to your dermatologist.</p>
+
+    <div class="finding-card">
+      <h3>Phase 2a Randomized Controlled Trial — Dupilumab for AA</h3>
+      <div class="fc-source">Published in Allergy (2021/2023) · PMC9997752 · Mount Sinai / Guttman-Yassky group</div>
+      <div class="fc-body">
+        40 patients received dupilumab, 20 received placebo. Primary endpoint: 24 weeks. Key finding: the overall group showed modest benefit, but patients with <strong>baseline serum IgE ≥ 200 IU/mL</strong> showed dramatically better outcomes — 53.8% achieved ≥30% improvement in the SALT score (hair coverage), 46.2% achieved ≥50% improvement, 38.5% achieved ≥75% improvement. IgE level predicted treatment response with <strong>83% accuracy</strong>. Conclusion: dupilumab works in AA, but primarily in the atopic/high-IgE subtype.
+      </div>
+      <div class="fc-result good">⬆ Hair improvement: 53.8% in high-IgE group (vs ~10% in low-IgE)</div>
+    </div>
+
+    <div class="finding-card">
+      <h3>Scalp Biomarker Study — Th2 Signals in AA Lesions</h3>
+      <div class="fc-source">Published in Allergy (2023/2024) · PMC11344221</div>
+      <div class="fc-body">
+        Scalp biopsies from AA patients treated with dupilumab showed significant suppression of Th2 markers at week 12: CCL13 (MCP-4), CCL17 (TARC), CCL18, CCL26 (eotaxin-3), IL-13, IL-4, and IL-5 all decreased. Upregulation of <strong>hair keratins</strong> (markers of anagen activity) correlated with Th2 suppression — the reduction in scalp Th2 signal preceded visible hair regrowth. This supports the direct mechanistic link between IL-4/IL-13 suppression and follicle recovery.
+      </div>
+      <div class="fc-result good">⬆ Hair keratin expression correlated with Th2 suppression at week 12</div>
+    </div>
+
+    <div class="finding-card">
+      <h3>National Database Study — AA Risk in Dupilumab Users</h3>
+      <div class="fc-source">Published in Diagnostics (2025) · MDPI · TriNetX database · 23,782 propensity-matched patients</div>
+      <div class="fc-body">
+        In 23,782 propensity-matched dupilumab users vs. an equal number of controls: <strong>105 dupilumab users developed alopecia areata vs. 74 controls</strong>. Odds ratio: <strong>1.436 (95% CI: 1.066–1.935, p = 0.0167)</strong>. This is the largest pharmacovigilance study to date. It confirms a statistically significant increased risk of AA in dupilumab users — the Th1 unmasking hypothesis at a population level. Worsening pattern more common in males and lower-IgE patients.
+      </div>
+      <div class="fc-result warn">⚠ OR 1.436 — ~44% higher AA risk in dupilumab users vs. controls</div>
+    </div>
+
+    <div class="finding-card">
+      <h3>Pediatric Real-World Data — Dupilumab in Children with AD+AA</h3>
+      <div class="fc-source">Multiple publications 2020–2024 · Springer Nature / Pediatric Dermatology</div>
+      <div class="fc-body">
+        A real-world observational study in pediatric AA patients treated with dupilumab found <strong>77.4% achieved hair regrowth</strong>, with a mean SALT score reduction of 42.6 over ~3.2 months. Children with concurrent atopic dermatitis showed the strongest and most consistent responses. A case of complete scalp hair regrowth in a 4-year-old girl with both AD and AA was documented. Pediatric data consistently favor dupilumab in the atopic-AA subtype — likely because childhood AA is more frequently associated with high-IgE atopy.
+      </div>
+      <div class="fc-result good">⬆ 77.4% hair regrowth in pediatric AD+AA patients</div>
+    </div>
+
+    <div class="finding-card">
+      <h3>Literature Review — 35 Articles, 51 Cases</h3>
+      <div class="fc-source">Published in Dermatology Practical and Conceptual (PMC, 2024)</div>
+      <div class="fc-body">
+        Systematic review of published dupilumab-AA interaction cases: <strong>38 cases showed hair improvement</strong> (mean age 27.6 years, predominantly female, higher IgE, concurrent AD) vs. <strong>13 cases showed hair loss worsening</strong> (mean age 32.8 years, predominantly male, lower IgE, more classic Th1 AA). The bidirectional pattern is real and predictable based on immune profile. Network meta-analysis comparing JAK inhibitors, dupilumab, and apremilast confirmed JAK inhibitors significantly outperform dupilumab for AA overall — dupilumab occupies a niche role in the atopic-AA subtype.
+      </div>
+      <div class="fc-result mixed">↕ 38 improved / 13 worsened — outcome depends on immune profile</div>
+    </div>
+
+    <div class="info-box note" style="margin-top:8px">
+      <h4>📋 FDA Label Status</h4>
+      <p>As of 2025, alopecia areata is <strong>not explicitly listed</strong> in the Dupixent prescribing information as a named adverse reaction. The published pharmacovigilance data suggest this label gap should be addressed. Always check the current FDA label at DailyMed and discuss with your dermatologist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: TIMELINE -->
+<section class="section" id="timeline">
+  <div class="section-inner">
+    <span class="sec-tag">Section 6</span>
+    <h2 class="sec-title">What to Expect & When</h2>
+    <p class="sec-sub">If Dupixent is going to affect your alopecia areata — better or worse — here's when you're most likely to notice it.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot info">🔵</div>
+        <div class="tl-body">
+          <h5>Weeks 1–8: Initial Adaptation</h5>
+          <p>Dupixent is ramping up toward steady state. IL-4/IL-13 signaling is being progressively suppressed. Blood eosinophils may temporarily rise (they're no longer being pulled into tissues). Skin and symptoms improving. Hair changes unlikely yet — the immune shift takes time.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warn">⚠️</div>
+        <div class="tl-body">
+          <h5>Months 3–9: The Critical Window</h5>
+          <p>This is when most published cases of dupilumab-associated AA worsening occur. The Th2 axis has been significantly suppressed; if Th1 was being held in check by IL-4, it may now be rebounding. Watch for new patches of hair loss during this window. Also when improvement cases typically begin to show if the atopic-AA mechanism applies to you.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot good">✓</div>
+        <div class="tl-body">
+          <h5>Months 4–12: Regrowth Signal</h5>
+          <p>In the Phase 2a trial, hair regrowth was seen from month 4 onward in responders. In pediatric real-world data, mean improvement began at ~3.2 months. Early sign: vellus (fine, unpigmented) hair appearing in bare patches before terminal hair returns. This is a positive sign.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warn">⚠️</div>
+        <div class="tl-body">
+          <h5>If You Stop Dupixent: 9–13 Week Washout</h5>
+          <p>Dupixent's ~25-day half-life means it remains pharmacologically active for 9–13 weeks after your last injection. If you stop, the Th2 suppression gradually lifts over this period. Any changes (good or bad) to your AA from Dupixent will gradually reverse as the drug clears.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: WATCH FOR -->
+<section class="section" id="watchfor">
+  <div class="section-inner">
+    <span class="sec-tag">Section 7</span>
+    <h2 class="sec-title">What to Watch For</h2>
+    <p class="sec-sub">Being on Dupixent with alopecia areata means paying attention to two competing signals. Know what you're looking for.</p>
+
+    <div class="watch-grid">
+      <div class="watch-card warn">
+        <h4>⚠️ Signs Dupixent May Be Worsening Your AA</h4>
+        <ul>
+          <li>New bald patches appearing on scalp, eyebrows, beard, or body (especially 3–9 months after starting)</li>
+          <li>Existing AA patches expanding in size</li>
+          <li>Progression from patchy AA toward total scalp loss</li>
+          <li>New nail pitting, ridging, or roughening (nail changes signal active AA disease)</li>
+          <li>Loss of eyelashes or eyebrows that wasn't present before starting Dupixent</li>
+          <li>"Exclamation mark" hairs at patch borders (short hairs thinner at the base — a hallmark of active AA)</li>
+        </ul>
+      </div>
+      <div class="watch-card good">
+        <h4>✅ Signs Dupixent May Be Helping Your Hair</h4>
+        <ul>
+          <li>Vellus (soft, fine, colorless) hair appearing in previously bare patches — early regrowth signal</li>
+          <li>Existing bare patches shrinking from the edges inward</li>
+          <li>Thickening and darkening of vellus regrowth into terminal hair over weeks</li>
+          <li>Reduced scalp itching, burning, or tingling that may accompany active AA</li>
+          <li>Overall hair density feeling fuller across the scalp</li>
+          <li>Eyebrow and eyelash regrowth (sometimes seen before scalp improvement)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h4>The Most Important Thing to Track</h4>
+      <p>Take monthly photos of the same areas under the same lighting. Hair changes are gradual and you'll miss them day-to-day. A clear photo record lets you and your dermatologist make objective decisions. If you see new patches expanding in the 3–9 month window after starting Dupixent, bring those photos to your appointment immediately.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: COMBINATION OPTIONS -->
+<section class="section" id="combo">
+  <div class="section-inner">
+    <span class="sec-tag">Section 8</span>
+    <h2 class="sec-title">The Combination Strategy</h2>
+    <p class="sec-sub">If you have both atopic dermatitis (needing Dupixent) and alopecia areata (needing an AA treatment), some academic dermatologists are now using both simultaneously — addressing each immune axis separately.</p>
+
+    <div class="combo-diagram">
+      <div class="combo-box gold">
+        <div class="cb-icon">💉</div>
+        <h4>Dupixent (Dupilumab)</h4>
+        <p>Blocks IL-4Rα → suppresses Th2 axis → treats atopic dermatitis + addresses Th2-driven component of atopic AA</p>
+      </div>
+      <div class="combo-plus">+</div>
+      <div class="combo-box purple">
+        <div class="cb-icon">💊</div>
+        <h4>JAK Inhibitor<br/>(Baricitinib or Ritlecitinib)</h4>
+        <p>Blocks JAK1/2 or JAK3 → suppresses IFN-γ/Th1 axis → treats the core AA autoimmune loop</p>
+      </div>
+      <div class="combo-equals">=</div>
+      <div class="combo-box green">
+        <div class="cb-icon">🎯</div>
+        <h4>Dual-Axis Coverage</h4>
+        <p>Both immune drivers addressed simultaneously. Emerging off-label strategy at academic centers with favorable early results.</p>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="badge badge-purple">Baricitinib (Olumiant)</div>
+        <h3 style="color:var(--purple)">JAK1/2 — FDA Approved for AA</h3>
+        <p>Specifically targets the IFN-γ → STAT1 loop that drives AA. FDA-approved for severe AA in adults (2022). Addresses the Th1 side that Dupixent misses. Case reports of successful combination with Dupixent exist.</p>
+      </div>
+      <div class="card">
+        <div class="badge badge-blue">Ritlecitinib (Litfulo)</div>
+        <h3 style="color:var(--blue)">JAK3/ITK — FDA Approved for AA (≥12yr)</h3>
+        <p>More lymphocyte-selective — targets the IL-15-driven CD8+ T cell loop specifically. May pair particularly well with Dupixent since JAK3 (ritlecitinib) and JAK1/2 (Dupixent downstream) address complementary signaling arms.</p>
+      </div>
+    </div>
+
+    <div class="info-box warn">
+      <h4>⚠ Important Safety Note</h4>
+      <p>All JAK inhibitors carry FDA <strong>black box warnings</strong> for serious infections, major cardiovascular events, malignancy, and venous thromboembolism — particularly in patients over 50, smokers, or those with cardiovascular risk factors. No specific new safety signals have emerged from the small number of published combination (Dupixent + JAK inhibitor) cases, but formal combination trial safety data is limited. This is a decision to make with your dermatologist based on your full health picture.</p>
+    </div>
+
+    <div class="info-box note">
+      <h4>📍 Where to Find Specialists in Both</h4>
+      <p>Academic centers with expertise in both atopic dermatitis and alopecia areata include: <strong>Icahn School of Medicine at Mount Sinai</strong> (Dr. Emma Guttman-Yassky's group — arguably the most published on atopic AA and dupilumab interactions), <strong>Columbia University Dermatology</strong>, <strong>Mass General / Harvard Dermatology</strong>, <strong>Northwestern Feinberg</strong>, and <strong>University of Colorado Dermatology</strong>. The <strong>National Alopecia Areata Foundation (NAAF)</strong> at naaf.org maintains a physician finder.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: QUESTIONS FOR YOUR DERM -->
+<section class="section" id="questions">
+  <div class="section-inner">
+    <span class="sec-tag">Section 9</span>
+    <h2 class="sec-title">Questions to Ask Your Dermatologist</h2>
+    <p class="sec-sub">Walk into your next appointment prepared. These questions are grounded in the published science on this exact topic.</p>
+
+    <div class="q-list">
+      <div class="derm-q">
+        <div class="dq-tag">About Your Risk Profile</div>
+        "What is my current serum IgE level? The Phase 2a trial found that patients with IgE above 200 IU/mL had 53.8% hair improvement on dupilumab — do I fall in that category?"
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About Monitoring</div>
+        "Given that dupilumab-associated AA worsening typically occurs between 3–9 months after starting, should we schedule a specific check-in during that window to assess my hair?"
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About My Specific Profile</div>
+        "Is my AA more consistent with the atopic (high-IgE, Th2-mixed) subtype or the classic Th1-dominant subtype? Which do you think I am based on my history?"
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About Combination Therapy</div>
+        "Given that I need Dupixent for my atopic dermatitis but also have AA, would you consider combining it with baricitinib (Olumiant) or ritlecitinib (Litfulo) to address both immune axes? Are there case reports supporting this?"
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About the Research</div>
+        "There's a 2025 TriNetX database study showing dupilumab users have a 1.436 odds ratio for developing AA compared to controls. How does this change our management plan?"
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About Your AA Biomarkers</div>
+        "Is a scalp biopsy with Th2 marker profiling available here? A 2024 study showed that scalp Th2 markers at week 12 predicted hair regrowth response to dupilumab."
+      </div>
+      <div class="derm-q">
+        <div class="dq-tag">About Stopping</div>
+        "If my AA worsens on Dupixent, what's the plan — stop it and transition to a JAK inhibitor? Is there a combination approach we could try first before stopping?"
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>📋 Medical Disclaimer:</strong> This page is an educational resource built from peer-reviewed scientific literature. It is not medical advice and does not replace consultation with your board-certified dermatologist. All treatment decisions — including whether to continue, stop, or modify Dupixent — should be made with your prescribing physician based on your individual health history, labs, and clinical picture. The science in this area is actively evolving. Please verify current FDA labeling at <a href="#">DailyMed</a> and consult your care team.
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built with research from peer-reviewed literature through April 2026. ·
+  <a href="aa.html">AA Module</a> ·
+  <a href="index.html">Full Module</a> ·
+  Always verify with your dermatologist.
+</footer>
+
+<script>
+let dupixentOn = false;
+let profile = 'atopic'; // 'atopic', 'mixed', 'th1'
+
+// Seesaw states: [th2%, th1%, loopActivity%, hairPotential%, beamAngle]
+const states = {
+  // Without Dupixent
+  atopic_off:  { th2:88, th1:52, loop:45, hair:40, angle:-12, caption:"Atopic patient: high Th2 partially checking Th1 AA loop" },
+  mixed_off:   { th2:60, th1:65, loop:60, hair:28, angle:-4, caption:"Mixed profile: moderate Th2, moderate Th1 AA activity" },
+  th1_off:     { th2:30, th1:85, loop:80, hair:15, angle:10, caption:"Classic Th1 AA: low Th2, strong IFN-γ-driven AA loop" },
+  // With Dupixent
+  atopic_on:   { th2:18, th1:48, loop:30, hair:72, angle:8, caption:"Dupixent ON (Atopic): Th2 suppressed — IL-4/IL-13 removed from follicle, AA loop dampened" },
+  mixed_on:    { th2:15, th1:72, loop:65, hair:38, angle:14, caption:"Dupixent ON (Mixed): Th2 suppressed, but Th1 rebounds — outcome uncertain" },
+  th1_on:      { th2:12, th1:92, loop:88, hair:12, angle:18, caption:"Dupixent ON (Classic Th1): Th2 brake removed — Th1/IFN-γ significantly unmasked, AA worsens" },
+};
+
+const explains = {
+  atopic_off: "Your atopic dermatitis creates a strong Th2 (IL-4/IL-13) environment. This partially suppresses your Th1 immune axis — the one driving your AA. Dupixent is not active — your current immune state reflects typical AD-with-AA.",
+  mixed_off: "You have some atopic history but your AA has both Th1 and Th2 components. The seesaw is closer to balance. Dupixent is not active.",
+  th1_off: "Classic Th1-dominant AA with minimal Th2 involvement. IFN-γ drives the AA loop strongly. Any Th2 suppression from Dupixent could remove a small but meaningful brake on Th1.",
+  atopic_on: "Dupixent has suppressed Th2 signaling. For the atopic AA profile: IL-4 and IL-13 were directly inhibiting your hair follicles via STAT6 → Wnt suppression. Removing them has a direct pro-hair-growth effect. The Th1/IFN-γ AA loop is also slightly reduced because the Th2-enriched inflammatory environment was amplifying it. Hair regrowth potential rises significantly. This is the profile that responded best in the Phase 2a trial (53.8% improvement).",
+  mixed_on: "Dupixent has suppressed Th2. For a mixed profile, the outcome is uncertain — the direct follicle benefit competes with Th1 rebound. Your dermatologist should monitor closely in months 3–9. Adding a JAK inhibitor may tip the balance toward improvement.",
+  th1_on: "Dupixent has suppressed Th2. With minimal Th2 in your baseline, this primarily removes a brake on Th1. IFN-γ levels rise relatively, accelerating the AA loop. This profile corresponds to the worsening cases in the published literature — predominantly male, low IgE, AA predating AD. Discuss with your dermatologist urgently.",
+};
+
+const outcomes = {
+  atopic_on:  { improve:'active-good', worsen:'', direct:'active-good' },
+  mixed_on:   { improve:'active-mixed', worsen:'active-mixed', direct:'active-mixed' },
+  th1_on:     { improve:'', worsen:'active-bad', direct:'' },
+  atopic_off: { improve:'', worsen:'', direct:'' },
+  mixed_off:  { improve:'', worsen:'', direct:'' },
+  th1_off:    { improve:'', worsen:'', direct:'' },
+};
+
+function toggleDupixent() {
+  dupixentOn = !dupixentOn;
+  document.getElementById('dupix-toggle').classList.toggle('on', dupixentOn);
+  document.getElementById('dupix-label').textContent = dupixentOn ? 'ON' : 'OFF';
+  document.getElementById('dupix-label').style.color = dupixentOn ? 'var(--gold)' : 'var(--muted)';
+  updateSim();
+}
+
+function setProfile(p, btn) {
+  profile = p;
+  document.querySelectorAll('.profile-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateSim();
+}
+
+function updateSim() {
+  const key = profile + '_' + (dupixentOn ? 'on' : 'off');
+  const s = states[key];
+  if (!s) return;
+
+  // Gauges
+  setGauge('th2', s.th2, 'var(--pink)');
+  setGauge('th1', s.th1, 'var(--red)');
+  setGauge('ifng', s.loop, 'var(--gold)');
+  setGauge('hair', s.hair, 'var(--green)');
+
+  // Seesaw beam angle
+  document.getElementById('seesaw-beam').style.transform = `rotate(${s.angle}deg)`;
+
+  // Seesaw sides
+  const leftEl = document.getElementById('ss-left');
+  const rightEl = document.getElementById('ss-right');
+  const th2Ball = document.getElementById('ss-th2-ball');
+  const th1Ball = document.getElementById('ss-th1-ball');
+
+  // Shift left side up/down based on angle (left goes up when angle is negative = th2 heavy)
+  const leftOffset = Math.round(s.angle * 2);
+  leftEl.style.bottom = (58 - leftOffset) + 'px';
+  rightEl.style.bottom = (58 + leftOffset) + 'px';
+
+  // Ball sizes to reflect weight
+  const th2Size = Math.max(40, Math.round(s.th2 * 0.65));
+  const th1Size = Math.max(40, Math.round(s.th1 * 0.65));
+  th2Ball.style.width = th2Size + 'px';
+  th2Ball.style.height = th2Size + 'px';
+  th1Ball.style.width = th1Size + 'px';
+  th1Ball.style.height = th1Size + 'px';
+
+  // Dim th2 if dupixent on
+  th2Ball.style.opacity = dupixentOn ? '0.4' : '1';
+
+  // Caption
+  document.getElementById('seesaw-caption').textContent = s.caption;
+
+  // Explain
+  document.getElementById('exp-text').textContent = explains[key] || '';
+
+  // Outcome cards
+  const oc = outcomes[key] || {};
+  ['improve','worsen','direct'].forEach(k => {
+    const el = document.getElementById('oc-' + k);
+    el.className = 'outcome-card' + (oc[k] ? ' ' + oc[k] : '');
+  });
+}
+
+function setGauge(id, pct, color) {
+  const fill = document.getElementById('gf-' + id);
+  const val = document.getElementById('gv-' + id);
+  if (fill) fill.style.width = pct + '%';
+  if (val) val.textContent = pct + '%';
+}
+
+// Init
+updateSim();
+</script>
+</body>
+</html>
