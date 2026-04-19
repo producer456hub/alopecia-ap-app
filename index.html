@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Homeostasis & Alopecia — A&P Interactive</title>
+<style>
+:root{
+  --bg:#0d1b2a;--bg2:#112233;--surface:#1a2d42;--surface2:#213449;
+  --border:#2d4260;--primary:#0fd4b8;--primary-dk:#0aa896;
+  --gold:#f5a623;--red:#ef5350;--green:#4caf50;--purple:#9c27b0;
+  --blue:#2196f3;--text:#e0eaf5;--muted:#7a9cbf;
+  --r:10px;--r2:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden}
+
+/* SIDEBAR */
+#sidebar{width:220px;min-width:220px;background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:10}
+.sb-brand{padding:0 16px 20px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sb-brand h2{font-size:14px;color:var(--primary);letter-spacing:.5px;text-transform:uppercase}
+.sb-brand p{font-size:11px;color:var(--muted);margin-top:2px}
+.sb-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;cursor:pointer;
+  border:none;background:none;color:var(--muted);font-size:12.5px;width:100%;text-align:left;
+  transition:all .2s;border-left:3px solid transparent}
+.sb-btn:hover{color:var(--text);background:var(--surface)}
+.sb-btn.active{color:var(--primary);background:var(--surface);border-left-color:var(--primary)}
+.sb-num{width:20px;height:20px;border-radius:50%;background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.sb-btn.active .sb-num{background:var(--primary);color:#000}
+
+/* MAIN */
+#main{flex:1;overflow-y:auto;scroll-behavior:smooth}
+
+/* CHAPTERS */
+.chapter{min-height:100vh;padding:60px 50px;display:none;animation:fadeIn .4s ease}
+.chapter.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.ch-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary);margin-bottom:10px}
+.ch-title{font-size:38px;font-weight:800;line-height:1.15;margin-bottom:16px;color:#fff}
+.ch-sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.7;margin-bottom:36px}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:28px;margin-bottom:20px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--primary)}
+.card p{font-size:14px;color:var(--muted);line-height:1.65}
+.card .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;
+  font-weight:700;margin-bottom:10px;letter-spacing:.5px}
+.badge-red{background:rgba(239,83,80,.18);color:#ff8a87}
+.badge-green{background:rgba(76,175,80,.18);color:#81c784}
+.badge-blue{background:rgba(33,150,243,.18);color:#64b5f6}
+.badge-gold{background:rgba(245,166,35,.18);color:#ffcc02}
+.badge-purple{background:rgba(156,39,176,.18);color:#ce93d8}
+
+/* HIGHLIGHT BOX */
+.highlight{background:linear-gradient(135deg,rgba(15,212,184,.1),rgba(15,212,184,.04));
+  border:1px solid rgba(15,212,184,.3);border-radius:var(--r);padding:20px 24px;margin:20px 0}
+.highlight h4{color:var(--primary);font-size:14px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
+.highlight p{font-size:14px;line-height:1.7}
+
+/* HAIR CYCLE ANIMATION */
+.hair-scene{display:flex;gap:30px;flex-wrap:wrap;margin:30px 0}
+.follicle-wrap{flex:1;min-width:160px;text-align:center}
+.follicle-wrap h4{font-size:13px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.8px}
+.follicle{position:relative;width:80px;height:160px;margin:0 auto 12px;display:flex;flex-direction:column;align-items:center}
+.hair-shaft{width:6px;border-radius:3px 3px 0 0;background:linear-gradient(to bottom,#c8a96e,#8b6914);
+  transition:height 1.5s ease;margin-bottom:0}
+.hair-bulb{width:36px;height:36px;border-radius:50%;border:3px solid;margin-top:0;transition:all 1.5s ease}
+.phase-anagen .hair-shaft{height:110px}
+.phase-anagen .hair-bulb{border-color:var(--green);background:rgba(76,175,80,.25);box-shadow:0 0 12px rgba(76,175,80,.4)}
+.phase-catagen .hair-shaft{height:65px}
+.phase-catagen .hair-bulb{border-color:var(--gold);background:rgba(245,166,35,.2);box-shadow:0 0 8px rgba(245,166,35,.3)}
+.phase-telogen .hair-shaft{height:30px}
+.phase-telogen .hair-bulb{border-color:var(--muted);background:rgba(122,156,191,.15);box-shadow:none}
+.phase-label{font-size:12px;font-weight:700;margin-bottom:4px}
+.phase-anagen .phase-label{color:var(--green)}
+.phase-catagen .phase-label{color:var(--gold)}
+.phase-telogen .phase-label{color:var(--muted)}
+.phase-dur{font-size:11px;color:var(--muted)}
+
+/* CONCEPT DEFINITIONS */
+.concept-list{display:flex;flex-direction:column;gap:12px}
+.concept-item{display:flex;gap:16px;align-items:flex-start;padding:16px;
+  background:var(--surface2);border-radius:var(--r);border-left:4px solid var(--primary)}
+.concept-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center;margin-top:2px}
+.concept-body h4{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.concept-body p{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* FEEDBACK LOOP SVG */
+.loop-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);
+  padding:20px;margin:24px 0;overflow-x:auto}
+.loop-container svg{display:block;max-width:100%;height:auto}
+
+/* NODE INFO PANEL */
+.node-info{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;margin-top:16px;min-height:80px;transition:all .3s}
+.node-info h4{color:var(--primary);font-size:15px;font-weight:700;margin-bottom:8px}
+.node-info p{font-size:13.5px;color:var(--muted);line-height:1.65}
+.node-info .ni-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;
+  color:var(--gold);margin-bottom:6px}
+
+/* DRUG SIMULATOR */
+.sim-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;margin-top:24px}
+@media(max-width:900px){.sim-layout{grid-template-columns:1fr}}
+.sim-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;overflow-x:auto}
+.sim-controls{display:flex;flex-direction:column;gap:12px}
+.sim-mode-tabs{display:flex;gap:8px;margin-bottom:8px}
+.sim-tab{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--r);
+  background:var(--surface);color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;text-align:center;transition:all .2s}
+.sim-tab.active{background:var(--primary);color:#000;border-color:var(--primary)}
+
+.drug-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.drug-card:hover{border-color:var(--primary)}
+.drug-card.on{border-color:var(--primary);background:var(--surface2)}
+.drug-card.on::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--primary)}
+.drug-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.drug-name{font-size:13px;font-weight:700;color:var(--text)}
+.drug-brand{font-size:11px;color:var(--muted);margin-bottom:6px}
+.drug-mech{font-size:12px;color:var(--muted);line-height:1.5}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--border);
+  position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;
+  background:#fff;top:3px;left:3px;transition:.3s}
+.toggle.on{background:var(--primary)}
+.toggle.on::after{transform:translateX(16px)}
+
+/* GAUGES */
+.gauges{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.gauge-item{}
+.gauge-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.gauge-label span:first-child{color:var(--muted)}
+.gauge-label span:last-child{font-weight:700;color:var(--text)}
+.gauge-bar{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.gauge-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.gauge-dht .gauge-fill{background:linear-gradient(90deg,#ef9a9a,#ef5350)}
+.gauge-ar .gauge-fill{background:linear-gradient(90deg,#ce93d8,#9c27b0)}
+.gauge-anagen .gauge-fill{background:linear-gradient(90deg,#81c784,#4caf50)}
+.gauge-density .gauge-fill{background:linear-gradient(90deg,#64b5f6,#2196f3)}
+.gauge-immune .gauge-fill{background:linear-gradient(90deg,#ffcc02,#f5a623)}
+
+/* DRUG INFO POPUP */
+.drug-detail{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;margin-top:12px;font-size:12.5px;line-height:1.65;display:none}
+.drug-detail.show{display:block}
+.drug-detail .dd-row{display:flex;gap:8px;margin-bottom:6px}
+.drug-detail .dd-label{color:var(--primary);font-weight:700;min-width:80px;flex-shrink:0}
+.drug-detail .dd-val{color:var(--muted)}
+
+/* QUIZ */
+#quiz-gate{text-align:center;padding:60px 40px}
+.quiz-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.quiz-choice{background:var(--surface);border:2px solid var(--border);border-radius:var(--r2);
+  padding:32px 28px;width:280px;cursor:pointer;transition:all .25s;text-align:left}
+.quiz-choice:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 12px 40px rgba(15,212,184,.15)}
+.quiz-choice h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:10px}
+.quiz-choice p{font-size:13px;color:var(--muted);line-height:1.6}
+.quiz-choice .qc-icon{font-size:36px;margin-bottom:14px}
+
+.quiz-screen{padding:60px 50px;max-width:780px;margin:0 auto;display:none}
+.quiz-screen.active{display:block}
+.quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.qp-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.qp-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .5s}
+.qp-text{font-size:13px;color:var(--muted);white-space:nowrap}
+.q-num{font-size:12px;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.q-text{font-size:21px;font-weight:700;color:#fff;margin-bottom:28px;line-height:1.4}
+.q-options{display:flex;flex-direction:column;gap:10px}
+.q-opt{padding:16px 20px;background:var(--surface);border:2px solid var(--border);
+  border-radius:var(--r);cursor:pointer;font-size:14.5px;transition:all .2s;text-align:left;color:var(--text)}
+.q-opt:hover:not(.answered){border-color:var(--primary);background:var(--surface2)}
+.q-opt.correct{border-color:var(--green);background:rgba(76,175,80,.15);color:#fff}
+.q-opt.wrong{border-color:var(--red);background:rgba(239,83,80,.12);color:#fff}
+.q-opt.answered{cursor:default}
+.q-feedback{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 20px;margin-top:18px;font-size:14px;line-height:1.65;display:none}
+.q-feedback.show{display:block}
+.q-feedback .fb-label{font-weight:700;margin-bottom:6px}
+.q-feedback.correct .fb-label{color:var(--green)}
+.q-feedback.wrong .fb-label{color:var(--red)}
+.btn-next{margin-top:20px;padding:13px 30px;background:var(--primary);color:#000;
+  border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;
+  display:none;transition:background .2s}
+.btn-next:hover{background:var(--primary-dk)}
+.btn-next.show{display:inline-block}
+
+/* RESULTS */
+.results-screen{padding:60px 50px;text-align:center;display:none}
+.results-screen.active{display:block}
+.score-ring{width:160px;height:160px;border-radius:50%;border:8px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 28px;position:relative;overflow:hidden}
+.score-ring::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--pct,0%),transparent 0);opacity:.25}
+.score-num{font-size:48px;font-weight:800;color:var(--primary);line-height:1}
+.score-denom{font-size:16px;color:var(--muted)}
+.result-msg{font-size:18px;color:var(--text);margin-bottom:28px;line-height:1.6}
+.result-btn{padding:13px 28px;border:none;border-radius:var(--r);font-size:14px;
+  font-weight:700;cursor:pointer;margin:6px;transition:all .2s}
+.result-btn.primary{background:var(--primary);color:#000}
+.result-btn.secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.result-btn:hover{opacity:.85}
+
+/* MISSED ITEMS */
+.missed-list{text-align:left;max-width:600px;margin:24px auto 0}
+.missed-list h4{font-size:14px;color:var(--muted);margin-bottom:12px}
+.missed-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 16px;margin-bottom:8px;font-size:13px;line-height:1.55}
+.missed-item .mi-q{color:var(--text);margin-bottom:4px}
+.missed-item .mi-a{color:var(--green)}
+
+/* NAV BUTTONS */
+.ch-nav{display:flex;gap:12px;margin-top:40px}
+.btn-ch{padding:12px 24px;border-radius:var(--r);font-size:14px;font-weight:600;
+  cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--primary);color:#000}
+.btn-primary:hover{background:var(--primary-dk)}
+.btn-secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{background:var(--surface2)}
+
+/* STAT PILLS */
+.stat-row{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+.stat{background:var(--surface2);border-radius:var(--r);padding:14px 20px;text-align:center;min-width:120px}
+.stat .sv{font-size:26px;font-weight:800;color:var(--primary)}
+.stat .sl{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+
+/* FLOW DIAGRAM (CSS-based) */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:24px 0}
+.flow-node{background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);
+  padding:12px 16px;text-align:center;min-width:110px;cursor:pointer;transition:all .25s;position:relative}
+.flow-node:hover,.flow-node.active{border-color:var(--primary);background:var(--surface)}
+.flow-node.active{box-shadow:0 0 0 3px rgba(15,212,184,.25)}
+.flow-node .fn-label{font-size:11px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.6px}
+.flow-node .fn-name{font-size:13px;font-weight:700;color:var(--text)}
+.flow-node.stimulus{border-color:rgba(245,166,35,.5)}
+.flow-node.stimulus .fn-name{color:var(--gold)}
+.flow-node.receptor{border-color:rgba(156,39,176,.5)}
+.flow-node.receptor .fn-name{color:#ce93d8}
+.flow-node.control{border-color:rgba(33,150,243,.5)}
+.flow-node.control .fn-name{color:#64b5f6}
+.flow-node.effector{border-color:rgba(76,175,80,.5)}
+.flow-node.effector .fn-name{color:#81c784}
+.flow-node.response{border-color:rgba(239,83,80,.5)}
+.flow-node.response .fn-name{color:#ff8a87}
+.flow-arrow{font-size:22px;color:var(--muted);padding:0 4px;flex-shrink:0}
+.flow-arrow.down{transform:rotate(90deg)}
+
+/* POSITIVE LOOP (circular concept) */
+.pos-loop{position:relative;margin:30px auto;max-width:500px}
+.pos-loop-items{display:flex;flex-direction:column;gap:0}
+.pl-item{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--surface2);border-radius:var(--r);margin-bottom:0;border-left:4px solid var(--red)}
+.pl-arrow{text-align:center;color:var(--red);font-size:18px;padding:4px 0}
+.pl-icon{font-size:20px;flex-shrink:0}
+.pl-body h5{font-size:13px;font-weight:700;color:#ff8a87}
+.pl-body p{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5}
+.loop-indicator{text-align:center;padding:10px;background:rgba(239,83,80,.1);border-radius:var(--r);
+  border:1px dashed rgba(239,83,80,.4);color:#ff8a87;font-size:13px;font-weight:600;margin-top:8px}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  #sidebar{width:180px;min-width:180px}
+  .chapter{padding:40px 24px}
+  .ch-title{font-size:28px}
+  .flow{flex-direction:column;align-items:flex-start}
+  .flow-arrow{transform:rotate(90deg)}
+}
+@media(max-width:540px){
+  body{flex-direction:column}
+  #sidebar{width:100%;min-width:unset;height:auto;flex-direction:row;overflow-x:auto;
+    padding:10px 0;border-right:none;border-bottom:1px solid var(--border);position:sticky;top:0}
+  .sb-brand{display:none}
+  .sb-btn{padding:8px 12px;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sb-brand">
+    <h2>A&amp;P Interactive</h2>
+    <p>Homeostasis &amp; Alopecia</p>
+  </div>
+  <button class="sb-btn active" onclick="goTo(0)"><span class="sb-num">★</span>Introduction</button>
+  <button class="sb-btn" onclick="goTo(1)"><span class="sb-num">1</span>Hair Cycle</button>
+  <button class="sb-btn" onclick="goTo(2)"><span class="sb-num">2</span>Set Point</button>
+  <button class="sb-btn" onclick="goTo(3)"><span class="sb-num">3</span>Stimulus</button>
+  <button class="sb-btn" onclick="goTo(4)"><span class="sb-num">4</span>Receptor</button>
+  <button class="sb-btn" onclick="goTo(5)"><span class="sb-num">5</span>Control Center</button>
+  <button class="sb-btn" onclick="goTo(6)"><span class="sb-num">6</span>Effector</button>
+  <button class="sb-btn" onclick="goTo(7)"><span class="sb-num">7</span>Negative Feedback</button>
+  <button class="sb-btn" onclick="goTo(8)"><span class="sb-num">8</span>Positive Feedback</button>
+  <button class="sb-btn" onclick="goTo(9)"><span class="sb-num">💊</span>Drug Simulator</button>
+  <button class="sb-btn" onclick="goTo(10)"><span class="sb-num">📝</span>Take a Quiz</button>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+
+<!-- CH 0: INTRO -->
+<div class="chapter active" id="ch0">
+  <span class="ch-tag">Welcome</span>
+  <h1 class="ch-title">Your Body Is Always<br/>Keeping the Balance</h1>
+  <p class="ch-sub">Every second, your body runs thousands of feedback loops to stay in its "sweet spot." When those loops break down, disease follows. Let's explore that through one of the most visible examples: <strong style="color:var(--primary)">hair loss (alopecia)</strong>.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-blue">What You'll Learn</div>
+      <h3>Core A&amp;P Concepts</h3>
+      <p>Set point · Normal range · Stimulus · Receptor · Control center · Effector · Negative feedback loop · Positive feedback loop</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-green">The Context</div>
+      <h3>Through Alopecia</h3>
+      <p>Hair loss is a perfect case study — it involves endocrine signaling, receptor biology, autoimmunity, and runaway positive feedback spirals all in one condition.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">Interactive</div>
+      <h3>Drug Simulator + Quizzes</h3>
+      <p>Try introducing real FDA-approved drugs into the feedback loop and see what happens. Then test your knowledge with two different quizzes.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>Three Types of Alopecia We'll Cover</h4>
+    <p><strong style="color:var(--gold)">Androgenetic Alopecia (AGA)</strong> — male/female pattern baldness, driven by DHT and androgen signaling. The most common type.<br/><br/>
+    <strong style="color:var(--purple)">Alopecia Areata (AA)</strong> — autoimmune attack on hair follicles. Demonstrates a powerful pathological positive feedback loop.<br/><br/>
+    <strong style="color:var(--blue)">Telogen Effluvium</strong> — stress-induced mass shedding. Shows how a stressor can shift the system's set point temporarily.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-primary" onclick="goTo(1)">Start Learning →</button>
+  </div>
+</div>
+
+<!-- CH 1: HAIR CYCLE -->
+<div class="chapter" id="ch1">
+  <span class="ch-tag">Chapter 1</span>
+  <h1 class="ch-title">The Hair Cycle</h1>
+  <p class="ch-sub">Hair doesn't grow continuously. Each follicle cycles through three phases — anagen, catagen, and telogen — repeating throughout your lifetime. Understanding this cycle is the foundation for understanding what goes wrong in alopecia.</p>
+
+  <div class="hair-scene">
+    <div class="follicle-wrap">
+      <h4>Anagen</h4>
+      <div class="follicle phase-anagen">
+        <div class="hair-shaft" style="height:110px"></div>
+        <div class="hair-bulb"></div>
+      </div>
+      <div class="phase-label">Growth Phase</div>
+      <div class="phase-dur">2–7 years</div>
+    </div>
+    <div class="follicle-wrap">
+      <h4>Catagen</h4>
+      <div class="follicle phase-catagen">
+        <div class="hair-shaft" style="height:60px"></div>
+        <div class="hair-bulb"></div>
+      </div>
+      <div class="phase-label">Regression</div>
+      <div class="phase-dur">2–3 weeks</div>
+    </div>
+    <div class="follicle-wrap">
+      <h4>Telogen</h4>
+      <div class="follicle phase-telogen">
+        <div class="hair-shaft" style="height:28px"></div>
+        <div class="hair-bulb"></div>
+      </div>
+      <div class="phase-label">Resting Phase</div>
+      <div class="phase-dur">3–4 months</div>
+    </div>
+    <div class="follicle-wrap">
+      <h4>Back to Anagen</h4>
+      <div class="follicle phase-anagen" style="opacity:.5">
+        <div class="hair-shaft" style="height:110px"></div>
+        <div class="hair-bulb"></div>
+      </div>
+      <div class="phase-label">New cycle begins</div>
+      <div class="phase-dur">~Repeats for life</div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-green">Anagen</div>
+      <h3>Active Growth</h3>
+      <p>The dermal papilla signals matrix cells to divide. Hair grows ~1 cm/month. Melanocytes produce pigment. About <strong>85–90%</strong> of your follicles are here at any given time.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">Catagen</div>
+      <h3>Programmed Regression</h3>
+      <p>Signals like <strong>TGF-β</strong> trigger apoptosis (cell death) of matrix cells. The lower follicle shrinks upward. Only ~1% of follicles are here at once.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">Telogen</div>
+      <h3>Rest &amp; Prepare</h3>
+      <p>The follicle rests and prepares for the next anagen. BMP signals keep stem cells quiet. About <strong>10–15%</strong> of follicles rest here. Normal daily shedding: <strong>50–100 hairs</strong>.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>Key Molecular Signals</h4>
+    <p><strong style="color:var(--green)">Pro-Anagen (keep growing):</strong> IGF-1, FGF-7, Wnt/β-catenin, VEGF<br/>
+    <strong style="color:var(--red)">Pro-Catagen (stop growing):</strong> TGF-β1, TGF-β2, FGF-5, BMP2/4, DHT (in susceptible follicles)</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(0)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(2)">Next: Set Point →</button>
+  </div>
+</div>
+
+<!-- CH 2: SET POINT & NORMAL RANGE -->
+<div class="chapter" id="ch2">
+  <span class="ch-tag">Chapter 2</span>
+  <h1 class="ch-title">Set Point &amp; Normal Range</h1>
+  <p class="ch-sub">Before a system can "go wrong," you need to understand what "normal" looks like. In homeostasis, the <strong>set point</strong> is the target value the body aims for. The <strong>normal range</strong> is the acceptable window around that target.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item">
+      <div class="concept-icon">🎯</div>
+      <div class="concept-body">
+        <h4>Set Point</h4>
+        <p>The ideal value a physiological variable is maintained at. Think of it like a thermostat setting. The body constantly reads the current value and adjusts to return to the set point. It is genetically programmed and can vary between individuals.</p>
+      </div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-icon">📊</div>
+      <div class="concept-body">
+        <h4>Normal Range</h4>
+        <p>A window of acceptable values around the set point. The body doesn't need to be at the exact set point every millisecond — small fluctuations within the normal range are fine. Outside this range, corrective action begins.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="stat-row">
+      <div class="stat"><div class="sv">~100K</div><div class="sl">Total scalp hairs (set point)</div></div>
+      <div class="stat"><div class="sv">200–300</div><div class="sl">Follicles per cm² (density)</div></div>
+      <div class="stat"><div class="sv">85–90%</div><div class="sl">Follicles in anagen (normal range)</div></div>
+      <div class="stat"><div class="sv">50–100</div><div class="sl">Hairs shed daily (normal range)</div></div>
+      <div class="stat"><div class="sv">2–7 yrs</div><div class="sl">Anagen duration (normal range)</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:8px">
+    <h3>How the Set Point Is Maintained</h3>
+    <p style="margin-bottom:12px">The 85:15 anagen-to-telogen ratio is actively maintained by a balance of molecular signals. The "anagen clock" inside each dermal papilla cell progressively accumulates inhibitory signals over years until they override growth signals — triggering catagen. This is a <strong>built-in biological timer</strong>.</p>
+    <p>In alopecia, this timer is disrupted. In androgenetic alopecia, DHT shortens the clock — each cycle's anagen gets shorter. The ratio shifts. The set point drifts toward more telogen, less anagen. Hair density falls below the normal range.</p>
+  </div>
+
+  <div class="highlight">
+    <h4>The "Anagen Clock" Analogy</h4>
+    <p>Imagine a sand timer in each follicle. Normally it runs for 2–7 years before flipping (triggering catagen). DHT puts a hole in the timer — it runs out faster each cycle. After many cycles, what was a 5-year timer becomes 6 months. The resulting hair is tiny (vellus), almost invisible. This is <strong>follicle miniaturization</strong>.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(1)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(3)">Next: Stimulus →</button>
+  </div>
+</div>
+
+<!-- CH 3: STIMULUS -->
+<div class="chapter" id="ch3">
+  <span class="ch-tag">Chapter 3</span>
+  <h1 class="ch-title">The Stimulus</h1>
+  <p class="ch-sub">A <strong>stimulus</strong> is a change in the internal or external environment that is detected by the body and triggers a response. It's the event that "starts" a feedback loop cycle.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--gold)">
+      <div class="concept-icon">⚡</div>
+      <div class="concept-body">
+        <h4>Stimulus (definition)</h4>
+        <p>Any change that disturbs homeostasis or activates a receptor. A stimulus can be chemical, physical, or biological. It does not have to be harmful — even normal fluctuations in blood glucose act as stimuli that trigger corrective responses.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-gold">AGA Stimulus</div>
+      <h3>DHT Reaching Androgen-Sensitive Follicles</h3>
+      <p>Dihydrotestosterone (DHT) is produced when 5-alpha reductase converts testosterone in the dermal papilla cells. In people with genetic susceptibility, these follicles have <strong>higher levels of the 5αR enzyme</strong> and more sensitive androgen receptors — so even normal DHT levels cause an outsized response.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-purple">AA Stimulus</div>
+      <h3>Collapse of Follicle Immune Privilege</h3>
+      <p>Normally, hair follicles are "invisible" to the immune system (a state called immune privilege). A trigger — stress, infection, or unknown factors — causes the follicle to suddenly <strong>display self-antigens</strong>. This is the stimulus that begins the autoimmune attack.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">TE Stimulus</div>
+      <h3>Systemic Physiological Stress</h3>
+      <p>In telogen effluvium, the stimulus is a body-wide stressor: childbirth, major surgery, high fever, severe weight loss, or thyroid dysfunction. Cortisol and substance P surge, simultaneously pushing <strong>many follicles into telogen</strong> at once.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>Why DHT Doesn't Cause Baldness Everywhere</h4>
+    <p>DHT is present in follicles all over your body — but it <em>promotes</em> growth in beard, chest, and body hair follicles while <em>inhibiting</em> growth in scalp follicles (in genetically susceptible individuals). The <strong>response to the same stimulus is location-specific</strong>, determined by each follicle's genetic programming. This is a key A&P concept: the same signal can have opposite effects in different receptor contexts.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(2)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(4)">Next: Receptor →</button>
+  </div>
+</div>
+
+<!-- CH 4: RECEPTOR -->
+<div class="chapter" id="ch4">
+  <span class="ch-tag">Chapter 4</span>
+  <h1 class="ch-title">The Receptor</h1>
+  <p class="ch-sub">A <strong>receptor</strong> is a structure that detects a specific stimulus and generates a signal. It is the body's "sensor." In alopecia, the receptors are molecular — proteins on (or inside) cells that detect hormones or immune signals.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#ce93d8">
+      <div class="concept-icon">🔬</div>
+      <div class="concept-body">
+        <h4>Receptor (definition)</h4>
+        <p>A cell or specialized protein that monitors a specific variable and generates an input signal when a change is detected. In physiology, receptors can be cells (like baroreceptors in arteries) or molecular proteins (like hormone receptors on cell surfaces or inside nuclei).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-purple">AGA Receptor</div>
+      <h3>Androgen Receptor (AR)</h3>
+      <p>The AR is a protein inside dermal papilla cells. DHT diffuses through the cell membrane and binds to the AR. This binding causes a shape change, and the DHT-AR complex moves into the nucleus to act as a transcription factor — directly changing which genes are expressed.</p>
+      <p style="margin-top:10px;font-size:12px;color:var(--muted)">Gene location: X chromosome (Xq11-12) — explains why AGA susceptibility is inherited maternally</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">AGA Receptor (upstream)</div>
+      <h3>5-Alpha Reductase (5αR)</h3>
+      <p>Technically the enzyme, not a receptor — but it "receives" testosterone and converts it to the active signal (DHT). Type II 5αR is the primary isoform in scalp follicles. Men born without this enzyme <strong>never develop male-pattern baldness</strong> — a key clinical clue that led to finasteride development.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-purple">AA Receptor</div>
+      <h3>NKG2D Receptor on CD8+ T Cells</h3>
+      <p>In alopecia areata, CD8+ cytotoxic T cells have NKG2D receptors that detect stress signals (NKG2D ligands: MICA, MICB, ULBP3) displayed on damaged follicle cells. When NKG2D binds its ligand, the T cell is activated to attack.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>AR = "Key-in-Lock" — But the Key Changes</h4>
+    <p>Testosterone fits the androgen receptor like a key in a lock. DHT is a "stronger key" — it binds 3–10× more tightly and stays 10× longer. In AGA, the lock itself (the AR) is also genetically altered to be easier to turn (shorter CAG repeats in the gene → more sensitive receptor). So the problem is both a stronger key AND a more sensitive lock.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(3)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(5)">Next: Control Center →</button>
+  </div>
+</div>
+
+<!-- CH 5: CONTROL CENTER -->
+<div class="chapter" id="ch5">
+  <span class="ch-tag">Chapter 5</span>
+  <h1 class="ch-title">The Control Center</h1>
+  <p class="ch-sub">The <strong>control center</strong> receives input from the receptor, compares it to the set point, and determines the appropriate response. It "decides" what to do with the signal.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#64b5f6">
+      <div class="concept-icon">🧠</div>
+      <div class="concept-body">
+        <h4>Control Center (definition)</h4>
+        <p>The integrating center that processes information from the receptor and directs the effector. In the nervous system this is often the brain. In endocrine systems it can be a gland. In cellular systems it can be a transcription factor complex inside a cell's nucleus.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-blue">Systemic Level</div>
+      <h3>The HPG Axis</h3>
+      <p>Hypothalamus → Pituitary → Gonads. The hypothalamus detects androgen levels in the blood and modulates GnRH pulses. Rising testosterone feeds back to reduce GnRH and LH — classic negative feedback that keeps systemic androgen levels in the normal range.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-purple">Cellular Level</div>
+      <h3>DHT-AR Complex in the Nucleus</h3>
+      <p>Once DHT binds the AR, the complex enters the nucleus and binds androgen response elements (AREs) in DNA. This is the local "control center" — it reads the DHT signal and decides which genes to turn up or down in the dermal papilla cell.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-gold">AA Control Center</div>
+      <h3>JAK-STAT Pathway in T Cells</h3>
+      <p>In alopecia areata, when IFN-γ binds T cell receptors, JAK1 and JAK2 enzymes phosphorylate STAT proteins. STAT proteins then enter the nucleus and activate genes for T cell proliferation and more cytokine production. This pathway is the control center of the autoimmune loop.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>What the DHT-AR Control Center Does</h4>
+    <p>In a susceptible dermal papilla cell, the DHT-AR complex commands the cell to:<br/>
+    <span style="color:var(--red)">↑ Upregulate:</span> TGF-β1, TGF-β2 (cause catagen), DKK-1 (block Wnt/stem cell activation), IGFBP-3 (mop up IGF-1)<br/>
+    <span style="color:var(--green)">↓ Downregulate:</span> IGF-1 (pro-anagen survival), FGF-7 (stimulates matrix cells), VEGF (blood supply)</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(4)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(6)">Next: Effector →</button>
+  </div>
+</div>
+
+<!-- CH 6: EFFECTOR -->
+<div class="chapter" id="ch6">
+  <span class="ch-tag">Chapter 6</span>
+  <h1 class="ch-title">The Effector</h1>
+  <p class="ch-sub">The <strong>effector</strong> is the organ or tissue that carries out the response directed by the control center. It produces the actual physical change that brings the variable back toward (or away from) the set point.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:#81c784">
+      <div class="concept-icon">💪</div>
+      <div class="concept-body">
+        <h4>Effector (definition)</h4>
+        <p>The muscle, gland, or tissue that executes the corrective response. In the classic thermostat analogy: the heater and air conditioner are the effectors. They receive instructions from the control center and physically change the temperature.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge badge-green">Primary Effector</div>
+      <h3>Dermal Papilla (DP) Cells</h3>
+      <p>DP cells are the master regulators of hair follicle behavior. A cluster of just 50–200 specialized cells at the base of the follicle. They signal to the matrix keratinocytes above them to either divide (anagen) or undergo apoptosis (catagen). <strong>The DP is the effector</strong> — it executes the response to the DHT-AR signal.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">Effector Response in AGA</div>
+      <h3>Follicle Miniaturization</h3>
+      <p>Under DHT influence, DP cells respond by: reducing their own size and number, secreting less IGF-1 and Wnt, secreting more TGF-β and DKK-1. This shortens each successive anagen cycle. Terminal hair (thick, pigmented) progressively becomes <strong>vellus hair</strong> (thin, colorless, barely visible).</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-purple">AA Effector</div>
+      <h3>Hair Follicle Bulb (Matrix Cells)</h3>
+      <p>In alopecia areata, the target of T cell attack is the matrix cells in the hair bulb. Unlike AGA (where follicles are miniaturized), in AA the follicle structure is largely <strong>preserved</strong> — the matrix cells are simply forced into telogen. This is why regrowth is possible when the immune attack stops.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>DP Cell Volume = Hair Diameter</h4>
+    <p>The size of the dermal papilla directly determines the diameter of the hair shaft it produces. A large, healthy DP → thick terminal hair. A shrunken, miniaturized DP → thin vellus hair. Critically, the miniaturized DP also becomes <strong>more sensitive to DHT</strong> — setting up the positive feedback loop you'll see in the next chapters.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(5)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(7)">Next: Negative Feedback →</button>
+  </div>
+</div>
+
+<!-- CH 7: NEGATIVE FEEDBACK -->
+<div class="chapter" id="ch7">
+  <span class="ch-tag">Chapter 7</span>
+  <h1 class="ch-title">The Negative Feedback Loop</h1>
+  <p class="ch-sub">A <strong>negative feedback loop</strong> opposes the original stimulus — it works to return a variable to its set point. Most homeostatic mechanisms are negative feedback. The body's control of androgen levels is a classic example.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--green)">
+      <div class="concept-icon">↩️</div>
+      <div class="concept-body">
+        <h4>Negative Feedback (definition)</h4>
+        <p>When the response to a stimulus reduces or eliminates the stimulus. The response "feeds back" in the opposite direction. This is stabilizing — it keeps variables within the normal range. Blood pressure regulation, blood glucose regulation, and body temperature regulation are all negative feedback systems.</p>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:var(--muted);margin-bottom:16px;font-size:14px">👇 Click any node to learn its role in the feedback loop</p>
+  <div class="flow" id="neg-flow">
+    <div class="flow-node stimulus" data-node="hyp" onclick="showNodeInfo('hyp')">
+      <div class="fn-label">Control Center</div>
+      <div class="fn-name">Hypothalamus</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node stimulus" data-node="pit" onclick="showNodeInfo('pit')">
+      <div class="fn-label">Control Center</div>
+      <div class="fn-name">Ant. Pituitary</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node receptor" data-node="gonads" onclick="showNodeInfo('gonads')">
+      <div class="fn-label">Effector</div>
+      <div class="fn-name">Gonads</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node stimulus" data-node="test" onclick="showNodeInfo('test')">
+      <div class="fn-label">Signal</div>
+      <div class="fn-name">Testosterone</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node receptor" data-node="sar5" onclick="showNodeInfo('sar5')">
+      <div class="fn-label">Enzyme</div>
+      <div class="fn-name">5α-Reductase</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node stimulus" data-node="dht" onclick="showNodeInfo('dht')">
+      <div class="fn-label">Stimulus</div>
+      <div class="fn-name">DHT</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node receptor" data-node="ar" onclick="showNodeInfo('ar')">
+      <div class="fn-label">Receptor</div>
+      <div class="fn-name">Androgen Receptor</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node effector" data-node="dp" onclick="showNodeInfo('dp')">
+      <div class="fn-label">Effector</div>
+      <div class="fn-name">Dermal Papilla</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node response" data-node="anagen" onclick="showNodeInfo('anagen')">
+      <div class="fn-label">Response</div>
+      <div class="fn-name">Anagen Shortens</div>
+    </div>
+  </div>
+
+  <div class="node-info" id="node-info">
+    <div class="ni-tag">Click a node above to explore it</div>
+    <p>The HPG axis is a classic endocrine negative feedback system. At the body level, rising testosterone tells the hypothalamus to reduce GnRH, keeping androgens in their normal range. At the follicle level, DHT signals through the androgen receptor to shorten the anagen phase.</p>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>The Negative Feedback Loop at the Body Level (HPG Axis)</h3>
+    <p>Rising testosterone in the bloodstream is detected by receptors in the hypothalamus → GnRH pulses decrease → pituitary releases less LH → testes produce less testosterone → testosterone levels fall back toward the set point. This keeps systemic androgen levels in their normal range. <strong>The problem in AGA is not that systemic androgens are too high</strong> — it's that the scalp follicles are genetically hypersensitive to normal androgen levels.</p>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(6)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(8)">Next: Positive Feedback →</button>
+  </div>
+</div>
+
+<!-- CH 8: POSITIVE FEEDBACK -->
+<div class="chapter" id="ch8">
+  <span class="ch-tag">Chapter 8</span>
+  <h1 class="ch-title">The Positive Feedback Loop</h1>
+  <p class="ch-sub">A <strong>positive feedback loop</strong> amplifies the original stimulus — it pushes the variable <em>further away</em> from the set point. These are rare in normal physiology (childbirth contractions, blood clotting) but are a hallmark of many diseases.</p>
+
+  <div class="concept-list" style="margin-bottom:28px">
+    <div class="concept-item" style="border-left-color:var(--red)">
+      <div class="concept-icon">📈</div>
+      <div class="concept-body">
+        <h4>Positive Feedback (definition)</h4>
+        <p>When the response to a stimulus amplifies or increases that stimulus further. This is destabilizing — it drives a variable progressively further from its set point. In disease, positive feedback loops create "runaway" cascades.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--gold);margin-bottom:12px">Positive Feedback Loop #1: AGA Miniaturization Spiral</h3>
+  <div class="pos-loop">
+    <div class="pos-loop-items">
+      <div class="pl-item">
+        <div class="pl-icon">🔴</div>
+        <div class="pl-body"><h5>DHT activates AR in Dermal Papilla</h5><p>DHT-AR complex upregulates TGF-β1/β2 and DKK-1; downregulates IGF-1 and Wnt signals</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">⬇️</div>
+        <div class="pl-body"><h5>Anagen shortens; DP cell shrinks</h5><p>TGF-β triggers premature catagen. Smaller DP → thinner hair shaft produced this cycle</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">🔁</div>
+        <div class="pl-body"><h5>Miniaturized DP becomes MORE sensitive to DHT</h5><p>AR expression actually increases in miniaturized cells. The weakened follicle is now more vulnerable</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">🔥</div>
+        <div class="pl-body"><h5>TGF-β triggers its own production (autocrine loop)</h5><p>TGF-β acts on neighboring DP cells to produce more TGF-β. Perifollicular inflammation (PGD2) adds fuel</p></div>
+      </div>
+      <div class="pl-arrow">↓</div>
+      <div class="pl-item">
+        <div class="pl-icon">💀</div>
+        <div class="pl-body"><h5>Fibrosis sets in — follicle "locked" in miniaturized state</h5><p>TGF-β drives perifollicular fibrosis. Physical restriction prevents DP from ever expanding again</p></div>
+      </div>
+    </div>
+    <div class="loop-indicator">🔄 Each cycle, the next anagen is shorter than the last — the spiral is self-reinforcing</div>
+  </div>
+
+  <h3 style="color:var(--purple);margin:28px 0 12px">Positive Feedback Loop #2: Alopecia Areata Autoimmune Loop</h3>
+  <div class="pos-loop">
+    <div class="pos-loop-items" style="--red:var(--purple)">
+      <div class="pl-item" style="border-left-color:var(--purple)">
+        <div class="pl-icon">⚡</div>
+        <div class="pl-body"><h5>Immune privilege collapses (trigger: stress/infection)</h5><p>Follicle upregulates MHC class I and NKG2D ligands, becoming "visible" to the immune system</p></div>
+      </div>
+      <div class="pl-arrow" style="color:var(--purple)">↓</div>
+      <div class="pl-item" style="border-left-color:var(--purple)">
+        <div class="pl-icon">🦠</div>
+        <div class="pl-body"><h5>CD8+ T cells attack the hair bulb</h5><p>NKG2D+ cytotoxic T cells recognize the follicle. IFN-γ is released as the attack proceeds</p></div>
+      </div>
+      <div class="pl-arrow" style="color:var(--purple)">↓</div>
+      <div class="pl-item" style="border-left-color:var(--purple)">
+        <div class="pl-icon">📡</div>
+        <div class="pl-body"><h5>IFN-γ upregulates MHC class I on MORE follicle cells</h5><p>More cells become visible → JAK-STAT pathway amplifies T cell proliferation. IL-15 fuels NK cells</p></div>
+      </div>
+      <div class="pl-arrow" style="color:var(--purple)">↓</div>
+      <div class="pl-item" style="border-left-color:var(--purple)">
+        <div class="pl-icon">🔊</div>
+        <div class="pl-body"><h5>Activated T cells circulate to other follicles</h5><p>The immune response spreads across the scalp. Patches expand. Alopecia totalis/universalis possible</p></div>
+      </div>
+    </div>
+    <div class="loop-indicator" style="border-color:rgba(156,39,176,.4);color:#ce93d8;background:rgba(156,39,176,.1)">🔄 More IFN-γ → More JAK-STAT → More T cells → More IFN-γ (unlike AGA, follicle structure is preserved)</div>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(7)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(9)">Next: Drug Simulator →</button>
+  </div>
+</div>
+
+<!-- CH 9: DRUG SIMULATOR -->
+<div class="chapter" id="ch9">
+  <span class="ch-tag">Interactive</span>
+  <h1 class="ch-title">Drug Simulator</h1>
+  <p class="ch-sub">Real drugs used to treat alopecia work by <strong>intervening at specific points in the feedback loop</strong>. Toggle drugs on and off to see where they act and how they affect the loop's variables.</p>
+
+  <div class="sim-mode-tabs">
+    <div class="sim-tab active" id="tab-aga" onclick="setSimMode('aga')">Androgenetic Alopecia (AGA)</div>
+    <div class="sim-tab" id="tab-aa" onclick="setSimMode('aa')">Alopecia Areata (AA)</div>
+  </div>
+
+  <div class="sim-layout">
+    <!-- Diagram side -->
+    <div class="sim-diagram">
+      <div id="sim-aga-diagram">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Intervention points light up when a drug targeting them is active. Watch the gauges respond.</p>
+        <div class="flow" style="flex-wrap:wrap;gap:8px">
+          <div class="flow-node stimulus sim-node" id="sn-test" style="min-width:90px">
+            <div class="fn-label">Source</div>
+            <div class="fn-name">Testosterone</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node receptor sim-node" id="sn-sar5" style="min-width:90px">
+            <div class="fn-label">Enzyme ⚔</div>
+            <div class="fn-name">5α-Reductase</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node stimulus sim-node" id="sn-dht" style="min-width:90px">
+            <div class="fn-label">Stimulus</div>
+            <div class="fn-name">DHT</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node receptor sim-node" id="sn-ar" style="min-width:90px">
+            <div class="fn-label">Receptor ⚔</div>
+            <div class="fn-name">Androgen Receptor</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node effector sim-node" id="sn-dp" style="min-width:90px">
+            <div class="fn-label">Effector ⚔</div>
+            <div class="fn-name">Dermal Papilla</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node response sim-node" id="sn-anagen" style="min-width:90px">
+            <div class="fn-label">Outcome</div>
+            <div class="fn-name">Hair Growth</div>
+          </div>
+        </div>
+        <div class="gauges" style="margin-top:24px">
+          <div class="gauge-item">
+            <div class="gauge-label"><span>DHT Level</span><span id="g-dht-val">100%</span></div>
+            <div class="gauge-bar gauge-dht"><div class="gauge-fill" id="g-dht" style="width:100%"></div></div>
+          </div>
+          <div class="gauge-item">
+            <div class="gauge-label"><span>AR Activation</span><span id="g-ar-val">100%</span></div>
+            <div class="gauge-bar gauge-ar"><div class="gauge-fill" id="g-ar" style="width:100%"></div></div>
+          </div>
+          <div class="gauge-item">
+            <div class="gauge-label"><span>Anagen Duration</span><span id="g-anagen-val">45%</span></div>
+            <div class="gauge-bar gauge-anagen"><div class="gauge-fill" id="g-anagen" style="width:45%"></div></div>
+          </div>
+          <div class="gauge-item">
+            <div class="gauge-label"><span>Hair Density</span><span id="g-density-val">40%</span></div>
+            <div class="gauge-bar gauge-density"><div class="gauge-fill" id="g-density" style="width:40%"></div></div>
+          </div>
+        </div>
+        <div id="sim-drug-detail" class="drug-detail show" style="margin-top:20px">
+          <p style="color:var(--muted);font-size:13px">Select a drug on the right to see details. Multiple drugs can be combined — watch for additive effects.</p>
+        </div>
+      </div>
+
+      <div id="sim-aa-diagram" style="display:none">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">JAK inhibitors break the autoimmune positive feedback loop. Toggle them to see the immune activity decrease.</p>
+        <div class="pos-loop-items" id="aa-loop-nodes" style="gap:8px">
+          <div class="pl-item sim-aa-node" id="aan-trigger" style="border-left-color:var(--purple)">
+            <div class="pl-icon">⚡</div>
+            <div class="pl-body"><h5>Immune Trigger</h5><p>Collapse of follicle immune privilege</p></div>
+          </div>
+          <div class="pl-arrow" style="color:var(--purple)">↓</div>
+          <div class="pl-item sim-aa-node" id="aan-tcell" style="border-left-color:var(--purple)">
+            <div class="pl-icon">🦠</div>
+            <div class="pl-body"><h5>T Cell Activation</h5><p>CD8+ NKG2D+ cells recognize follicle antigens</p></div>
+          </div>
+          <div class="pl-arrow" style="color:var(--purple)">↓</div>
+          <div class="pl-item sim-aa-node" id="aan-jak" style="border-left-color:var(--purple)">
+            <div class="pl-icon">⚙️</div>
+            <div class="pl-body"><h5>JAK-STAT Signaling ⚔</h5><p>IFN-γ → JAK1/JAK2/JAK3 → STAT phosphorylation → gene transcription</p></div>
+          </div>
+          <div class="pl-arrow" style="color:var(--purple)">↓</div>
+          <div class="pl-item sim-aa-node" id="aan-ifng" style="border-left-color:var(--purple)">
+            <div class="pl-icon">🔥</div>
+            <div class="pl-body"><h5>IFN-γ Amplification</h5><p>More IFN-γ → more MHC class I → more T cell recruitment (positive feedback)</p></div>
+          </div>
+        </div>
+        <div class="gauges" style="margin-top:24px">
+          <div class="gauge-item">
+            <div class="gauge-label"><span>Immune Activity</span><span id="g-immune-val">100%</span></div>
+            <div class="gauge-bar gauge-immune"><div class="gauge-fill" id="g-immune" style="width:100%"></div></div>
+          </div>
+          <div class="gauge-item">
+            <div class="gauge-label"><span>JAK-STAT Signal</span><span id="g-jak-val">100%</span></div>
+            <div class="gauge-bar gauge-dht"><div class="gauge-fill" id="g-jak" style="width:100%"></div></div>
+          </div>
+          <div class="gauge-item">
+            <div class="gauge-label"><span>Hair Regrowth Potential</span><span id="g-regrow-val">10%</span></div>
+            <div class="gauge-bar gauge-anagen"><div class="gauge-fill" id="g-regrow" style="width:10%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drug controls -->
+    <div class="sim-controls" id="sim-drug-list">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <div class="ch-nav">
+    <button class="btn-ch btn-secondary" onclick="goTo(8)">← Back</button>
+    <button class="btn-ch btn-primary" onclick="goTo(10)">Take a Quiz →</button>
+  </div>
+</div>
+
+<!-- CH 10: QUIZ GATE -->
+<div class="chapter" id="ch10">
+  <span class="ch-tag">Assessment</span>
+  <h1 class="ch-title">Test Your Knowledge</h1>
+  <p class="ch-sub">Choose the quiz that matches what you want to test. Both cover the material from this module.</p>
+  <div class="quiz-cards">
+    <div class="quiz-choice" onclick="startQuiz(1)">
+      <div class="qc-icon">🔄</div>
+      <h3>Quiz 1: Homeostasis Concepts</h3>
+      <p>Focused on set point, normal range, stimulus, receptor, control center, effector, and the difference between negative and positive feedback loops — in the context of alopecia.</p>
+      <p style="margin-top:14px;font-size:12px;color:var(--primary);font-weight:700">10 questions · ~5 min</p>
+    </div>
+    <div class="quiz-choice" onclick="startQuiz(2)">
+      <div class="qc-icon">🧬</div>
+      <h3>Quiz 2: Alopecia Deep Dive</h3>
+      <p>Comprehensive test covering all three types of alopecia, the molecular pathways, drug mechanisms, and clinical details from this module.</p>
+      <p style="margin-top:14px;font-size:12px;color:var(--primary);font-weight:700">10 questions · ~6 min</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ 1 SCREEN -->
+<div class="quiz-screen" id="quiz1-screen">
+  <div class="quiz-progress">
+    <div class="qp-bar"><div class="qp-fill" id="q1-prog"></div></div>
+    <div class="qp-text" id="q1-prog-text">1 / 10</div>
+  </div>
+  <div id="q1-content"></div>
+  <div class="q-feedback" id="q1-feedback"></div>
+  <button class="btn-next" id="q1-next" onclick="nextQuestion(1)">Next Question →</button>
+</div>
+
+<!-- QUIZ 2 SCREEN -->
+<div class="quiz-screen" id="quiz2-screen">
+  <div class="quiz-progress">
+    <div class="qp-bar"><div class="qp-fill" id="q2-prog"></div></div>
+    <div class="qp-text" id="q2-prog-text">1 / 10</div>
+  </div>
+  <div id="q2-content"></div>
+  <div class="q-feedback" id="q2-feedback"></div>
+  <button class="btn-next" id="q2-next" onclick="nextQuestion(2)">Next Question →</button>
+</div>
+
+<!-- RESULTS SCREENS -->
+<div class="results-screen" id="quiz1-results">
+  <h2 style="font-size:28px;margin-bottom:8px">Quiz 1 Results</h2>
+  <p style="color:var(--muted);margin-bottom:28px">Homeostasis Concepts</p>
+  <div class="score-ring" id="q1-ring">
+    <div class="score-num" id="q1-score">0</div>
+    <div class="score-denom">/ 10</div>
+  </div>
+  <p class="result-msg" id="q1-msg"></p>
+  <div class="missed-list" id="q1-missed"></div>
+  <div style="margin-top:28px">
+    <button class="result-btn primary" onclick="startQuiz(1)">Retake Quiz</button>
+    <button class="result-btn secondary" onclick="startQuiz(2)">Take Quiz 2</button>
+    <button class="result-btn secondary" onclick="goTo(0)">Review Content</button>
+  </div>
+</div>
+
+<div class="results-screen" id="quiz2-results">
+  <h2 style="font-size:28px;margin-bottom:8px">Quiz 2 Results</h2>
+  <p style="color:var(--muted);margin-bottom:28px">Alopecia Deep Dive</p>
+  <div class="score-ring" id="q2-ring">
+    <div class="score-num" id="q2-score">0</div>
+    <div class="score-denom">/ 10</div>
+  </div>
+  <p class="result-msg" id="q2-msg"></p>
+  <div class="missed-list" id="q2-missed"></div>
+  <div style="margin-top:28px">
+    <button class="result-btn primary" onclick="startQuiz(2)">Retake Quiz</button>
+    <button class="result-btn secondary" onclick="startQuiz(1)">Take Quiz 1</button>
+    <button class="result-btn secondary" onclick="goTo(0)">Review Content</button>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// =============================================
+// NAVIGATION
+// =============================================
+let currentChapter = 0;
+const totalChapters = 11; // 0-10
+
+function goTo(n) {
+  // Hide all chapters and screens
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el => {
+    el.classList.remove('active');
+    if (el.classList.contains('quiz-screen') || el.classList.contains('results-screen')) el.style.display = '';
+  });
+  // Update sidebar
+  document.querySelectorAll('.sb-btn').forEach((btn, i) => btn.classList.toggle('active', i === n));
+  // Show chapter
+  const ch = document.getElementById('ch' + n);
+  if (ch) { ch.classList.add('active'); }
+  currentChapter = n;
+  document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (n === 9) renderDrugs();
+}
+
+// =============================================
+// NODE INFO (Chapter 7 - Negative Feedback)
+// =============================================
+const nodeData = {
+  hyp: {
+    tag: 'Control Center',
+    title: 'Hypothalamus',
+    text: 'The hypothalamus is the master regulator of the endocrine system. It constantly monitors blood testosterone levels. When testosterone rises above the normal range, it reduces pulses of GnRH (gonadotropin-releasing hormone), which signals the pituitary to produce less LH — a classic negative feedback.'
+  },
+  pit: {
+    tag: 'Control Center',
+    title: 'Anterior Pituitary',
+    text: 'In response to GnRH from the hypothalamus, the anterior pituitary releases LH (luteinizing hormone) and FSH. LH travels through the blood to the gonads (testes/ovaries) and stimulates them to produce testosterone. Less GnRH → less LH → less testosterone.'
+  },
+  gonads: {
+    tag: 'Effector (systemic)',
+    title: 'Gonads (Testes / Ovaries)',
+    text: 'Leydig cells in the testes (or theca cells in the ovaries) produce testosterone in response to LH. Rising testosterone then feeds back negatively on the hypothalamus and pituitary — completing the systemic negative feedback loop that keeps circulating androgen levels within the normal range.'
+  },
+  test: {
+    tag: 'Hormone / Signal',
+    title: 'Testosterone',
+    text: 'Testosterone is the primary androgen in males (~300–1000 ng/dL) and is also present in females (~15–70 ng/dL). It circulates in the blood and enters tissues throughout the body. In the scalp, it is converted to DHT by 5-alpha reductase enzymes in the dermal papilla cells.'
+  },
+  sar5: {
+    tag: 'Enzyme (conversion step)',
+    title: '5-Alpha Reductase Type II (5αR)',
+    text: 'This enzyme lives inside dermal papilla cells. It irreversibly converts testosterone into DHT using the cofactor NADPH. Men born with a congenital 5αR Type II deficiency never develop male-pattern baldness — a fact that directly led to the development of finasteride, which blocks this enzyme. 5αR is NOT the receptor; it is the enzyme that creates the active ligand (DHT) from the precursor (testosterone).'
+  },
+  dht: {
+    tag: 'Active Stimulus',
+    title: 'DHT (Dihydrotestosterone)',
+    text: 'DHT is 3–10× more potent than testosterone at the androgen receptor — it binds more tightly and stays bound 10× longer. This gives it a much stronger and more sustained effect on gene transcription. Critically, in AGA the scalp DHT concentration is often higher than serum levels suggest, due to high local 5αR activity and reduced DHT clearance in susceptible follicles.'
+  },
+  ar: {
+    tag: 'Receptor',
+    title: 'Androgen Receptor (AR)',
+    text: 'The AR is a nuclear receptor protein encoded on the X chromosome (Xq11-12). DHT diffuses through the cell membrane into the cytoplasm and binds the AR. The DHT-AR complex then dissociates from heat-shock proteins, dimerizes, translocates into the nucleus, and binds androgen response elements (AREs) in DNA — acting as a transcription factor. This is THE receptor in AGA.'
+  },
+  dp: {
+    tag: 'Effector',
+    title: 'Dermal Papilla (DP) Cell',
+    text: 'A cluster of 50–200 specialized mesenchymal cells at the base of each follicle. They are the effectors — they carry out the response commanded by the DHT-AR control center. In response to DHT-AR activation, DP cells upregulate TGF-β (shortens anagen) and DKK-1 (blocks Wnt signaling), while downregulating IGF-1 and FGF-7 (needed for anagen).'
+  },
+  anagen: {
+    tag: 'Response / Outcome',
+    title: 'Shortened Anagen Phase',
+    text: 'The result of DHT-AR signaling in the dermal papilla is a shorter anagen phase in each successive hair cycle. A hair that previously grew for 4 years might only grow for 2 years, then 1 year, then 6 months. The resulting hair shaft gets progressively thinner and shorter — the process called miniaturization. Ultimately, terminal hairs become vellus hairs (nearly invisible).'
+  }
+};
+
+function showNodeInfo(id) {
+  const d = nodeData[id];
+  if (!d) return;
+  document.querySelectorAll('.flow-node').forEach(n => n.classList.remove('active'));
+  document.querySelector(`[data-node="${id}"]`)?.classList.add('active');
+  const panel = document.getElementById('node-info');
+  panel.innerHTML = `<div class="ni-tag">${d.tag}</div><h4>${d.title}</h4><p>${d.text}</p>`;
+}
+
+// =============================================
+// DRUG SIMULATOR
+// =============================================
+const DRUGS = {
+  aga: [
+    { id:'finasteride', name:'Finasteride', brand:'Propecia', target:'sar5', color:'#3b82f6',
+      mechanism:'Inhibits 5-alpha reductase type II → reduces DHT by ~70%',
+      fda:'FDA-approved 1997 (men only)', efficacy:'66% regrowth at 2 yrs',
+      time:'3–6 months', sideEffects:'Sexual dysfunction (~2–4%), mood changes, masks PSA',
+      dhtMult:0.30, arMult:1.0, anagFact:1.0 },
+    { id:'dutasteride', name:'Dutasteride', brand:'Avodart', target:'sar5', color:'#60a5fa',
+      mechanism:'Inhibits BOTH 5-alpha reductase types I & II → reduces DHT by ~90–95%',
+      fda:'Approved for BPH only in US (off-label AGA); approved in Korea/Japan for hair',
+      efficacy:'~20–30% greater hair count vs finasteride', time:'3–6 months',
+      sideEffects:'Similar to finasteride; 5-week half-life means prolonged effect after stopping',
+      dhtMult:0.07, arMult:1.0, anagFact:1.0 },
+    { id:'spironolactone', name:'Spironolactone', brand:'Aldactone', target:'ar', color:'#ec4899',
+      mechanism:'Blocks androgen receptor (competitive antagonist) + reduces androgen synthesis in ovaries/adrenals',
+      fda:'Off-label for women with AGA — NOT used in men (causes feminization)',
+      efficacy:'~44% hair density improvement at 12 months (women)', time:'3–6 months',
+      sideEffects:'Menstrual irregularities, breast tenderness, hyperkalemia, teratogenic',
+      dhtMult:1.0, arMult:0.40, anagFact:1.0 },
+    { id:'clascoterone', name:'Clascoterone', brand:'Breezula (Phase 3)', target:'ar', color:'#f472b6',
+      mechanism:'Topical androgen receptor antagonist — blocks AR locally in scalp without systemic anti-androgen effects',
+      fda:'Approved as Winlevi for acne; Phase 3 trials ongoing for AGA (both sexes)',
+      efficacy:'Phase 3 results mixed; promising as a systemic-effect-free option',
+      time:'3–6 months (projected)', sideEffects:'Local skin irritation; minimal systemic effects',
+      dhtMult:1.0, arMult:0.50, anagFact:1.0 },
+    { id:'minoxidil', name:'Minoxidil', brand:'Rogaine / Oral', target:'dp', color:'#22c55e',
+      mechanism:'Opens KATP channels (vasodilation) + boosts VEGF + extends anagen phase directly',
+      fda:'FDA-approved topical 1988; oral use is off-label but widely prescribed',
+      efficacy:'40–60% topical; ~75–80% with oral minoxidil', time:'4–6 months for visible regrowth',
+      sideEffects:'Initial shedding (wks 2–8), hypertrichosis, hypotension with oral',
+      dhtMult:1.0, arMult:1.0, anagFact:1.40 },
+    { id:'prp', name:'PRP', brand:'Platelet-Rich Plasma', target:'dp', color:'#f59e0b',
+      mechanism:'Concentrated growth factors (IGF-1, VEGF, PDGF, FGF) injected into scalp — multi-target anagen promotion',
+      fda:'Not FDA-approved as a drug; procedure only; widely practiced',
+      efficacy:'~27–30% increase in hair density', time:'2–3 months; multiple sessions needed',
+      sideEffects:'Injection pain, swelling, variable results, expensive ($500–2000/session)',
+      dhtMult:1.0, arMult:1.0, anagFact:1.27 }
+  ],
+  aa: [
+    { id:'baricitinib', name:'Baricitinib', brand:'Olumiant', target:'jak12', color:'#a855f7',
+      mechanism:'Selective JAK1 + JAK2 inhibitor — blocks IFN-γ and cytokine signaling; interrupts the autoimmune positive feedback loop',
+      fda:'FDA-approved June 2022 — FIRST FDA-approved systemic treatment for alopecia areata',
+      efficacy:'38.8% achieve ≥80% scalp coverage at 36 weeks (BRAVE-AA trials)',
+      time:'4–8 weeks initial; 6–9 months for full effect',
+      sideEffects:'Upper respiratory infections, VTE risk (black box), elevated lipids, serious infection risk',
+      immuneMult:0.35 },
+    { id:'ritlecitinib', name:'Ritlecitinib', brand:'Litfulo', target:'jak3', color:'#8b5cf6',
+      mechanism:'Selective JAK3 + TEC kinase inhibitor — targets IL-15-driven CD8+ T cell and NK cell activation',
+      fda:'FDA-approved June 2023 — first approved for adolescents ≥12 years',
+      efficacy:'23% achieve SALT ≤20 at week 24; 31% at week 48 (ALLEGRO trial)',
+      time:'4–8 weeks initial response', sideEffects:'Headache, diarrhea; black box warnings same as class',
+      immuneMult:0.45 },
+    { id:'deuruxolitinib', name:'Deuruxolitinib', brand:'Leqselvi', target:'jak12', color:'#7c3aed',
+      mechanism:'Deuterium-modified JAK1/JAK2 inhibitor — stable blood levels, sustained blockade of IFN-γ loop',
+      fda:'FDA-approved August 2024 — newest approved AA treatment',
+      efficacy:'~30–35% achieve SALT ≤20 at week 24 (THRIVE-AA trials)',
+      time:'4–8 weeks initial response', sideEffects:'Similar to baricitinib; same class black box warnings',
+      immuneMult:0.38 },
+    { id:'tofacitinib', name:'Tofacitinib', brand:'Xeljanz', target:'jak13', color:'#6d28d9',
+      mechanism:'Pan JAK1/3 inhibitor (also weak JAK2) — broadly blocks multiple cytokine pathways including IFN-γ, IL-15, IL-21',
+      fda:'NOT FDA-approved for AA — off-label use (predates baricitinib/ritlecitinib approvals)',
+      efficacy:'~32% complete/near-complete response in off-label studies',
+      time:'4–8 weeks initial response', sideEffects:'Same class black box; infection risk; first studied in AA (Yale, 2014)',
+      immuneMult:0.40 }
+  ]
+};
+
+let simMode = 'aga';
+let activeDrugs = new Set();
+
+function setSimMode(mode) {
+  simMode = mode;
+  activeDrugs.clear();
+  document.getElementById('tab-aga').classList.toggle('active', mode === 'aga');
+  document.getElementById('tab-aa').classList.toggle('active', mode === 'aa');
+  document.getElementById('sim-aga-diagram').style.display = mode === 'aga' ? '' : 'none';
+  document.getElementById('sim-aa-diagram').style.display = mode === 'aa' ? '' : 'none';
+  renderDrugs();
+  updateGauges();
+}
+
+function renderDrugs() {
+  const list = document.getElementById('sim-drug-list');
+  list.innerHTML = '';
+  const drugs = DRUGS[simMode];
+  drugs.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'drug-card';
+    card.id = 'dcard-' + d.id;
+    card.innerHTML = `
+      <div class="drug-header">
+        <div>
+          <div class="drug-name" style="color:${d.color}">${d.name}</div>
+          <div class="drug-brand">${d.brand}</div>
+        </div>
+        <div class="toggle" id="tog-${d.id}" onclick="toggleDrug('${d.id}')"></div>
+      </div>
+      <div class="drug-mech">${d.mechanism}</div>
+    `;
+    card.onclick = (e) => { if (!e.target.classList.contains('toggle')) showDrugDetail(d); };
+    list.appendChild(card);
+  });
+  document.getElementById('sim-drug-detail').innerHTML = '<p style="color:var(--muted);font-size:13px">Click a drug card to see full details. Toggle the switch to activate it in the loop.</p>';
+}
+
+function toggleDrug(id) {
+  if (activeDrugs.has(id)) {
+    activeDrugs.delete(id);
+    document.getElementById('dcard-' + id)?.classList.remove('on');
+    document.getElementById('tog-' + id)?.classList.remove('on');
+  } else {
+    activeDrugs.add(id);
+    document.getElementById('dcard-' + id)?.classList.add('on');
+    document.getElementById('tog-' + id)?.classList.add('on');
+  }
+  updateGauges();
+  highlightInterventionPoints();
+}
+
+function highlightInterventionPoints() {
+  // Reset all sim nodes
+  document.querySelectorAll('.sim-node').forEach(n => {
+    n.style.borderColor = '';
+    n.style.boxShadow = '';
+  });
+  document.querySelectorAll('.sim-aa-node').forEach(n => {
+    n.style.borderColor = '';
+    n.style.background = '';
+  });
+
+  const drugs = DRUGS[simMode];
+  activeDrugs.forEach(id => {
+    const d = drugs.find(x => x.id === id);
+    if (!d) return;
+    if (simMode === 'aga') {
+      const nodeMap = { sar5: 'sn-sar5', ar: 'sn-ar', dp: 'sn-dp' };
+      const nodeId = nodeMap[d.target];
+      if (nodeId) {
+        const el = document.getElementById(nodeId);
+        if (el) {
+          el.style.borderColor = d.color;
+          el.style.boxShadow = `0 0 0 3px ${d.color}44`;
+        }
+      }
+    } else {
+      const nodeMap = { jak12: 'aan-jak', jak3: 'aan-jak', jak13: 'aan-jak' };
+      const nodeId = nodeMap[d.target];
+      if (nodeId) {
+        const el = document.getElementById(nodeId);
+        if (el) {
+          el.style.borderColor = d.color;
+          el.style.background = `${d.color}18`;
+        }
+      }
+    }
+  });
+}
+
+function updateGauges() {
+  const drugs = DRUGS[simMode];
+  if (simMode === 'aga') {
+    let dhtMult = 1.0, arMult = 1.0, anagFact = 1.0;
+    activeDrugs.forEach(id => {
+      const d = drugs.find(x => x.id === id);
+      if (!d) return;
+      dhtMult = Math.min(dhtMult, d.dhtMult);
+      arMult = Math.min(arMult, d.arMult);
+      anagFact = Math.max(anagFact, d.anagFact);
+    });
+    // Clamp anagFact by AR and DHT suppression benefit
+    const dhtPct = Math.round(dhtMult * 100);
+    const arPct = Math.round(arMult * 100);
+    // Anagen: base 45%, improved by drug benefit
+    const dhtBenefit = (1 - dhtMult) * 0.5; // up to +50%
+    const arBenefit = (1 - arMult) * 0.35;
+    const anagBase = 45;
+    const anagPct = Math.min(95, Math.round(anagBase + (anagFact - 1) * 60 + dhtBenefit * 100 + arBenefit * 100));
+    const densityPct = Math.min(90, Math.round(40 + (anagPct - 45) * 0.9));
+
+    setGauge('g-dht', dhtPct);
+    setGauge('g-ar', arPct);
+    setGauge('g-anagen', anagPct);
+    setGauge('g-density', densityPct);
+
+    // Color DHT node based on level
+    const dhtNode = document.getElementById('sn-dht');
+    if (dhtNode) dhtNode.style.opacity = 0.3 + dhtMult * 0.7;
+  } else {
+    let immuneMult = 1.0;
+    activeDrugs.forEach(id => {
+      const d = drugs.find(x => x.id === id);
+      if (!d) return;
+      immuneMult = Math.min(immuneMult, d.immuneMult);
+    });
+    const immunePct = Math.round(immuneMult * 100);
+    const jakPct = Math.round(immuneMult * 95);
+    const regrowPct = Math.min(90, Math.round(10 + (1 - immuneMult) * 80));
+    setGauge('g-immune', immunePct);
+    setGauge('g-jak', jakPct);
+    setGauge('g-regrow', regrowPct);
+  }
+}
+
+function setGauge(id, pct) {
+  const el = document.getElementById(id);
+  const val = document.getElementById(id + '-val');
+  if (el) el.style.width = pct + '%';
+  if (val) val.textContent = pct + '%';
+}
+
+function showDrugDetail(d) {
+  const det = document.getElementById('sim-drug-detail');
+  det.classList.add('show');
+  det.innerHTML = `
+    <div class="dd-row"><span class="dd-label">Drug</span><span class="dd-val" style="color:${d.color};font-weight:700">${d.name} (${d.brand})</span></div>
+    <div class="dd-row"><span class="dd-label">Mechanism</span><span class="dd-val">${d.mechanism}</span></div>
+    <div class="dd-row"><span class="dd-label">FDA Status</span><span class="dd-val">${d.fda}</span></div>
+    <div class="dd-row"><span class="dd-label">Efficacy</span><span class="dd-val">${d.efficacy}</span></div>
+    <div class="dd-row"><span class="dd-label">Time to effect</span><span class="dd-val">${d.time}</span></div>
+    <div class="dd-row"><span class="dd-label">Side effects</span><span class="dd-val">${d.sideEffects}</span></div>
+  `;
+}
+
+// =============================================
+// QUIZ DATA
+// =============================================
+const Q1 = [
+  { q:'What is a "set point" in physiological homeostasis?',
+    opts:['The maximum value a variable can reach before causing damage','The ideal target value the body continually works to maintain','The point at which a feedback loop stops functioning','The threshold that activates an effector organ'],
+    ans:1, exp:'The set point is the target value that the homeostatic control system works to maintain — like a thermostat setting. The body continuously adjusts to keep variables at this ideal level.' },
+  { q:'In androgenetic alopecia, which best describes the STIMULUS?',
+    opts:['The hair falling out of the follicle','DHT reaching androgen-sensitive dermal papilla cells','The dermal papilla cells shrinking','The immune system attacking the follicle'],
+    ans:1, exp:'DHT (dihydrotestosterone) reaching follicle dermal papilla cells is the chemical stimulus that initiates the feedback response in androgenetic alopecia. The stimulus is the event that the receptor detects.' },
+  { q:'A RECEPTOR in a homeostatic feedback loop is best defined as:',
+    opts:['The organ that produces the corrective response','A structure that detects a specific change and generates an input signal','The brain area that processes sensory information','A cell that releases hormones into the bloodstream'],
+    ans:1, exp:'A receptor monitors a specific variable (like DHT concentration) and sends a signal when a change is detected. In AGA, the androgen receptor (AR) on dermal papilla cells is the molecular receptor.' },
+  { q:'Which protein on dermal papilla cells acts as the primary RECEPTOR for DHT in androgenetic alopecia?',
+    opts:['5-alpha reductase type II','Transforming growth factor-beta (TGF-β)','The androgen receptor (AR)','Vascular endothelial growth factor receptor (VEGFR)'],
+    ans:2, exp:'The androgen receptor (AR) is a nuclear receptor protein inside dermal papilla cells. DHT diffuses in and binds the AR, changing its conformation so it can act as a transcription factor — this is the receptor step.' },
+  { q:'The CONTROL CENTER in a homeostatic feedback loop:',
+    opts:['Always refers to the brain or spinal cord','Receives information from the receptor and directs the effector\'s response','Produces the initial stimulus that disrupts homeostasis','Measures the strength of the effector\'s response'],
+    ans:1, exp:'The control center is the integrating center — it receives input from the receptor, compares it to the set point, and sends instructions to the effector. In AGA, the DHT-AR complex in the nucleus serves this role at the cellular level.' },
+  { q:'In a NEGATIVE feedback loop, when the controlled variable returns to its set point:',
+    opts:['The loop continues to amplify the corrective response','The stimulus increases to maintain the correction','The corrective response is reduced or turned off','A new positive feedback loop automatically begins'],
+    ans:2, exp:'Negative feedback is self-limiting — when the variable returns to the set point, the receptor stops signaling and the control center stops directing the effector. The response is turned off. This is what makes negative feedback stabilizing.' },
+  { q:'Which scenario best describes a POSITIVE feedback loop?',
+    opts:['Blood pressure rises → baroreceptors detect it → heart rate slows → pressure normalizes','DHT causes follicle miniaturization → the miniaturized follicle becomes more sensitive to DHT → greater miniaturization occurs','Blood glucose rises → insulin is released → glucose falls back to normal','Body temperature rises → sweat glands activate → temperature decreases'],
+    ans:1, exp:'Positive feedback amplifies the original stimulus rather than opposing it. In AGA, DHT causes miniaturization, which increases AR sensitivity, which means the same DHT causes even more miniaturization — a self-reinforcing spiral away from the set point.' },
+  { q:'What is the approximate normal range for daily scalp hair shedding?',
+    opts:['5–20 hairs per day','50–100 hairs per day','200–300 hairs per day','500 or more hairs per day'],
+    ans:1, exp:'Shedding 50–100 hairs daily is completely normal and reflects the natural hair cycle (telogen follicles entering exogen phase). Shedding consistently over 150/day may indicate a problem. This is the "normal range" for this variable.' },
+  { q:'The EFFECTOR in the AGA feedback loop is:',
+    opts:['The hypothalamus directing GnRH production','The androgen receptor detecting DHT levels','The dermal papilla cells that execute the response by changing growth factor output','5-alpha reductase converting testosterone to DHT'],
+    ans:2, exp:'The dermal papilla cells are the effectors — they receive instructions from the DHT-AR control center and execute the response by upregulating TGF-β, downregulating IGF-1, and shortening the anagen phase.' },
+  { q:'In alopecia areata, IFN-γ released by T cells upregulates MHC class I on follicle cells → more T cells recognize the follicle → more IFN-γ is released. This is an example of:',
+    opts:['Negative feedback returning the system to its set point','Normal regulation of the anagen phase','A pathological positive feedback loop','The effector overriding the control center'],
+    ans:2, exp:'This is a classic pathological positive feedback loop — each cycle amplifies the stimulus rather than opposing it. The T cell attack gets stronger with each iteration because IFN-γ makes the follicle more visible, recruiting even more T cells.' }
+];
+
+const Q2 = [
+  { q:'Approximately what percentage of scalp follicles are in the anagen (active growth) phase in a healthy adult?',
+    opts:['30–40%','60–70%','85–90%','98–100%'],
+    ans:2, exp:'About 85–90% of scalp follicles are in anagen at any given time. This ratio is the set point for hair density. In alopecia, this ratio shifts — more follicles enter telogen and stay there, or anagen cycles become too short to produce visible hair.' },
+  { q:'Which enzyme converts testosterone to DHT specifically in hair follicle dermal papilla cells, making it the primary target in androgenetic alopecia treatment?',
+    opts:['Aromatase (CYP19A1)','5-alpha reductase type II (SRD5A2)','Androgen receptor kinase','IGF-1 synthase'],
+    ans:1, exp:'5-alpha reductase type II is the dominant isoform in hair follicle dermal papilla cells and prostate. Finasteride specifically inhibits this enzyme. Men with congenital type II deficiency never develop male-pattern baldness.' },
+  { q:'What makes alopecia areata fundamentally different from androgenetic alopecia in terms of the follicle\'s fate?',
+    opts:['Androgenetic alopecia is reversible; alopecia areata causes permanent loss','In alopecia areata, the follicle structure is usually preserved — allowing potential regrowth','Alopecia areata permanently destroys the follicle through fibrosis','There is no structural difference between the two types'],
+    ans:1, exp:'In alopecia areata, CD8+ T cells force follicles into telogen but do not destroy them. The follicle structure is largely intact. This is why spontaneous regrowth occurs in ~50% of cases and why JAK inhibitors can restore hair even in severe cases. In late-stage AGA, follicles are replaced by fibrous tracts.' },
+  { q:'Finasteride treats androgenetic alopecia by:',
+    opts:['Directly blocking the androgen receptor on dermal papilla cells','Inhibiting 5-alpha reductase type II, reducing DHT production by ~70%','Extending the anagen phase through potassium channel opening','Suppressing autoimmune T cell activity in the scalp'],
+    ans:1, exp:'Finasteride competitively inhibits 5-alpha reductase type II, blocking the conversion of testosterone to DHT. This reduces scalp DHT by ~60–70%. It does NOT block the AR — it reduces the amount of the ligand (DHT) that reaches the receptor.' },
+  { q:'"Immune privilege" of hair follicles refers to:',
+    opts:['Hair follicles producing their own antibodies against pathogens','The follicle\'s active suppression of local immune responses to avoid autoimmune attack','Special immune cells stationed inside follicles to protect them from infection','The follicle\'s genetic resistance to DHT effects'],
+    ans:1, exp:'Hair follicles are immune-privileged sites — similar to the eye and testes. They actively suppress local immune surveillance through low MHC class I expression, local TGF-β, α-MSH, and other mechanisms. This prevents rapidly dividing follicle cells (which express "foreign" melanin antigens) from being attacked. When this privilege collapses, alopecia areata begins.' },
+  { q:'Which drug was the FIRST FDA-approved systemic treatment for alopecia areata, approved in June 2022?',
+    opts:['Finasteride (Propecia)','Minoxidil (Rogaine)','Baricitinib (Olumiant)','Ritlecitinib (Litfulo)'],
+    ans:2, exp:'Baricitinib (Olumiant, Eli Lilly) was the first FDA-approved systemic treatment for severe alopecia areata in June 2022. It is a selective JAK1/JAK2 inhibitor that breaks the IFN-γ positive feedback loop driving the autoimmune attack.' },
+  { q:'DKK-1, upregulated by DHT in dermal papilla cells, contributes to androgenetic alopecia primarily by:',
+    opts:['Increasing TGF-β production directly','Activating additional androgen receptors on neighboring cells','Blocking Wnt signaling, preventing follicle stem cells from activating for a new anagen cycle','Reducing blood flow to the follicle through vasoconstriction'],
+    ans:2, exp:'DKK-1 (Dickkopf-1) is a potent Wnt antagonist. It binds to LRP5/6 co-receptors, blocking Wnt ligands from activating the pathway. Since Wnt/β-catenin signaling is essential for bulge stem cells to begin a new anagen cycle, DKK-1 effectively prevents hair regrowth — a key mechanism in the positive feedback spiral of AGA.' },
+  { q:'Minoxidil primarily helps maintain hair growth by:',
+    opts:['Blocking DHT production in follicle cells','Extending the anagen phase through KATP channel opening and VEGF upregulation','Blocking the androgen receptor from responding to DHT','Suppressing autoimmune T cell proliferation in the scalp'],
+    ans:1, exp:'Minoxidil\'s active metabolite (minoxidil sulfate) opens ATP-sensitive potassium channels in dermal papilla cells, causing vasodilation and improved blood supply. It also upregulates VEGF and directly stimulates DP cell activity, extending the anagen phase. It does NOT address the hormonal cause (DHT) — it rescues the follicle downstream.' },
+  { q:'Telogen effluvium differs from androgenetic alopecia in that:',
+    opts:['Telogen effluvium causes permanent follicle destruction through fibrosis','Telogen effluvium only affects men over 40','A systemic stressor pushes many follicles into telogen at once, but the follicles themselves are undamaged and regrowth typically occurs','Telogen effluvium is caused by DHT hypersensitivity in susceptible follicles'],
+    ans:2, exp:'In telogen effluvium, a stressor (childbirth, illness, weight loss, thyroid dysfunction) triggers mass entry into telogen. The follicles are structurally normal — they simply rested. Once the trigger resolves, anagen resumes and hair regrows over 3–6 months. The set point is disrupted temporarily, not permanently.' },
+  { q:'Why is spironolactone used for hair loss in women but generally NOT in men?',
+    opts:['Spironolactone does not affect androgen receptors in men\'s scalp follicles','Spironolactone causes feminizing side effects (gynecomastia, sexual dysfunction) that are typically unacceptable in men','Men have far lower androgen receptor density in their scalp follicles','Spironolactone interacts dangerously with testosterone at normal male levels'],
+    ans:1, exp:'Spironolactone is an androgen receptor antagonist with anti-androgen effects throughout the body. In men, this causes gynecomastia (breast growth), sexual dysfunction, and other feminizing effects. These side effects make it impractical for men. In post-menopausal or hormonally managed women, these systemic effects are acceptable or even beneficial.' }
+];
+
+// =============================================
+// QUIZ ENGINE
+// =============================================
+let quizState = {
+  1: { current:0, score:0, answers:[], started:false },
+  2: { current:0, score:0, answers:[], started:false }
+};
+
+function startQuiz(num) {
+  // Reset
+  quizState[num] = { current:0, score:0, answers:[], started:true };
+  // Hide everything
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el => {
+    el.classList.remove('active');
+    el.style.display = 'none';
+  });
+  const screen = document.getElementById('quiz' + num + '-screen');
+  screen.style.display = 'block';
+  screen.classList.add('active');
+  // Update sidebar
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  renderQuestion(num);
+}
+
+function renderQuestion(num) {
+  const state = quizState[num];
+  const questions = num === 1 ? Q1 : Q2;
+  const q = questions[state.current];
+  if (!q) { showResults(num); return; }
+
+  const pct = ((state.current) / questions.length * 100).toFixed(0);
+  document.getElementById('q'+num+'-prog').style.width = pct + '%';
+  document.getElementById('q'+num+'-prog-text').textContent = (state.current+1)+' / '+questions.length;
+
+  document.getElementById('q'+num+'-feedback').className = 'q-feedback';
+  document.getElementById('q'+num+'-feedback').style.display = 'none';
+  document.getElementById('q'+num+'-next').className = 'btn-next';
+
+  const opts = q.opts.map((o,i) =>
+    `<button class="q-opt" onclick="answerQ(${num},${i})">${String.fromCharCode(65+i)}. ${o}</button>`
+  ).join('');
+
+  document.getElementById('q'+num+'-content').innerHTML = `
+    <div class="q-num">Question ${state.current+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-options">${opts}</div>
+  `;
+}
+
+function answerQ(num, chosen) {
+  const state = quizState[num];
+  const questions = num === 1 ? Q1 : Q2;
+  const q = questions[state.current];
+
+  // Disable all options
+  document.querySelectorAll(`#q${num}-content .q-opt`).forEach((btn, i) => {
+    btn.classList.add('answered');
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === chosen && chosen !== q.ans) btn.classList.add('wrong');
+  });
+
+  const correct = chosen === q.ans;
+  if (correct) state.score++;
+  state.answers.push({ q:q.q, chosen, correct, ans:q.ans, ansText:q.opts[q.ans], exp:q.exp });
+
+  const fb = document.getElementById('q'+num+'-feedback');
+  fb.className = 'q-feedback show ' + (correct ? 'correct' : 'wrong');
+  fb.style.display = 'block';
+  fb.innerHTML = `<div class="fb-label">${correct ? '✓ Correct!' : '✗ Incorrect'}</div><p>${q.exp}</p>`;
+
+  const nextBtn = document.getElementById('q'+num+'-next');
+  nextBtn.className = 'btn-next show';
+  const isLast = state.current === questions.length - 1;
+  nextBtn.textContent = isLast ? 'See Results →' : 'Next Question →';
+}
+
+function nextQuestion(num) {
+  quizState[num].current++;
+  const questions = num === 1 ? Q1 : Q2;
+  if (quizState[num].current >= questions.length) {
+    showResults(num);
+  } else {
+    renderQuestion(num);
+  }
+}
+
+function showResults(num) {
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el => {
+    el.classList.remove('active');
+    el.style.display = 'none';
+  });
+  const res = document.getElementById('quiz'+num+'-results');
+  res.style.display = 'block';
+  res.classList.add('active');
+
+  const state = quizState[num];
+  const score = state.score;
+  const total = num === 1 ? Q1.length : Q2.length;
+  const pct = score / total;
+
+  document.getElementById('q'+num+'-score').textContent = score;
+  document.getElementById('q'+num+'-ring').style.setProperty('--pct', Math.round(pct*100)+'%');
+
+  const msgs = [
+    [0.9,'🏆 Outstanding! You have a solid command of these concepts. You\'re ready to move on to the next unit.'],
+    [0.7,'👍 Great work! A few concepts to review, but you understand the fundamentals well.'],
+    [0.5,'📚 Good effort! Review the chapters on the topics you missed and try again — you\'re getting there.'],
+    [0,'📖 Keep studying! Go back through the chapters carefully and focus on the concepts you found difficult.']
+  ];
+  const msg = msgs.find(m => pct >= m[0]);
+  document.getElementById('q'+num+'-msg').textContent = `You scored ${score} out of ${total}. ${msg[1]}`;
+
+  // Missed questions
+  const missed = state.answers.filter(a => !a.correct);
+  const missedEl = document.getElementById('q'+num+'-missed');
+  if (missed.length > 0) {
+    missedEl.innerHTML = `<h4>Review these questions:</h4>` +
+      missed.map(a => `<div class="missed-item">
+        <div class="mi-q">${a.q}</div>
+        <div class="mi-a">✓ ${a.ansText}</div>
+      </div>`).join('');
+  } else {
+    missedEl.innerHTML = '<div class="missed-item" style="border-color:var(--green)">🎯 Perfect score! All questions answered correctly.</div>';
+  }
+}
+
+// =============================================
+// INIT
+// =============================================
+goTo(0);
+</script>
+</body>
+</html>
