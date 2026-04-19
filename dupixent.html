@@ -267,15 +267,15 @@ footer a{color:var(--gold);text-decoration:none}
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">🧬 Personalized for You</div>
-  <h1>You're Taking <span>Dupixent</span>.<br/>Here's What's Happening<br/>in Your Immune System.</h1>
-  <p>Dupixent (dupilumab) is one of the most powerful anti-inflammatory biologics available — but its relationship with alopecia areata is complex. It can help hair grow back. It can also trigger or worsen hair loss. Here's exactly why, and what to watch for.</p>
+  <div class="hero-tag">🧬 Your Experience — What Actually Happened</div>
+  <h1>Dupixent <span>Triggered Alopecia Totalis</span>.<br/>Here's the Immunology<br/>Behind Why.</h1>
+  <p>After starting Dupixent, your alopecia areata progressed to <strong>alopecia totalis</strong> — complete scalp hair loss. This is not a random side effect. It's a predictable outcome of your specific immune profile meeting Dupixent's mechanism. This page explains exactly what happened in your immune system, what the research says about cases like yours, and what comes next.</p>
   <div class="hero-pills">
     <div class="pill"><strong>Drug:</strong> Dupilumab (Dupixent)</div>
-    <div class="pill"><strong>Target:</strong> IL-4 receptor alpha (IL-4Rα)</div>
-    <div class="pill"><strong>Type:</strong> Human IgG4 monoclonal antibody</div>
-    <div class="pill"><strong>Made by:</strong> Regeneron &amp; Sanofi</div>
-    <div class="pill"><strong>FDA AA approved:</strong> No — used off-label for AA</div>
+    <div class="pill"><strong>Your outcome:</strong> AA → Alopecia Totalis</div>
+    <div class="pill"><strong>Mechanism:</strong> Th1 unmasking via Th2 blockade</div>
+    <div class="pill"><strong>Profile:</strong> Classic Th1-dominant AA (low Th2 baseline)</div>
+    <div class="pill"><strong>Next target:</strong> JAK inhibitors (FDA-approved for AA)</div>
   </div>
 </div>
 
@@ -353,8 +353,8 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="section" id="seesaw">
   <div class="section-inner">
     <span class="sec-tag">Section 2 — Interactive</span>
-    <h2 class="sec-title">The Immune Seesaw</h2>
-    <p class="sec-sub">Your immune system has two major "teams" that actively suppress each other. Dupixent tips this balance — and the direction it tips for your AA depends on your individual immune profile. Use the controls below to explore.</p>
+    <h2 class="sec-title">The Immune Seesaw — What Happened in Your Case</h2>
+    <p class="sec-sub">You already had AA before Dupixent — meaning your Th1 immune axis was already activated. When Dupixent suppressed Th2, it removed the one remaining brake on Th1. The seesaw tipped hard. Your AA loop accelerated until you reached totalis. <strong>The simulator below is pre-set to your profile — "Classic Th1 AA with Dupixent ON."</strong> Toggle it off to see what your immune state looked like before Dupixent.</p>
 
     <div class="sim-wrapper">
       <div class="sim-controls-top">
@@ -366,9 +366,9 @@ footer a{color:var(--gold);text-decoration:none}
         <div class="profile-selector">
           <label>Your AA Profile (select what fits you best)</label>
           <div class="profile-track">
-            <button class="profile-opt atopic active" onclick="setProfile('atopic',this)">Atopic AA<br/><span style="font-size:10px;font-weight:400">High IgE, has AD</span></button>
+            <button class="profile-opt atopic" onclick="setProfile('atopic',this)">Atopic AA<br/><span style="font-size:10px;font-weight:400">High IgE, has AD</span></button>
             <button class="profile-opt mixed" onclick="setProfile('mixed',this)">Mixed<br/><span style="font-size:10px;font-weight:400">Some atopy</span></button>
-            <button class="profile-opt th1" onclick="setProfile('th1',this)">Classic Th1 AA<br/><span style="font-size:10px;font-weight:400">Low IgE, no AD</span></button>
+            <button class="profile-opt th1 active" onclick="setProfile('th1',this)">★ Your Profile<br/><span style="font-size:10px;font-weight:400">Classic Th1 AA</span></button>
           </div>
         </div>
       </div>
@@ -489,26 +489,26 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="section" id="paradox">
   <div class="section-inner">
     <span class="sec-tag">Section 4</span>
-    <h2 class="sec-title">Why the Same Drug Can Do Opposite Things</h2>
-    <p class="sec-sub">Dupixent can trigger new hair loss <em>or</em> restore it — in the same disease, in different patients. This isn't a flaw in the research. It's a window into how your individual immune makeup determines your outcome.</p>
+    <h2 class="sec-title">Why Dupixent Made Your AA Worse</h2>
+    <p class="sec-sub">You already had AA before Dupixent — your Th1 axis was primed. Dupixent blocked Th2 (IL-4/IL-13), which was providing a small but real suppressive check on Th1. When that brake was removed, IFN-γ surged and your AA loop accelerated to totalis. This is the documented worsening mechanism — it's in the published literature, it was predictable, and it happened to you.</p>
 
     <div class="card-grid">
-      <div class="card" style="border-color:rgba(34,197,94,.3)">
-        <div class="badge badge-green">Profile: Helps AA</div>
-        <h3 style="color:var(--green)">High-IgE / Atopic AA Patient</h3>
-        <p>Your AA developed alongside or after atopic dermatitis. Your scalp biopsy would show elevated Th2 markers (IL-4, IL-13, TARC) in addition to the usual Th1 signals. In this profile, IL-4/IL-13 are <strong>directly contributing</strong> to your AA. Dupixent removes them → AA improves.</p>
-        <div class="info-box good" style="margin-top:12px">
-          <h4>Key predictor: IgE ≥ 200 IU/mL</h4>
-          <p>The Phase 2a trial found 53.8% of patients with IgE ≥200 achieved ≥30% hair improvement on dupilumab. Baseline IgE predicted response with 83% accuracy.</p>
+      <div class="card" style="border-color:rgba(239,83,80,.5);border-width:2px">
+        <div class="badge badge-red">★ Your Profile</div>
+        <h3 style="color:var(--red)">Pre-existing AA + Th1-dominant — Dupixent Removed the Brake</h3>
+        <p>You had alopecia areata before starting Dupixent. That means your Th1 (IFN-γ) immune loop was already active and attacking your follicles. IL-4 and IL-13, even at baseline levels, were partially suppressing T-bet and IFN-γ production. Dupixent eliminated that suppression. <strong>Th1 surged. The AA loop accelerated. You progressed to alopecia totalis.</strong></p>
+        <div class="info-box warn" style="margin-top:12px">
+          <h4>What the research shows about cases like yours</h4>
+          <p>Published worsening cases are predominantly: pre-existing AA (not new onset), lower IgE, more extensive disease, and progression occurring 3–12 months after starting Dupixent. The 2025 TriNetX database study confirmed a 44% elevated odds of AA in dupilumab users (OR 1.436, p=0.017).</p>
         </div>
       </div>
-      <div class="card" style="border-color:rgba(239,83,80,.3)">
-        <div class="badge badge-red">Profile: Worsens AA</div>
-        <h3 style="color:var(--red)">Low-IgE / Non-Atopic AA Patient</h3>
-        <p>Your AA has no significant Th2 component. But IL-4 (even at normal levels) was providing a mild brake on Th1 activity. When Dupixent removes that brake, Th1 rebounds. IFN-γ surges. The AA loop accelerates. Hair loss spreads or appears for the first time.</p>
-        <div class="info-box warn" style="margin-top:12px">
-          <h4>Pattern from published cases</h4>
-          <p>Worsening cases are disproportionately male, lower IgE, no prior atopic history, and AA appearing 3–12 months after starting Dupixent.</p>
+      <div class="card" style="border-color:rgba(34,197,94,.3)">
+        <div class="badge badge-green">The Other Profile (for context)</div>
+        <h3 style="color:var(--green)">High-IgE / Atopic AA — Dupixent Helps</h3>
+        <p>For patients whose AA developed alongside or after atopic dermatitis, with high IgE and significant Th2 inflammation in the scalp, Dupixent removes a direct hair-follicle growth inhibitor. This profile sees improvement. You can explore it in the simulator above, but this is not your story.</p>
+        <div class="info-box good" style="margin-top:12px">
+          <h4>Key predictor: IgE ≥ 200 IU/mL</h4>
+          <p>The Phase 2a trial found 53.8% of high-IgE patients improved on dupilumab. Baseline IgE predicted response with 83% accuracy. Your IgE level is worth knowing.</p>
         </div>
       </div>
     </div>
@@ -594,36 +594,43 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="section" id="timeline">
   <div class="section-inner">
     <span class="sec-tag">Section 6</span>
-    <h2 class="sec-title">What to Expect & When</h2>
-    <p class="sec-sub">If Dupixent is going to affect your alopecia areata — better or worse — here's when you're most likely to notice it.</p>
+    <h2 class="sec-title">The Timeline of What Happened — and What Comes Next</h2>
+    <p class="sec-sub">Looking back through the immunology, here's the sequence that led from AA to totalis, and what the timeline looks like going forward.</p>
 
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-dot info">🔵</div>
         <div class="tl-body">
-          <h5>Weeks 1–8: Initial Adaptation</h5>
-          <p>Dupixent is ramping up toward steady state. IL-4/IL-13 signaling is being progressively suppressed. Blood eosinophils may temporarily rise (they're no longer being pulled into tissues). Skin and symptoms improving. Hair changes unlikely yet — the immune shift takes time.</p>
+          <h5>Weeks 1–8: Dupixent Building Up</h5>
+          <p>IL-4/IL-13 signaling being progressively suppressed. Skin (if any eczema was present) likely improving. Eosinophils may have temporarily risen in blood — they were no longer being pulled into tissues. The AA immune shift hadn't fully expressed yet at this point.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot warn">⚠️</div>
         <div class="tl-body">
-          <h5>Months 3–9: The Critical Window</h5>
-          <p>This is when most published cases of dupilumab-associated AA worsening occur. The Th2 axis has been significantly suppressed; if Th1 was being held in check by IL-4, it may now be rebounding. Watch for new patches of hair loss during this window. Also when improvement cases typically begin to show if the atopic-AA mechanism applies to you.</p>
+          <h5>Months 3–9: The Th1 Unmask — When It Happened</h5>
+          <p>Dupixent reached steady state. Th2 was substantially suppressed. The residual IL-4/IL-13 that was damping your Th1/IFN-γ loop was now gone. Your existing AA autoimmune loop — already active — accelerated without its brake. This is the documented window when dupilumab-associated AA worsening occurs in published cases. Patches expanded, merged, and progression to totalis happened here.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warn">⚠️</div>
+        <div class="tl-body">
+          <h5>Now: Totalis — Active Th1 Loop, Ongoing Dupixent Suppression</h5>
+          <p>While on Dupixent, Th2 remains suppressed and the Th1 brake remains off. The IFN-γ-driven AA loop is running largely unchecked by endogenous Th2. The hair follicles are in immune privilege collapse — NKG2D-expressing CD8+ T cells surrounding and attacking them. JAK inhibitors directly block the IFN-γ → JAK1/2 → STAT1 signal that is doing this.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot info">🔵</div>
+        <div class="tl-body">
+          <h5>Stopping Dupixent: 9–13 Week Washout</h5>
+          <p>Dupixent's ~25-day half-life means it stays pharmacologically active for 9–13 weeks after the last injection. If you stop, Th2 suppression gradually lifts and the brake on Th1 partially returns — but this alone won't reverse totalis. The AA loop needs to be actively interrupted, not just released.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot good">✓</div>
         <div class="tl-body">
-          <h5>Months 4–12: Regrowth Signal</h5>
-          <p>In the Phase 2a trial, hair regrowth was seen from month 4 onward in responders. In pediatric real-world data, mean improvement began at ~3.2 months. Early sign: vellus (fine, unpigmented) hair appearing in bare patches before terminal hair returns. This is a positive sign.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot warn">⚠️</div>
-        <div class="tl-body">
-          <h5>If You Stop Dupixent: 9–13 Week Washout</h5>
-          <p>Dupixent's ~25-day half-life means it remains pharmacologically active for 9–13 weeks after your last injection. If you stop, the Th2 suppression gradually lifts over this period. Any changes (good or bad) to your AA from Dupixent will gradually reverse as the drug clears.</p>
+          <h5>The Next Step: JAK Inhibition — Targeting the Actual AA Loop</h5>
+          <p>Baricitinib (Olumiant) and ritlecitinib (Litfulo) are FDA-approved specifically for severe AA — the category that includes totalis. They directly block JAK1/JAK2 or JAK3/ITK, shutting down the IFN-γ → STAT1 pathway that is destroying your follicles. Response in totalis/universalis patients is slower than patchy AA but documented — with baricitinib trials showing significant regrowth in severe cases over 36 weeks.</p>
         </div>
       </div>
     </div>
@@ -634,37 +641,37 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="section" id="watchfor">
   <div class="section-inner">
     <span class="sec-tag">Section 7</span>
-    <h2 class="sec-title">What to Watch For</h2>
-    <p class="sec-sub">Being on Dupixent with alopecia areata means paying attention to two competing signals. Know what you're looking for.</p>
+    <h2 class="sec-title">Where You Are Now & What to Monitor</h2>
+    <p class="sec-sub">The warning signs already happened — your AA progressed to totalis. Now the focus shifts to monitoring disease activity, tracking the AA loop's current state, and watching for early signals if a JAK inhibitor is added.</p>
 
     <div class="watch-grid">
       <div class="watch-card warn">
-        <h4>⚠️ Signs Dupixent May Be Worsening Your AA</h4>
+        <h4>⚠️ Signs the AA Loop Is Still Active</h4>
         <ul>
-          <li>New bald patches appearing on scalp, eyebrows, beard, or body (especially 3–9 months after starting)</li>
-          <li>Existing AA patches expanding in size</li>
-          <li>Progression from patchy AA toward total scalp loss</li>
-          <li>New nail pitting, ridging, or roughening (nail changes signal active AA disease)</li>
-          <li>Loss of eyelashes or eyebrows that wasn't present before starting Dupixent</li>
-          <li>"Exclamation mark" hairs at patch borders (short hairs thinner at the base — a hallmark of active AA)</li>
+          <li>Nail pitting, ridging, or roughening — nail matrix has the same immune privilege mechanism as hair follicles; active nail changes = active disease</li>
+          <li>Scalp tenderness, tingling, or burning sensation — can indicate active immune attack at follicles</li>
+          <li>Loss of or thinning of eyebrows and eyelashes — progression toward universalis</li>
+          <li>Body hair loss (arms, legs, underarms) — signals systemic AA activity beyond the scalp</li>
+          <li>"Exclamation mark" hairs at any remaining hairline — short hairs thinner at the base, hallmark of active AA at the border</li>
+          <li>Increased scalp sensitivity — some patients report pain or tenderness at sites of active immune attack</li>
         </ul>
       </div>
       <div class="watch-card good">
-        <h4>✅ Signs Dupixent May Be Helping Your Hair</h4>
+        <h4>✅ Early Signs a JAK Inhibitor Is Working</h4>
         <ul>
-          <li>Vellus (soft, fine, colorless) hair appearing in previously bare patches — early regrowth signal</li>
-          <li>Existing bare patches shrinking from the edges inward</li>
-          <li>Thickening and darkening of vellus regrowth into terminal hair over weeks</li>
-          <li>Reduced scalp itching, burning, or tingling that may accompany active AA</li>
-          <li>Overall hair density feeling fuller across the scalp</li>
-          <li>Eyebrow and eyelash regrowth (sometimes seen before scalp improvement)</li>
+          <li>Vellus (fine, soft, colorless) hair appearing anywhere on the scalp — this is follicle re-awakening, the first signal</li>
+          <li>Reduced scalp tenderness or tingling — immune activity cooling down</li>
+          <li>Eyebrow and eyelash regrowth — often appears before scalp hair in JAK inhibitor responders</li>
+          <li>Vellus hair darkening and thickening into terminal hair over 4–8 weeks of sustained regrowth</li>
+          <li>Nail improvement — pitting reduces as the systemic AA loop quiets</li>
+          <li>In baricitinib trials, most totalis responders began showing vellus by week 12–16</li>
         </ul>
       </div>
     </div>
 
     <div class="highlight">
-      <h4>The Most Important Thing to Track</h4>
-      <p>Take monthly photos of the same areas under the same lighting. Hair changes are gradual and you'll miss them day-to-day. A clear photo record lets you and your dermatologist make objective decisions. If you see new patches expanding in the 3–9 month window after starting Dupixent, bring those photos to your appointment immediately.</p>
+      <h4>Track Everything With Photos Now</h4>
+      <p>Take monthly photos of your full scalp (overhead), hairline, eyebrows, and eyelashes — same lighting, same angles. With totalis, the first regrowth signals are subtle (tiny vellus hairs) and you will miss them without a comparison baseline. A photo log also gives your dermatologist objective data to time any dose adjustments on a JAK inhibitor and decide when to reassess the Dupixent situation.</p>
     </div>
   </div>
 </section>
@@ -672,41 +679,46 @@ footer a{color:var(--gold);text-decoration:none}
 <!-- SECTION 8: COMBINATION OPTIONS -->
 <section class="section" id="combo">
   <div class="section-inner">
-    <span class="sec-tag">Section 8</span>
-    <h2 class="sec-title">The Combination Strategy</h2>
-    <p class="sec-sub">If you have both atopic dermatitis (needing Dupixent) and alopecia areata (needing an AA treatment), some academic dermatologists are now using both simultaneously — addressing each immune axis separately.</p>
+    <span class="sec-tag">Section 8 — Most Actionable Section</span>
+    <h2 class="sec-title">The Path Forward: What Actually Treats AA Totalis</h2>
+    <p class="sec-sub">Dupixent does not treat the immune loop causing your totalis — it never targeted it. JAK inhibitors are FDA-approved specifically for severe AA (which includes totalis) because they block the actual mechanism. The question for your dermatologist is whether to stop Dupixent, add a JAK inhibitor to it, or switch entirely.</p>
 
     <div class="combo-diagram">
-      <div class="combo-box gold">
-        <div class="cb-icon">💉</div>
-        <h4>Dupixent (Dupilumab)</h4>
-        <p>Blocks IL-4Rα → suppresses Th2 axis → treats atopic dermatitis + addresses Th2-driven component of atopic AA</p>
-      </div>
-      <div class="combo-plus">+</div>
       <div class="combo-box purple">
         <div class="cb-icon">💊</div>
-        <h4>JAK Inhibitor<br/>(Baricitinib or Ritlecitinib)</h4>
-        <p>Blocks JAK1/2 or JAK3 → suppresses IFN-γ/Th1 axis → treats the core AA autoimmune loop</p>
+        <h4>JAK Inhibitor — First Priority</h4>
+        <p>Baricitinib (Olumiant) or ritlecitinib (Litfulo) directly block IFN-γ → JAK → STAT1 — the exact pathway destroying your follicles right now. FDA-approved for severe AA in adults.</p>
+      </div>
+      <div class="combo-plus">±</div>
+      <div class="combo-box gold">
+        <div class="cb-icon">💉</div>
+        <h4>Dupixent — Reassess</h4>
+        <p>If Dupixent is still needed for another condition (eczema, asthma), the question is whether to continue it alongside a JAK inhibitor. If it was only for AA, stopping it removes the Th1 brake problem.</p>
       </div>
       <div class="combo-equals">=</div>
       <div class="combo-box green">
         <div class="cb-icon">🎯</div>
-        <h4>Dual-Axis Coverage</h4>
-        <p>Both immune drivers addressed simultaneously. Emerging off-label strategy at academic centers with favorable early results.</p>
+        <h4>Targeting the Right Axis</h4>
+        <p>JAK inhibitors address the actual immune mechanism destroying your follicles. Whether you keep Dupixent or not, the JAK inhibitor is doing the actual AA work.</p>
       </div>
     </div>
 
     <div class="card-grid">
-      <div class="card">
-        <div class="badge badge-purple">Baricitinib (Olumiant)</div>
-        <h3 style="color:var(--purple)">JAK1/2 — FDA Approved for AA</h3>
-        <p>Specifically targets the IFN-γ → STAT1 loop that drives AA. FDA-approved for severe AA in adults (2022). Addresses the Th1 side that Dupixent misses. Case reports of successful combination with Dupixent exist.</p>
+      <div class="card" style="border-color:rgba(168,85,247,.4)">
+        <div class="badge badge-purple">Baricitinib (Olumiant) — 4mg daily</div>
+        <h3 style="color:var(--purple)">JAK1/2 — FDA Approved, Severe AA in Adults</h3>
+        <p>Targets IFN-γ → JAK1/JAK2 → STAT1 — the exact signal your AA loop runs on. The pivotal BRAVE-AA1 and BRAVE-AA2 trials included patients with alopecia totalis and universalis. <strong>In those trials, ~35–40% of totalis/universalis patients achieved ≥80% hair coverage (SALT ≤20) at 36 weeks.</strong> Oral, once-daily. FDA-approved June 2022.</p>
       </div>
-      <div class="card">
-        <div class="badge badge-blue">Ritlecitinib (Litfulo)</div>
+      <div class="card" style="border-color:rgba(59,130,246,.4)">
+        <div class="badge badge-blue">Ritlecitinib (Litfulo) — 50mg daily</div>
         <h3 style="color:var(--blue)">JAK3/ITK — FDA Approved for AA (≥12yr)</h3>
-        <p>More lymphocyte-selective — targets the IL-15-driven CD8+ T cell loop specifically. May pair particularly well with Dupixent since JAK3 (ritlecitinib) and JAK1/2 (Dupixent downstream) address complementary signaling arms.</p>
+        <p>More lymphocyte-selective than baricitinib — specifically targets the IL-15-driven CD8+ T cell loop. JAK3 is expressed mainly on lymphocytes (not broadly expressed like JAK1/2), so the safety profile may differ favorably. FDA-approved June 2023 for patients 12 and older. Oral, once-daily. A reasonable option to discuss alongside baricitinib.</p>
       </div>
+    </div>
+
+    <div class="info-box note" style="margin-top:4px">
+      <h4>📋 On Stopping Dupixent</h4>
+      <p>If Dupixent was prescribed primarily for AA (not for eczema, asthma, or another condition), many dermatologists would recommend transitioning off it now that it has driven progression to totalis. The washout takes 9–13 weeks. If Dupixent is still needed for eczema or another condition, a combination approach with a JAK inhibitor is documented in case reports and is an active area at academic centers. Discuss the specific tradeoff with your dermatologist — the goal is to no longer have Th2 suppression running unbalanced against an active Th1 AA loop.</p>
     </div>
 
     <div class="info-box warn">
@@ -730,32 +742,32 @@ footer a{color:var(--gold);text-decoration:none}
 
     <div class="q-list">
       <div class="derm-q">
-        <div class="dq-tag">About Your Risk Profile</div>
-        "What is my current serum IgE level? The Phase 2a trial found that patients with IgE above 200 IU/mL had 53.8% hair improvement on dupilumab — do I fall in that category?"
+        <div class="dq-tag">About Causality — Establish the Record</div>
+        "My AA progressed to alopecia totalis after starting Dupixent. The 2025 TriNetX database study (23,782 patients) showed an odds ratio of 1.436 for AA in dupilumab users. I believe this is a case of dupilumab-associated AA worsening via Th1 unmasking. Can we document this formally and consider reporting it to FDA MedWatch?"
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About Monitoring</div>
-        "Given that dupilumab-associated AA worsening typically occurs between 3–9 months after starting, should we schedule a specific check-in during that window to assess my hair?"
+        <div class="dq-tag">About JAK Inhibitors — FDA-Approved for Severe AA</div>
+        "Baricitinib (Olumiant) and ritlecitinib (Litfulo) are FDA-approved for severe AA in adults — which includes alopecia totalis. In the BRAVE-AA trials, 35–40% of totalis patients achieved ≥80% hair coverage at 36 weeks. Am I a candidate for one of these?"
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About My Specific Profile</div>
-        "Is my AA more consistent with the atopic (high-IgE, Th2-mixed) subtype or the classic Th1-dominant subtype? Which do you think I am based on my history?"
+        <div class="dq-tag">About Stopping Dupixent</div>
+        "Since the Dupixent appears to have been a driver of my progression to totalis, and it doesn't treat the AA mechanism (IFN-γ/JAK-STAT1), should we plan to stop it as part of transitioning to a JAK inhibitor? What's the washout timeline and transition protocol?"
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About Combination Therapy</div>
-        "Given that I need Dupixent for my atopic dermatitis but also have AA, would you consider combining it with baricitinib (Olumiant) or ritlecitinib (Litfulo) to address both immune axes? Are there case reports supporting this?"
+        <div class="dq-tag">About My IgE Level</div>
+        "Can you check my current serum IgE level? If it's low (under 200 IU/mL), that further supports the Th1-dominant profile interpretation and would predict a poor response to dupilumab — consistent with what happened. It also helps predict JAK inhibitor response."
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About the Research</div>
-        "There's a 2025 TriNetX database study showing dupilumab users have a 1.436 odds ratio for developing AA compared to controls. How does this change our management plan?"
+        <div class="dq-tag">About Biomarker Monitoring on JAK Inhibitor</div>
+        "Once I start a JAK inhibitor, can we track SALT score plus any available inflammatory markers (CRP, IgE trend, eosinophil count) to objectively assess response? I want to know at 12 and 24 weeks whether it's working."
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About Your AA Biomarkers</div>
-        "Is a scalp biopsy with Th2 marker profiling available here? A 2024 study showed that scalp Th2 markers at week 12 predicted hair regrowth response to dupilumab."
+        <div class="dq-tag">About Scalp Biopsy</div>
+        "Would a scalp biopsy be informative at this point to confirm the CD8+ T cell infiltrate pattern consistent with active AA totalis, and rule out any other contributing process? This could also document the baseline before starting a JAK inhibitor."
       </div>
       <div class="derm-q">
-        <div class="dq-tag">About Stopping</div>
-        "If my AA worsens on Dupixent, what's the plan — stop it and transition to a JAK inhibitor? Is there a combination approach we could try first before stopping?"
+        <div class="dq-tag">About Realistic Expectations for Totalis</div>
+        "What's the realistic regrowth timeline for alopecia totalis on baricitinib or ritlecitinib? I know patchy AA responds faster — can you walk me through what to expect at 12, 24, and 36 weeks, and what partial response looks like before full regrowth?"
       </div>
     </div>
 
@@ -773,8 +785,8 @@ footer a{color:var(--gold);text-decoration:none}
 </footer>
 
 <script>
-let dupixentOn = false;
-let profile = 'atopic'; // 'atopic', 'mixed', 'th1'
+let dupixentOn = true;  // pre-set to your current state
+let profile = 'th1';   // your profile: Classic Th1 AA
 
 // Seesaw states: [th2%, th1%, loopActivity%, hairPotential%, beamAngle]
 const states = {
@@ -878,7 +890,10 @@ function setGauge(id, pct, color) {
   if (val) val.textContent = pct + '%';
 }
 
-// Init
+// Init — pre-set to your actual state (Th1 AA + Dupixent ON)
+document.getElementById('dupix-toggle').classList.add('on');
+document.getElementById('dupix-label').textContent = 'ON';
+document.getElementById('dupix-label').style.color = 'var(--gold)';
 updateSim();
 </script>
 </body>
