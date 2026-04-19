@@ -298,6 +298,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .eli5-header h2{font-size:26px;font-weight:800;color:#fff;margin-bottom:8px}
 .eli5-header p{font-size:15px;color:var(--muted);line-height:1.65;max-width:560px;margin:0 auto}
 
+/* MODE SELECTOR */
+#mode-selector{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center;padding:40px}
+#mode-selector.hidden{display:none}
+.mode-inner{max-width:860px;width:100%;text-align:center}
+.mode-inner h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.mode-inner p{font-size:16px;color:var(--muted);margin-bottom:40px;line-height:1.6}
+.mode-cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.mode-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--r2);
+  padding:36px 30px;width:320px;cursor:pointer;transition:all .25s;text-align:left}
+.mode-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.mode-card.teal:hover{border-color:var(--primary);box-shadow:0 20px 60px rgba(15,212,184,.15)}
+.mode-card.purple:hover{border-color:#a855f7;box-shadow:0 20px 60px rgba(168,85,247,.15)}
+.mode-card .mc-icon{font-size:48px;margin-bottom:16px}
+.mode-card h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.mode-card p{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.mode-card .mc-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.6px}
+.mode-card.teal .mc-tag{background:rgba(15,212,184,.15);color:var(--primary)}
+.mode-card.purple .mc-tag{background:rgba(168,85,247,.15);color:#c084fc}
+.mode-card ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.mode-card ul li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.mode-card ul li::before{content:'✓';font-size:11px;flex-shrink:0}
+.mode-card.teal ul li::before{color:var(--primary)}
+.mode-card.purple ul li::before{color:#a855f7}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -324,11 +348,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <body>
 
 <!-- SIDEBAR -->
+<!-- MODE SELECTOR OVERLAY -->
+<div id="mode-selector">
+  <div class="mode-inner">
+    <div style="font-size:52px;margin-bottom:12px">🧬</div>
+    <h1>Homeostasis &amp; Hair Loss</h1>
+    <p>An interactive A&amp;P module. Choose which type of alopecia you want to study.</p>
+    <div class="mode-cards">
+      <div class="mode-card teal" onclick="selectMode('full')">
+        <div class="mc-icon">🔬</div>
+        <h2>Full Module</h2>
+        <p>Covers all three major types of alopecia and compares hormonal vs. autoimmune mechanisms.</p>
+        <span class="mc-tag">COMPREHENSIVE</span>
+        <ul>
+          <li>Androgenetic Alopecia (DHT/hormonal)</li>
+          <li>Alopecia Areata (autoimmune)</li>
+          <li>Telogen Effluvium (stress-induced)</li>
+          <li>6 AGA drugs + 4 AA JAK inhibitors</li>
+          <li>ELI5 mode, 2 quizzes</li>
+        </ul>
+      </div>
+      <div class="mode-card purple" onclick="selectMode('aa')">
+        <div class="mc-icon">🛡️</div>
+        <h2>Autoimmune Focus</h2>
+        <p>Deep dive exclusively into alopecia areata — the immune system attacking your own hair follicles.</p>
+        <span class="mc-tag">AA ONLY</span>
+        <ul>
+          <li>Immune privilege &amp; its collapse</li>
+          <li>NKG2D receptors, JAK-STAT pathway</li>
+          <li>IFN-γ positive feedback loop</li>
+          <li>All 4 JAK inhibitors in detail</li>
+          <li>ELI5 mode, 2 AA-focused quizzes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <nav id="sidebar">
   <div class="sb-brand">
     <h2>A&amp;P Interactive</h2>
     <p>Homeostasis &amp; Alopecia</p>
   </div>
+  <button class="sb-btn" onclick="showModeSelector()" style="color:var(--primary);border-bottom:1px solid var(--border);margin-bottom:8px;padding-bottom:14px"><span class="sb-num">⇄</span>Switch Mode</button>
   <button class="sb-btn active" onclick="goTo(0)"><span class="sb-num">★</span>Introduction</button>
   <button class="sb-btn" onclick="goToELI5()"><span class="sb-num">🧸</span>ELI5 Mode</button>
   <button class="sb-btn" onclick="goTo(1)"><span class="sb-num">1</span>Hair Cycle</button>
@@ -1217,6 +1279,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 </div><!-- /main -->
 
 <script>
+// MODE SELECTION
+function selectMode(mode) {
+  document.getElementById('mode-selector').classList.add('hidden');
+  if (mode === 'aa') window.location.href = 'aa.html';
+}
+function showModeSelector() {
+  document.getElementById('mode-selector').classList.remove('hidden');
+}
+
 // =============================================
 // NAVIGATION
 // =============================================
