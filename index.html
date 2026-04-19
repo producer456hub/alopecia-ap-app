@@ -262,6 +262,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .loop-indicator{text-align:center;padding:10px;background:rgba(239,83,80,.1);border-radius:var(--r);
   border:1px dashed rgba(239,83,80,.4);color:#ff8a87;font-size:13px;font-weight:600;margin-top:8px}
 
+/* ELI5 */
+.eli5-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--r2);
+  padding:28px 32px;margin-bottom:20px;position:relative;overflow:hidden;cursor:pointer;transition:all .25s}
+.eli5-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 10px 40px rgba(15,212,184,.12)}
+.eli5-card .ec-emoji{font-size:48px;margin-bottom:14px;display:block}
+.eli5-card h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:4px}
+.eli5-card .ec-concept{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--primary);margin-bottom:12px}
+.eli5-card p{font-size:15.5px;line-height:1.75;color:var(--muted)}
+.eli5-card p strong{color:var(--text)}
+.eli5-card .ec-science{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);
+  font-size:13.5px;color:var(--muted);line-height:1.7}
+.eli5-card.open .ec-science{display:block}
+.eli5-card .ec-toggle{position:absolute;top:20px;right:20px;font-size:12px;color:var(--primary);
+  font-weight:700;background:rgba(15,212,184,.1);border:1px solid rgba(15,212,184,.3);
+  border-radius:20px;padding:4px 12px}
+.eli5-story{background:linear-gradient(135deg,#1a2d42,#213449);border:2px solid var(--gold);
+  border-radius:var(--r2);padding:32px;margin:28px 0}
+.eli5-story h3{color:var(--gold);font-size:20px;margin-bottom:16px}
+.eli5-story p{font-size:15.5px;line-height:1.9;color:var(--text);margin-bottom:14px}
+.eli5-story p:last-child{margin-bottom:0}
+.eli5-story .story-highlight{color:var(--primary);font-weight:700}
+.eli5-story .story-bad{color:#ff8a87;font-weight:700}
+.eli5-story .story-good{color:#81c784;font-weight:700}
+.eli5-analogy-bar{display:flex;align-items:center;gap:16px;background:var(--surface2);
+  border-radius:var(--r);padding:16px 20px;margin:8px 0}
+.eli5-analogy-bar .aa-left{font-size:30px;flex-shrink:0}
+.eli5-analogy-bar .aa-body{}
+.eli5-analogy-bar .aa-title{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:3px}
+.eli5-analogy-bar .aa-text{font-size:13.5px;color:var(--muted);line-height:1.55}
+.eli5-header{background:linear-gradient(135deg,rgba(15,212,184,.15),rgba(15,212,184,.04));
+  border:1px solid rgba(15,212,184,.25);border-radius:var(--r2);padding:28px 32px;margin-bottom:28px;text-align:center}
+.eli5-header .eh-emoji{font-size:56px;margin-bottom:10px}
+.eli5-header h2{font-size:26px;font-weight:800;color:#fff;margin-bottom:8px}
+.eli5-header p{font-size:15px;color:var(--muted);line-height:1.65;max-width:560px;margin:0 auto}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -294,6 +330,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     <p>Homeostasis &amp; Alopecia</p>
   </div>
   <button class="sb-btn active" onclick="goTo(0)"><span class="sb-num">★</span>Introduction</button>
+  <button class="sb-btn" onclick="goToELI5()"><span class="sb-num">🧸</span>ELI5 Mode</button>
   <button class="sb-btn" onclick="goTo(1)"><span class="sb-num">1</span>Hair Cycle</button>
   <button class="sb-btn" onclick="goTo(2)"><span class="sb-num">2</span>Set Point</button>
   <button class="sb-btn" onclick="goTo(3)"><span class="sb-num">3</span>Stimulus</button>
@@ -308,6 +345,172 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 <!-- MAIN -->
 <div id="main">
+
+<!-- ELI5 CHAPTER -->
+<div class="chapter" id="ch-eli5">
+  <span class="ch-tag">ELI5 Mode 🧸</span>
+  <h1 class="ch-title">Explain It Like I'm Five</h1>
+  <p class="ch-sub">Big science words can feel scary. Let's break everything down with simple stories and silly analogies. <strong>Tap any card</strong> to see the grown-up science version underneath.</p>
+
+  <div class="eli5-header">
+    <div class="eh-emoji">🍪</div>
+    <h2>Think of Your Body Like a Cookie Factory</h2>
+    <p>Your body is really good at keeping things "just right." Not too much, not too little — just perfect. It does this all day, every day, automatically. Scientists call this <strong style="color:var(--primary)">homeostasis</strong> (say it: HO-mee-oh-STAY-sis). It just means "keeping things balanced."</p>
+  </div>
+
+  <!-- SET POINT -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">🎯</span>
+    <div class="ec-concept">Set Point</div>
+    <h3>The "Just Right" Number</h3>
+    <p>Imagine your mom says you can only have <strong>3 cookies</strong> before dinner. Three is the <strong>"just right" number</strong> — your set point. If you eat more, something happens to bring it back to 3. If you eat less, something nudges you back up to 3. Your body has a "just right" number for almost everything — temperature, blood sugar, heart rate... and even how many hairs grow on your head!</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> The set point is the target value a homeostatic control system maintains. For hair, the set point is approximately 100,000 total scalp hairs, with ~85–90% of follicles in the active growth (anagen) phase at any given time. This ratio is genetically programmed and maintained by a balance of molecular signals in each follicle's dermal papilla.
+    </div>
+  </div>
+
+  <!-- NORMAL RANGE -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">📏</span>
+    <div class="ec-concept">Normal Range</div>
+    <h3>Close Enough Is Good Enough</h3>
+    <p>Your mom doesn't freak out if you ate 2 cookies or 4 cookies. That's still pretty close to 3, right? The <strong>"normal range"</strong> is like that — a little window of "close enough." Your body is okay as long as things stay inside that window. It only starts freaking out and making fixes when something goes <em>way</em> outside the window.</p>
+    <p style="margin-top:10px">For hair: shedding <strong>50–100 hairs a day</strong> is totally normal. Your body doesn't panic. But if you're losing 400 hairs a day — that's way outside the window, and something's wrong.</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> The normal range for scalp hair density is 200–300 follicles/cm². Daily shedding of up to 150 hairs is within normal range. The anagen:telogen ratio of ~85–90%:10–15% is the normal range for follicle phase distribution. Outside these ranges, homeostatic correction begins.
+    </div>
+  </div>
+
+  <!-- STIMULUS -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">👋</span>
+    <div class="ec-concept">Stimulus</div>
+    <h3>Something Pokes the System</h3>
+    <p>A <strong>stimulus</strong> is just something that <em>pokes</em> or <em>changes</em> the system. Like your little brother sneaking one of your cookies — that's a stimulus! Something changed from "just right," so now the system has to react.</p>
+    <p style="margin-top:10px">In hair loss, the "poke" is a chemical called <strong>DHT</strong>. Think of DHT as a tiny troublemaker that sneaks into your hair's little factory and starts messing with the machines. In alopecia areata, the poke is your own immune system — your body's "army" accidentally starts attacking your hair!</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> In androgenetic alopecia (AGA), the stimulus is dihydrotestosterone (DHT) — a potent androgen derived from testosterone by 5-alpha reductase type II — reaching genetically susceptible dermal papilla cells. In alopecia areata (AA), the stimulus is immune privilege collapse, exposing follicle antigens to circulating CD8+ NKG2D+ cytotoxic T cells.
+    </div>
+  </div>
+
+  <!-- RECEPTOR -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">👂</span>
+    <div class="ec-concept">Receptor</div>
+    <h3>The Ears That Hear the Problem</h3>
+    <p>A <strong>receptor</strong> is like the ears of your body's alarm system. It's the thing that <em>notices</em> when the stimulus happens. Like a smoke detector — it doesn't put out fires itself, it just notices smoke and starts beeping.</p>
+    <p style="margin-top:10px">In hair loss, the "smoke detector" is a tiny protein called the <strong>Androgen Receptor (AR)</strong>. It sits inside the hair follicle cells and listens for DHT. When DHT shows up, the AR catches it — kind of like a catcher's mitt — and that starts the whole chain of events that leads to hair loss.</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> The androgen receptor (AR) is a nuclear receptor protein encoded on the X chromosome (Xq11-12). DHT diffuses into dermal papilla cells and binds the AR with 3–10× greater affinity than testosterone. The DHT-AR complex then undergoes conformational change, dissociates from heat-shock proteins, dimerizes, translocates to the nucleus, and binds androgen response elements (AREs) in DNA.
+    </div>
+  </div>
+
+  <!-- CONTROL CENTER -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">🧠</span>
+    <div class="ec-concept">Control Center</div>
+    <h3>The Boss Who Decides What to Do</h3>
+    <p>Once the smoke detector beeps, someone has to decide what to do about it. That's the <strong>control center</strong> — it's like the boss of the operation. It hears the alarm, thinks about it, and gives orders.</p>
+    <p style="margin-top:10px">In hair loss, the boss is the <strong>DHT-Androgen Receptor team</strong> once it gets inside the cell's nucleus (the command room). Together they flip switches in the DNA — turning off the "grow hair" instructions and turning on the "stop growing" instructions. It's like a manager walking into a factory and telling all the workers to go home early.</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> The DHT-AR complex acts as a transcription factor in the dermal papilla nucleus. It upregulates TGF-β1, TGF-β2, and DKK-1 (anti-anagen signals) while downregulating IGF-1, FGF-7, and VEGF (pro-anagen signals). At the systemic level, the hypothalamic-pituitary-gonadal (HPG) axis is the control center maintaining androgen levels in the normal range via classic endocrine negative feedback.
+    </div>
+  </div>
+
+  <!-- EFFECTOR -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">🏭</span>
+    <div class="ec-concept">Effector</div>
+    <h3>The Worker Who Actually Does the Job</h3>
+    <p>The <strong>effector</strong> is the one who actually <em>does</em> what the boss said. When the boss says "close the factory early," the workers actually pull down the shutters and go home. The effector creates the real, physical change.</p>
+    <p style="margin-top:10px">In your hair, the effector is a tiny cluster of special cells at the very bottom of each hair follicle called the <strong>Dermal Papilla</strong>. When DHT tells them to, these cells send a signal to your hair: <em>"Stop growing! Go to sleep!"</em> And the hair does. Each time this happens, the hair wakes up a little shorter and thinner than before.</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> Dermal papilla (DP) cells are specialized mesenchymal cells (50–200 per follicle) that control hair matrix keratinocyte behavior. Under DHT-AR signaling, DP cells reduce IGF-1 secretion, increase TGF-β output, and upregulate DKK-1. DP cell volume is directly correlated with hair shaft diameter — a miniaturized DP produces a thinner, shorter hair in each successive anagen cycle.
+    </div>
+  </div>
+
+  <!-- NEGATIVE FEEDBACK -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">↩️</span>
+    <div class="ec-concept">Negative Feedback Loop</div>
+    <h3>When Your Body Says "Whoa, Too Much — Cut It Out!"</h3>
+    <p>A <strong>negative feedback loop</strong> means the body's response <em>fights back against</em> the change. It's like a thermostat. Room gets too hot? Thermostat kicks on the AC to cool it down. Room gets too cold? It kicks on the heat. The reaction is always the <em>opposite</em> of the problem — that's what keeps everything balanced.</p>
+    <p style="margin-top:10px">🌡️ Your body does this with hormones too! If you have too much testosterone in your blood, your brain says <em>"Okay, okay — ease up!"</em> and tells the body to make less. This normally works great. The problem with hair loss is that the <em>hair follicle</em> part of the loop goes haywire — even when your body is doing its job correctly at the big level.</p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> The HPG axis is the classic negative feedback system: rising testosterone → detected by hypothalamic receptors → reduced GnRH pulsing → reduced LH from pituitary → reduced testosterone from gonads → levels return to set point. In AGA, systemic androgen levels are typically normal — the pathology is follicle-level hypersensitivity to normal DHT concentrations, not a failure of the systemic negative feedback.
+    </div>
+  </div>
+
+  <!-- POSITIVE FEEDBACK -->
+  <div class="eli5-card" onclick="toggleELI5(this)">
+    <div class="ec-toggle">Show science ↓</div>
+    <span class="ec-emoji">📢</span>
+    <div class="ec-concept">Positive Feedback Loop</div>
+    <h3>When Things Spiral Out of Control</h3>
+    <p>A <strong>positive feedback loop</strong> is the opposite — instead of fixing the problem, it makes it <em>bigger and bigger</em>. Imagine you're yelling into a microphone near a speaker. The speaker makes your voice louder, which goes back into the microphone, which makes it even louder, which goes back in... <strong>SCREEEECH!</strong> That horrible noise is positive feedback. Nothing is stopping it — it just keeps building.</p>
+    <p style="margin-top:10px">This is exactly what happens with hair loss! DHT shrinks the hair follicle. But here's the cruel part — the smaller and weaker the follicle gets, the <em>more</em> it reacts to DHT. So DHT shrinks it more. Then it reacts even harder. Then DHT shrinks it even more. <strong>Round and round, getting worse every time.</strong></p>
+    <div class="ec-science">
+      <strong style="color:var(--primary)">The science:</strong> DHT-AR activation in DP cells upregulates TGF-β, which acts autocrinally to induce more TGF-β production in neighboring DP cells. DKK-1 suppresses Wnt/β-catenin signaling, weakening each successive anagen cycle. The miniaturized DP shows increased AR expression — amplifying its own DHT sensitivity. Perifollicular PGD2-driven inflammation and eventual TGF-β1-mediated fibrosis create a self-reinforcing cascade that progressively drives follicles toward permanent miniaturization.
+    </div>
+  </div>
+
+  <!-- THE FULL STORY -->
+  <div class="eli5-story">
+    <h3>🧸 The Whole Story — In Plain English</h3>
+    <p>Okay, imagine every single hair on your head has its own tiny <span class="story-highlight">factory underground</span>. That factory's job is to grow one hair. It works for a few years, takes a short nap, then wakes up and does it again. Your body has a "just right" rule: <span class="story-highlight">keep about 100,000 of those factories running at once</span>.</p>
+    <p>Now, in some people — because of the genes they were born with — there's a <span class="story-bad">troublemaker chemical called DHT</span>. DHT sneaks into certain factories (the scalp ones) and whispers to the manager: <span class="story-bad">"Hey, close up early today."</span> So the factory closes early, and the hair that came out is a little shorter and thinner than before.</p>
+    <p>Next cycle? DHT does it again. <span class="story-bad">"Close up even earlier."</span> The hair is even shorter and thinner. And here's where it gets sneaky: the more the factory shrinks, the <em>more easily</em> DHT can mess with it. The smaller it gets, the more sensitive it becomes. <span class="story-bad">It's a spiral that just keeps going.</span></p>
+    <p>The body's normal "balance police" — the HPG axis — keeps DHT levels in the blood totally normal. But it can't stop what's happening inside the individual factories. <span class="story-highlight">The big loop is working. The little loop is broken.</span></p>
+    <p>And that's alopecia. The body trying its best, but a positive feedback loop inside the hair follicle winning the battle — one hair cycle at a time. <span class="story-good">The good news? Scientists have figured out how to interrupt that loop with drugs — which you can try in the Drug Simulator! 💊</span></p>
+  </div>
+
+  <!-- QUICK ANALOGY TABLE -->
+  <h3 style="color:var(--primary);margin-bottom:14px">🔁 Quick Cheat Sheet</h3>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">🎯</div>
+    <div class="aa-body"><div class="aa-title">Set Point</div><div class="aa-text">The "just right" number — like 3 cookies or 100,000 hairs</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">📏</div>
+    <div class="aa-body"><div class="aa-title">Normal Range</div><div class="aa-text">The "close enough" window — 2–4 cookies is fine; 10 is not</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">👋</div>
+    <div class="aa-body"><div class="aa-title">Stimulus</div><div class="aa-text">The poke that starts the whole thing — DHT showing up is the poke</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">👂</div>
+    <div class="aa-body"><div class="aa-title">Receptor</div><div class="aa-text">The smoke detector — notices the problem (DHT = the smoke)</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">🧠</div>
+    <div class="aa-body"><div class="aa-title">Control Center</div><div class="aa-text">The boss who reads the smoke alarm and decides what the workers do</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">🏭</div>
+    <div class="aa-body"><div class="aa-title">Effector</div><div class="aa-text">The workers who actually do the job — dermal papilla cells shutting down the factory</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">↩️</div>
+    <div class="aa-body"><div class="aa-title">Negative Feedback</div><div class="aa-text">Thermostat logic — response fights the change. Good! Keeps balance.</div></div>
+  </div>
+  <div class="eli5-analogy-bar">
+    <div class="aa-left">📢</div>
+    <div class="aa-body"><div class="aa-title">Positive Feedback</div><div class="aa-text">Microphone + speaker screeching — response amplifies the change. Usually bad!</div></div>
+  </div>
+
+  <div class="ch-nav" style="margin-top:32px">
+    <button class="btn-ch btn-secondary" onclick="goTo(0)">← Back to Intro</button>
+    <button class="btn-ch btn-primary" onclick="goTo(1)">Start the Full Lessons →</button>
+  </div>
+</div>
 
 <!-- CH 0: INTRO -->
 <div class="chapter active" id="ch0">
@@ -341,7 +544,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   </div>
 
   <div class="ch-nav">
-    <button class="btn-ch btn-primary" onclick="goTo(1)">Start Learning →</button>
+    <button class="btn-ch btn-secondary" onclick="goToELI5()">🧸 Explain It Like I'm Five</button>
+    <button class="btn-ch btn-primary" onclick="goTo(1)">Start Full Lessons →</button>
   </div>
 </div>
 
@@ -1025,15 +1229,36 @@ function goTo(n) {
     el.classList.remove('active');
     if (el.classList.contains('quiz-screen') || el.classList.contains('results-screen')) el.style.display = '';
   });
-  // Update sidebar
-  document.querySelectorAll('.sb-btn').forEach((btn, i) => btn.classList.toggle('active', i === n));
+  // Update sidebar (offset by 1 because ELI5 btn is index 1)
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  // sidebar btn index: 0=intro, 1=eli5, 2=ch1, 3=ch2 ... n+2 for n>=1
+  const btnIdx = n === 0 ? 0 : n + 2;
+  const btns = document.querySelectorAll('.sb-btn');
+  if (btns[btnIdx]) btns[btnIdx].classList.add('active');
   // Show chapter
   const ch = document.getElementById('ch' + n);
   if (ch) { ch.classList.add('active'); }
   currentChapter = n;
   document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
-
   if (n === 9) renderDrugs();
+}
+
+function goToELI5() {
+  document.querySelectorAll('.chapter,.quiz-screen,.results-screen').forEach(el => {
+    el.classList.remove('active');
+    if (el.classList.contains('quiz-screen') || el.classList.contains('results-screen')) el.style.display = '';
+  });
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sb-btn')[1].classList.add('active');
+  document.getElementById('ch-eli5').classList.add('active');
+  document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleELI5(card) {
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+  const tog = card.querySelector('.ec-toggle');
+  if (tog) tog.textContent = isOpen ? 'Show science ↓' : 'Hide science ↑';
 }
 
 // =============================================
